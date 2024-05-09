@@ -6,8 +6,8 @@ import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename="/react_vite">
+    <BrowserRoutr basename="/aqua_track">
       <App />
-    </BrowserRouter>
+    </BrowserRoutr>
   </React.StrictMode>
 );
