@@ -6,7 +6,7 @@ import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename="/aqua_track">
+    <BrowserRouter basename="/AquaTrack-IT-WARRIORS-frontend">
       <App />
     </BrowserRouter>
   </React.StrictMode>
