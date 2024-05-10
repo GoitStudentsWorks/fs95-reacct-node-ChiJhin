@@ -1,27 +1,52 @@
 import { Route, Routes } from 'react-router-dom';
-import SharedLayout from 'components/SharedLayout/SharedLayout';
-import FirstPage from 'pages/FirstPage/FirstPage';
-import SecondPage from 'pages/SecondPage/SecondPage';
-import HalfPage from 'pages/HalfPage/HalfPage';
+import { Layout } from './components/Layout/Layout';
 import ErrorPage from 'pages/ErrorPage/ErrorPage';
+// import { useDispatch } from "react-redux";
+import { lazy } from 'react';
+import { RestrictedRoute } from './components/RestrictedRoute/RestrictedRoute.jsx';
+import { PrivateRoute } from './components/PrivateRoute/PrivateRoute.jsx';
+// import { refreshUser } from "./redux/auth/operations.js";
+// import { useAuth } from "./hooks";
 import { AppWrapper } from './App.styled';
 
-const test = import.meta.env.VITE_API_TEST;
+const HomePage = lazy(() => import('./pages/HomePage/HomePage.jsx'));
+const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage.jsx'));
+const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage.jsx'));
+const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage.jsx'));
 
-function App() {
-  console.log(test);
+export default function App() {
   return (
     <AppWrapper>
       <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route path="/first" element={<FirstPage />} />
-          <Route path="/second" element={<SecondPage />}>
-            <Route path=":half" element={<HalfPage />} />
-          </Route>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route
+            path="/signup"
+            element={
+              <RestrictedRoute
+                redirectTo="/tracker"
+                component={<SignUpPage />}
+              />
+            }
+          />
+          <Route
+            path="/signin"
+            element={
+              <RestrictedRoute
+                redirectTo="/tracker"
+                component={<SignInPage />}
+              />
+            }
+          />
+          <Route
+            path="/tracker"
+            element={
+              <PrivateRoute redirectTo="/" component={<TrackerPage />} />
+            }
+          />
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
     </AppWrapper>
   );
 }
-export default App;
