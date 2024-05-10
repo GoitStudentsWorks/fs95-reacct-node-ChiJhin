@@ -2,7 +2,7 @@ export default function AdvantagesSection() {
   return (
     <div>
       <div>
-        <img srcset="" src="" alt="" height="" width="" />
+        <img srcSet="" src="" alt="" height="" width="" />
         <p>Our happy customers</p>
       </div>
 

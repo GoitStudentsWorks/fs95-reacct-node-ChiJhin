@@ -1,16 +1,9 @@
-// import { Suspense } from 'react';
-// import { Outlet } from 'react-router-dom';
-// import { Toaster } from 'react-hot-toast';
-// import { AppBar } from '../AppBar/AppBar';
+import Logo from '../Logo/Logo';
 
-// export const Layout = () => {
-//   return (
-//     <div>
-//       <AppBar />
-//       <Suspense fallback={null}>
-//         <Outlet />
-//       </Suspense>
-//       <Toaster position="top-right" />
-//     </div>
-//   );
-// };
+export default function Layout() {
+  return (
+    <div>
+      <Logo />
+    </div>
+  );
+}
