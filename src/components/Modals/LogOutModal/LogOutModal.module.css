@@ -1,0 +1,58 @@
+.modalBox{
+    display: flex;
+    flex-direction: column;
+    /* gap:28px ; */
+}
+.title{
+    margin-bottom: 20px;
+font-weight: 700;
+font-size: 20px;
+line-height: 1.2;
+letter-spacing: -0.01em;
+text-align: center;
+color: #323f47;
+}
+.modalBox p{
+    margin-bottom: 28px;;
+font-weight: 400;
+font-size: 14px;
+line-height: 1.28571;
+letter-spacing: -0.01em;
+text-align: center;
+color: #323f47;
+}
+.btnBox{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.btn{
+    border: none;
+    border-radius: 30px;
+padding: 14px 12px;
+width: 304px;
+height: 46px;
+background: #9be1a0;
+
+font-weight: 700;
+font-size: 14px;
+line-height: 1.28571;
+letter-spacing: -0.01em;
+text-align: center;
+color: #323f47;
+}
+
+.btnCancel{
+    composes:btn;
+color: rgba(50, 63, 71, 0.3);
+    background: #f0eff4;
+}
+@media (min-width:768px) {
+    .btnBox{flex-direction: row;}
+    .btn{
+        border-radius: 15px;
+padding: 40px;
+width: 516px;
+height: 244px;
+    }
+}
