@@ -1,0 +1,5 @@
+.waterDetailedInfo {
+  max-width: 45vw;
+  background-color: var(--background);
+  border-radius: 30px;
+}
