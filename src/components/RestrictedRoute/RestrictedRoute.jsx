@@ -7,7 +7,7 @@ export default function RestrictedRoute({
 }) {
   //turn off auth for testing
   // const { isLoggedIn } = useAuth();
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   return isLoggedIn ? <Navigate to={redirectTo} /> : Component;
 }
