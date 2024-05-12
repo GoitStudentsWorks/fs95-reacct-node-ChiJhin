@@ -6,8 +6,8 @@
   height: 520px;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   background: #fff;
-  justify-content: center;
-  display: flex;
+  /* justify-content: center; */
+  /* display: flex; */
   flex-wrap: wrap;
   position: absolute;
   inset: inherit;

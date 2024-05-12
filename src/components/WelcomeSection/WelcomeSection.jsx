@@ -1,3 +1,4 @@
+import BtnAddWater from '../AddWaterBtn/AddWaterBtn';
 import Logo from '../Logo/Logo';
 import { Link } from 'react-router-dom';
 
@@ -13,6 +14,7 @@ export default function WelcomeSection() {
       <Link to="/signin">
         <button type="submit">Sign In</button>
       </Link>
+      <BtnAddWater/>
     </div>
   );
 }

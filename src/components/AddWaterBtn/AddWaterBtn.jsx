@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import Modals from "../Modals/Modal/Modal";
+import WaterModal from '../Modals/WaterModal/WaterModal';
 // import WaterForm from '../Modals/WaterForm/WaterForm';
-import LogOutModal from '../Modals/LogOutModal/LogOutModal';
+// import LogOutModal from '../Modals/LogOutModal/LogOutModal';
 export default function BtnAddWater (){
 //     const filter = useSelector(selectFilter);
 //   const dispatch = useDispatch();
@@ -11,7 +12,9 @@ export default function BtnAddWater (){
   const [selectedContactId, setSelectedContactId] = useState(null);
   const [update, setUpdate] = useState(null);
   const [modIsOpen, setModIsOpen] = useState(false);
-  const styleNameClass = "modalDelete"
+  // const styleNameClass = "modalDelete"
+  const styleNameClass = "Modal"
+
 
       const handleAddWater= (id) => {
         setUpdate(1)
@@ -34,7 +37,8 @@ export default function BtnAddWater (){
             <Modals styleVariant={styleNameClass} isOpen={modIsOpen} closeModal={closeModalUpdate}>
           <div>
             {/* тут втавляєм потрібний компонент */}
-            <LogOutModal/>
+            <WaterModal/>
+            {/* <LogOutModal/> */}
             {/* <WaterForm item={update} closeModal={closeModalUpdate} /> */}
           </div>
         </Modals>

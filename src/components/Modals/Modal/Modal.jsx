@@ -1,5 +1,6 @@
 import Modal from 'react-modal';
 import css from './Modal.module.css';
+import { AiOutlineClose } from "react-icons/ai";
 
 Modal.setAppElement('#root');
 const customStyles = {
@@ -20,7 +21,7 @@ export default function Modals({ styleVariant, isOpen, closeModal, children }) {
       >
         {children}
         <button type="button" className={css.closeBtn} onClick={closeModal}>
-          x
+          <AiOutlineClose/>
         </button>
       </Modal>
     </>
