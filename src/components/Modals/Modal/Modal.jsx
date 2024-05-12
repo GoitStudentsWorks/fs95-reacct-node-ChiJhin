@@ -9,7 +9,7 @@ const customStyles = {
   },
 };
 
-export default function Modals({ styleVariant, isOpen, closeModal, children }) {
+export default function Modals({ styleVariantBtn,styleVariant, isOpen, closeModal, children }) {
   return (
     <>
       <Modal
@@ -20,7 +20,7 @@ export default function Modals({ styleVariant, isOpen, closeModal, children }) {
         className={css[styleVariant]}
       >
         {children}
-        <button type="button" className={css.closeBtn} onClick={closeModal}>
+        <button type="button" className={css[styleVariantBtn]} onClick={closeModal}>
           <AiOutlineClose/>
         </button>
       </Modal>
