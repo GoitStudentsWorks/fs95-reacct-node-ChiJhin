@@ -7,11 +7,15 @@
   --background: #f0eff4;
   --main-white: #fff;
   --bold: 700;
+  --hover: #71ae75;
+  --animation: 200ms ease-in;
 }
 
 body {
-  background-color: var(--background);
+  /* background-color: var(--background); */
+  background-color: var(--main-white);
   /* background-image: url('./assets/background.png'); */
+
   background-size: auto 100%;
   background-position: center center;
   background-repeat: no-repeat;
@@ -30,7 +34,7 @@ h4,
 h5,
 h6,
 p {
-  margin-top: 0;
+  margin: 0;
 }
 a {
   text-decoration: none;
