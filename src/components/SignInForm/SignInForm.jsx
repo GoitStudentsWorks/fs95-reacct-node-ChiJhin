@@ -6,6 +6,8 @@ import { useState } from 'react';
 import css from './SignInForm.module.css';
 // import { useDispatch } from 'react-redux';
 import { useId } from 'react';
+import Logo from '../Logo/Logo';
+import { Link } from 'react-router-dom';
 
 const signInValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -37,42 +39,67 @@ export default function SignInForm() {
   });
 
   const onSubmit = (data) => {
-    dispatch(logIn(data));
+    dispatch(login(data));
     reset();
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor={emailFieldId}>Email</label>
-          <input
-            className={errors.email ? css.errorInput : css.input}
-            placeholder="Enter your email"
-            type="text"
-            id={emailFieldId}
-            {...register('email')}
-          />
-          {errors.email && <p className={css.error}>{errors.email?.message}</p>}
+    <div className={css.container}>
+      <div className={css.section}>
+        <div className={css.logo}>
+          <Logo />
         </div>
-        <div>
-          <label htmlFor={passwordFieldId}>Password</label>
-          <input
-            className={errors.password ? css.errorInput : css.input}
-            placeholder="Enter your password"
-            type={passwordVisibility ? 'password' : 'text'}
-            id={passwordFieldId}
-            {...register('password')}
-          />
-          <span onClick={handlePasswordVisibility}>
-            {passwordVisibility ? <FaEyeSlash /> : <FaEye />}
-          </span>
-          {errors.password && (
-            <p className={css.error}>{errors.password?.message}</p>
-          )}
-        </div>
-        <button type="submit">Sign In</button>
-      </form>
-    </>
+        <h1 className={css.title}>Sign In</h1>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className={css.item}>
+            <label htmlFor={emailFieldId} className={css.label}>
+              Email
+            </label>
+            <input
+              className={errors.email ? css.errorInput : css.input}
+              placeholder="Enter your email"
+              type="text"
+              id={emailFieldId}
+              {...register('email')}
+            />
+            {errors.email && (
+              <p className={css.error}>{errors.email?.message}</p>
+            )}
+          </div>
+          <div className={css.item}>
+            <label htmlFor={passwordFieldId} className={css.label}>
+              Password
+            </label>
+            <div className={css.wrapper}>
+              <div className={css.cont}>
+                <input
+                  className={errors.password ? css.errorInput : css.inputTwo}
+                  placeholder="Enter your password"
+                  type={passwordVisibility ? 'password' : 'text'}
+                  id={passwordFieldId}
+                  {...register('password')}
+                />
+                <span className={css.eyes} onClick={handlePasswordVisibility}>
+                  {passwordVisibility ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
+            </div>
+            {errors.password && (
+              <p className={css.error}>{errors.password?.message}</p>
+            )}
+          </div>
+
+          <button type="submit" className={css.btn}>
+            Sign In
+          </button>
+          <p className={css.text}>
+            Don`t have an account?
+            <Link to="/signup" className={css.link}>
+              Sign up
+            </Link>
+          </p>
+        </form>
+      </div>
+    </div>
   );
 }
