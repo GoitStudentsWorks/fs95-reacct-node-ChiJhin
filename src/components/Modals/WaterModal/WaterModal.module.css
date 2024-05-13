@@ -1,0 +1,97 @@
+  .titleAdd{
+    /* font-family: "Poppins", sans-serif; */
+font-weight: 700;
+font-size: 20px;
+line-height: 1.2;
+letter-spacing: -0.01em;
+color: #323f47;
+margin-bottom: 24px;
+  }
+  @media (min-width:375px) {
+    .titleAdd{
+font-size: 28px;
+line-height: 1.14286;
+    }
+    
+  }
+  .titleAmount{
+    /* font-family: "Poppins", sans-serif; */
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.01em;
+    color: #2f2f2f;
+    margin-bottom: 5px;
+  }
+  .amauntWraper{
+    border-radius: 30px;
+    padding: 11px 20px;
+    width: 89px;
+    height: 40px;
+   
+    background: #323f47;
+
+   
+  }
+  .wraperText{
+      /* font-family: "Poppins", sans-serif; */
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1.28571;
+      color: #fff;
+    }
+    .amauntBox{
+      display: flex;
+      gap:5px;
+      margin-bottom: 24px;
+    }
+  .btnMinus{
+    width: 40px;
+    border-radius: 50%;
+border: 1.50px solid #323f47;
+  }
+  .labelRecord{
+    /* font-family: "Poppins", sans-serif; */
+font-weight: 400;
+font-size: 14px;
+line-height: 1.28571;
+letter-spacing: -0.01em;
+color: #2f2f2f;
+margin-bottom: 5px;
+  }
+  .titleShoose{
+    /* font-family: "Poppins", sans-serif; */
+font-weight: 700;
+font-size: 15px;
+line-height: 1.25;
+letter-spacing: -0.01em;
+/* text-align: center; */
+color: #323f47;
+  }
+  .labelEnter{
+    /* font-family: "Poppins", sans-serif; */
+font-weight: 700;
+font-size: 15px;
+line-height: 1.25;
+letter-spacing: -0.01em;
+/* text-align: center; */
+color: #323f47;
+margin-bottom: 5px;
+  }
+  .btnSave{
+    border: none;
+    border-radius: 30px;
+padding: 14px 40px;
+width: 116px;
+height: 46px;
+background: #9be1a0;
+  }
+  .btnSave span{
+    /* font-family: "Poppins", sans-serif; */
+font-weight: 700;
+font-size: 14px;
+line-height: 1.28571;
+letter-spacing: -0.01em;
+text-align: center;
+color: #323f47;
+  }
