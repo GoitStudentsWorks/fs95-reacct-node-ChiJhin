@@ -1,6 +1,22 @@
 .logoFont {
   font-weight: var(--bold);
   font-size: 24px;
-  padding: 10px;
-  color: red;
+  /* padding: 10px;
+  color: red; */
+  color: var(--main);
+  position: absolute;
+  z-index: 11111;
+  top: 24px;
+  left: 16px;
+
+  line-height: 1;
+  letter-spacing: -0.24px;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 768px) {
+  .logo {
+    top: 32px;
+    left: 32px;
+  }
 }
