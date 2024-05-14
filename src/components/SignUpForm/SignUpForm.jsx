@@ -1,94 +1,117 @@
-import * as Yup from 'yup';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { useState } from 'react';
+import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { FiEyeOff, FiEye } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import css from './SignUpForm.module.css';
-// import { useDispatch } from 'react-redux';
+import Logo from '../Logo/Logo';
 
-const signUpValidationSchema = Yup.object().shape({
+const signUpValidationSchema = Yup.object({
   email: Yup.string()
-    .email('Invalid email address')
-    .required('Email is required'),
+    .required('Email is required')
+    .email('Invalid email address'),
   password: Yup.string()
-    .min(7, 'Password must be at least 7 characters long')
-    .required('Password is required'),
+    .required('Password is required')
+    .min(7, 'Password must be at least 7 characters long'),
   repeatPassword: Yup.string()
-    .oneOf([Yup.ref('password')], 'Mismatched passwords, please try again.')
-    .required('Please confirm your password.'),
+    .oneOf([Yup.ref('password')], 'Passwords must match')
+    .required('Please confirm your password'),
 });
 
 export default function SignUpForm() {
-  //   const dispatch = useDispatch();
-  const [passwordVisibility, setPasswordVisibility] = useState(true);
-  const [repeatPasswordVisibility, setRepeatPasswordVisibility] =
-    useState(true);
-
-  const handlePasswordVisibility = () => {
-    setPasswordVisibility(!passwordVisibility);
-  };
-
-  const handleRepeatPasswordVisibility = () => {
-    setRepeatPasswordVisibility(!repeatPasswordVisibility);
-  };
+  const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(signUpValidationSchema),
   });
 
   const onSubmit = (data) => {
     dispatch(registerUser(data));
+    reset();
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Email</label>
-          <input
-            className={errors.email ? css.errorInput : css.input}
-            placeholder="Enter your email"
-            type="text"
-            {...register('email')}
-          />
-          {errors.email && <p className={css.error}>{errors.email?.message}</p>}
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            className={errors.password ? css.errorInput : css.input}
-            placeholder="Enter your password"
-            type={passwordVisibility ? 'password' : 'text'}
-            {...register('password')}
-          />
-          <span onClick={handlePasswordVisibility}>
-            {passwordVisibility ? <FaEyeSlash /> : <FaEye />}
-          </span>
-          {errors.password && (
-            <p className={css.error}>{errors.password?.message}</p>
-          )}
-        </div>
-        <div>
-          <label>Repeat Password</label>
-          <input
-            className={errors.repeatPassword ? css.errorInput : css.input}
-            placeholder="Repeat password"
-            type={repeatPasswordVisibility ? 'password' : 'text'}
-            {...register('repeatPassword')}
-          />
-          <span onClick={handleRepeatPasswordVisibility}>
-            {repeatPasswordVisibility ? <FaEyeSlash /> : <FaEye />}
-          </span>
-          {errors.repeatPassword && (
-            <p className={css.error}>{errors.repeatPassword?.message}</p>
-          )}
-        </div>
-        <button type="submit">Sign Up</button>
-      </form>
-    </>
+    <div className={css.container}>
+      <div className={css.section}>
+        <Logo />
+        <h1 className={css.title}>Sign Up</h1>
+        <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
+          <div className={css.field}>
+            <label className={css.email}>Email</label>
+            <input
+              className={errors.email ? css.errorInput : css.firstInput}
+              type="text"
+              placeholder="Enter your email"
+              {...register('email')}
+            />
+            {errors.email && (
+              <p className={css.error}>{errors.email.message}</p>
+            )}
+          </div>
+          <div className={css.field}>
+            <label className={css.password}>Password</label>
+            <div className={css.toggle}>
+              <input
+                className={errors.password ? css.errorIn : css.secondInput}
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Enter your password"
+                {...register('password')}
+              />
+              <div
+                onClick={() => setShowPassword(!showPassword)}
+                className={css.iconOne}
+              >
+                {showPassword ? <FiEye size={20} /> : <FiEyeOff size={20} />}
+              </div>
+            </div>
+            {errors.password && (
+              <p className={css.error}>{errors.password.message}</p>
+            )}
+          </div>
+          <div className={css.field}>
+            <label className={css.repeat}>Repeat Password</label>
+            <div className={css.toggle}>
+              <input
+                className={errors.repeatPassword ? css.errorIn : css.thirdInput}
+                type={showRepeatPassword ? 'text' : 'password'}
+                placeholder="Repeat password"
+                {...register('repeatPassword')}
+              />
+              <div
+                onClick={() => setShowRepeatPassword(!showRepeatPassword)}
+                className={css.iconTwo}
+              >
+                {showRepeatPassword ? (
+                  <FiEye size={20} />
+                ) : (
+                  <FiEyeOff size={20} />
+                )}
+              </div>
+            </div>
+            {errors.repeatPassword && (
+              <p className={css.error}>{errors.repeatPassword.message}</p>
+            )}
+          </div>
+          <button type="submit" className={css.button}>
+            Sign Up
+          </button>
+          <p className={css.text}>
+            Already have an account?
+            <Link to="/signin" className={css.link}>
+              Sign in
+            </Link>
+          </p>
+        </form>
+      </div>
+    </div>
   );
 }
