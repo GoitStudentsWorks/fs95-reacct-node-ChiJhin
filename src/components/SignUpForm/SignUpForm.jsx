@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { FiEyeOff, FiEye } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import css from './SignUpForm.module.css';
 import Logo from '../Logo/Logo';
