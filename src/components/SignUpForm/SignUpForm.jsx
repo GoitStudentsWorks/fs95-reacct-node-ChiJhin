@@ -70,7 +70,7 @@ export default function SignUpForm() {
                 onClick={() => setShowPassword(!showPassword)}
                 className={css.iconOne}
               >
-                {showPassword ? <FiEye size={20} /> : <FiEyeOff size={20} />}
+                {showPassword ? <FaEye size={20} /> : <FaEyeSlash size={20} />}
               </div>
             </div>
             {errors.password && (
@@ -91,9 +91,9 @@ export default function SignUpForm() {
                 className={css.iconTwo}
               >
                 {showRepeatPassword ? (
-                  <FiEye size={20} />
+                  <FaEye size={20} />
                 ) : (
-                  <FiEyeOff size={20} />
+                  <FaEyeSlash size={20} />
                 )}
               </div>
             </div>
