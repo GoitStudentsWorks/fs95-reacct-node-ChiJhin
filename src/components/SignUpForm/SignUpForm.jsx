@@ -1,9 +1,10 @@
-import * as Yup from 'yup';
+import { useState } from 'react';
+
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { useState } from 'react';
+import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
+import { FiEyeOff, FiEye } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import css from './SignUpForm.module.css';
 import Logo from '../Logo/Logo';
@@ -70,7 +71,7 @@ export default function SignUpForm() {
                 onClick={() => setShowPassword(!showPassword)}
                 className={css.iconOne}
               >
-                {showPassword ? <FaEye size={20} /> : <FaEyeSlash size={20} />}
+                {showPassword ? <FiEye size={20} /> : <FiEyeOff size={20} />}
               </div>
             </div>
             {errors.password && (
@@ -91,9 +92,9 @@ export default function SignUpForm() {
                 className={css.iconTwo}
               >
                 {showRepeatPassword ? (
-                  <FaEye size={20} />
+                  <FiEye size={20} />
                 ) : (
-                  <FaEyeSlash size={20} />
+                  <FiEyeOff size={20} />
                 )}
               </div>
             </div>
