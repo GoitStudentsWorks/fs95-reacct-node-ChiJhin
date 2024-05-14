@@ -1,10 +1,8 @@
 .progressBarContainer {
   position: relative;
   width: 198px;
-
   padding: 12px;
   border-radius: 15px;
-  background-color: rgb(247, 248, 246);
 }
 
 .nameBar {
