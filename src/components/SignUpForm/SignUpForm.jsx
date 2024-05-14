@@ -5,8 +5,6 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useState } from 'react';
 import css from './SignUpForm.module.css';
 // import { useDispatch } from 'react-redux';
-import Logo from '../Logo/Logo';
-import { Link } from 'react-router-dom';
 
 const signUpValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -47,68 +45,50 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className={css.container}>
-      <div className={css.section}>
-        <div className={css.logo}>
-          <Logo />
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <label>Email</label>
+          <input
+            className={errors.email ? css.errorInput : css.input}
+            placeholder="Enter your email"
+            type="text"
+            {...register('email')}
+          />
+          {errors.email && <p className={css.error}>{errors.email?.message}</p>}
         </div>
-        <h1 className={css.title}>Sign Up</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className={css.item}>
-            <label className={css.label}>Email</label>
-            <input
-              className={errors.email ? css.errorInput : css.input}
-              placeholder="Enter your email"
-              type="text"
-              {...register('email')}
-            />
-            {errors.email && (
-              <p className={css.error}>{errors.email?.message}</p>
-            )}
-          </div>
-          <div className={css.item}>
-            <label className={css.label}>Password</label>
-            <input
-              className={errors.password ? css.errorInput : css.inputTwo}
-              placeholder="Enter your password"
-              type={passwordVisibility ? 'password' : 'text'}
-              {...register('password')}
-            />
-            <span className={css.eyes} onClick={handlePasswordVisibility}>
-              {passwordVisibility ? <FaEyeSlash /> : <FaEye />}
-            </span>
-            {errors.password && (
-              <p className={css.error}>{errors.password?.message}</p>
-            )}
-          </div>
-          <div className={css.item}>
-            <label className={css.label}>Repeat Password</label>
-            <input
-              className={
-                errors.repeatPassword ? css.errorInput : css.inputThree
-              }
-              placeholder="Repeat password"
-              type={repeatPasswordVisibility ? 'password' : 'text'}
-              {...register('repeatPassword')}
-            />
-            <span className={css.eyes} onClick={handleRepeatPasswordVisibility}>
-              {repeatPasswordVisibility ? <FaEyeSlash /> : <FaEye />}
-            </span>
-          </div>
+        <div>
+          <label>Password</label>
+          <input
+            className={errors.password ? css.errorInput : css.input}
+            placeholder="Enter your password"
+            type={passwordVisibility ? 'password' : 'text'}
+            {...register('password')}
+          />
+          <span onClick={handlePasswordVisibility}>
+            {passwordVisibility ? <FaEyeSlash /> : <FaEye />}
+          </span>
+          {errors.password && (
+            <p className={css.error}>{errors.password?.message}</p>
+          )}
+        </div>
+        <div>
+          <label>Repeat Password</label>
+          <input
+            className={errors.repeatPassword ? css.errorInput : css.input}
+            placeholder="Repeat password"
+            type={repeatPasswordVisibility ? 'password' : 'text'}
+            {...register('repeatPassword')}
+          />
+          <span onClick={handleRepeatPasswordVisibility}>
+            {repeatPasswordVisibility ? <FaEyeSlash /> : <FaEye />}
+          </span>
           {errors.repeatPassword && (
             <p className={css.error}>{errors.repeatPassword?.message}</p>
           )}
-          <button type="submit" className={css.btn}>
-            Sign Up
-          </button>
-          <p className={css.text}>
-            Already have account?{' '}
-            <Link to="/signin" className={css.link}>
-              Sign in
-            </Link>
-          </p>
-        </form>
-      </div>
-    </div>
+        </div>
+        <button type="submit">Sign Up</button>
+      </form>
+    </>
   );
 }
