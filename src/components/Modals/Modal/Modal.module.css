@@ -10,6 +10,7 @@ background: #fff;
 /* display: flex; */
 /* flex-direction: column; */
 /* flex-wrap: wrap; */
+/* z-index: 12000; */
 position: absolute;
 inset: inherit;
 overflow: auto;
@@ -26,6 +27,16 @@ top: 14px;
 right: 14px;
 }
 .btnDelete{
+  width: 24px;
+height: 24px;
+
+border: none;
+background: inherit;
+position: absolute;
+top: 14px;
+right: 14px;
+}
+.btnSetting{
   width: 24px;
 height: 24px;
 
@@ -88,6 +99,13 @@ height: 267px;
     padding: 40px;
     width: 516px;
     height: 244px;
+  }
+  .btnSetting{
+    width: 28px;
+  height: 28px;
+  
+  top: 35px;
+  right: 35px;
   }
 .modalSetting {
   /* composes: Modal; */
