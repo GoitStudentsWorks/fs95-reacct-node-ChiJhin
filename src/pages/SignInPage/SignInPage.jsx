@@ -5,9 +5,12 @@ import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSect
 export default function SignInPage() {
   return (
     <main className={css.container}>
-      <SignInForm />
-      <div className={css.item}>
-        <AdvantagesSection />
+      <div className={css.page}>
+        <SignInForm />
+
+        <div className={css.wrap}>
+          <AdvantagesSection />
+        </div>
       </div>
     </main>
   );

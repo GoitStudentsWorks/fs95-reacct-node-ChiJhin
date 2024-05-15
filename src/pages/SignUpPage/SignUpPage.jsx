@@ -5,9 +5,12 @@ import css from '../SignUpPage/SignUpPage.module.css';
 export default function SignUpPage() {
   return (
     <main className={css.container}>
-      <SignUpForm />
-      <div className={css.item}>
-        <AdvantagesSection />
+      <div className={css.page}>
+        <SignUpForm />
+
+        <div className={css.wrap}>
+          <AdvantagesSection />
+        </div>
       </div>
     </main>
   );

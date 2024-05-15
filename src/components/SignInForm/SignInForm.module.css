@@ -1,6 +1,5 @@
 .container {
   max-width: 375px;
-  margin: 0 auto;
   overflow-x: hidden;
 }
 
@@ -10,7 +9,6 @@
   border-radius: 30px;
   height: 780px;
   background: var(--background);
-  margin: 16px;
 }
 
 .title {
@@ -167,7 +165,6 @@
 
   .section {
     height: 960px;
-    margin: 32px;
   }
 
   .title {
