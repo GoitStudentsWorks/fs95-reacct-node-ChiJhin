@@ -1,23 +1,54 @@
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import css from './UserSettingsForm.module.css';
 import RadioBtn from './RadioInput/RadioInput';
 import AvatarInput from './AvatarInput/AvatarInput';
 
 export default function UserSettingsForm() {
+  const [selectedValueRadio, setSelectedValueRadio] = useState('');
+  const [result, setResult] = useState(null); 
+  const [volume, setSelectedVolume] =useState('')
+  const [M, setM]=useState(null)
+  const [T, setT]=useState(null)
+
+ 
+  const handleRadioChange = (event) => {
+    setSelectedValueRadio(event.target.value);
+    console.log(`Selected value: ${event.target.value}`);
+  };
+  const handleChange = (setSelected, event)=>{
+    setSelected(event.target.value)
+    console.log(event.target.value);
+  }
+  useEffect(() => {
+    
+    if (selectedValueRadio !== '') {
+      if (selectedValueRadio === 'woman') {
+        const V = (M * 0.03) + (T * 0.4);
+        setResult(V);
+        console.log('result', V);
+      } else {
+        const V = (M * 0.04) + (T * 0.6);
+        setResult(V);
+        console.log('result', V);
+      }
+    }
+  }, [selectedValueRadio, M,T]);
+
   const {
     control,
+    setValue,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  //   const fg = useForm();
-  //   console.log(fg);
-  const v = '1.8L';
 
+  setValue('lastEmail', "sad@gmail.com");
+  
   const onSubmit = (data) => {
     const file = data.avatar[0];
-    console.log(file);
+    console.log(data,file);
+
     if (file) {
       const blob = new Blob([file]);
       console.log(blob);
@@ -25,11 +56,8 @@ export default function UserSettingsForm() {
       console.log(objectURL);
       //   setAvatar(objectURL);
     }
-    // console.log(control);
-    // console.log(data.file); // Обробка даних з інпуту типу файл
-    // };
-     console.log(data);
   };
+
   return (
     <>
       {/* =============================== */}
@@ -39,16 +67,19 @@ export default function UserSettingsForm() {
           <h3 className={css.titleHender}>Your gender identity</h3>
         </div>
         <RadioBtn
-          // handleSubmit={handleSubmit}
-          register={register}
+        onChangeRadio={handleRadioChange}
+        selectedValue={selectedValueRadio}  
+        register={register}
         />
         <div className={css.sectionBox}>
 
         <section>
           <div className={css.box}>
             <label className={css.labelName}>Your name</label>
-            <input {...register('lastVolume', { value: v })} />
+            <input {...register('lastName', { value: 'name'})} 
+            />
           </div>
+        
 
           <div className={css.box}>
             <label className={css.labelName}>Email</label>
@@ -57,7 +88,6 @@ export default function UserSettingsForm() {
             {errors.lastEmail && <p>Last name is required.</p>}
           </div>
 
-          {/* setValue('firstName', v); */}
           {/* ================================= */}
           <h2 className={css.titleNormaFormula}>My daily norma</h2>
           <ul className={css.listFormula}>
@@ -90,18 +120,22 @@ export default function UserSettingsForm() {
         <section>
           <div className={css.formKilo}>
             <label>Your weight in kilograms:</label>
-            <input {...register('lastKilo')} />
+            <input {...register('lastKilo')} 
+          onChange={(event) => handleChange(setM, event)}
+          />
           </div>
 
           <div className={css.formKilo}>
             <label>The time of active participation in sports:</label>
-            <input {...register('lastTime', { required: true })} />
+            <input {...register('lastTime', { required: true })} 
+          onChange={(event) => handleChange(setT, event)}
+          />
             {errors.lastTime && <p>Last name is required.</p>}
           </div>
 
           <p className={css.amountWater}>
             The required amount of water in liters per day:<span className={css.amount}>
-{v}
+               {result}   L
             </span>
           </p>
 
@@ -109,7 +143,9 @@ export default function UserSettingsForm() {
             <label >
               Write down how much water you will drink:
             </label>
-            <input {...register('lastWater')} />
+            <input {...register('lastValume')} 
+            onChange={(event) => handleChange(setSelectedVolume, event)}
+            />
           </div>
         </section>
         </div>
