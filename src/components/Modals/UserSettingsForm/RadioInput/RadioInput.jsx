@@ -25,7 +25,9 @@ export default function RadioBtn({ register, onChangeRadio,selectedValue}) {
           value="man" 
           id="field-man" 
           checked={selectedValue === 'man'}
-          onChange={onChangeRadio}/> 
+          onChange={onChangeRadio}
+          // defaultChecked 
+          /> 
         <label htmlFor="field-man" className={css.radioLabel}>
           Man
         </label>
@@ -34,3 +36,22 @@ export default function RadioBtn({ register, onChangeRadio,selectedValue}) {
     </>
   );
   }
+  // const dispatch = useDispatch();
+
+  // const onSubmitFormik = ({ name, number }, actions) => {
+  //   actions.resetForm();
+  //   const contactData = {
+  //     name: name,
+  //     number: number.replace(/(\d{3})(\d{3})(\d{2})/, '$1-$2-$3'),
+  //   };
+  //   dispatch(updateContact({ id: id, data: contactData }))
+  //     .unwrap()
+  //     .then(() => {
+  //       notify();
+  //     })
+  //     .catch(() => {
+  //       notifyError();
+  //     });
+  //   closeModal();
+  // };
+
