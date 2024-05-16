@@ -3,6 +3,7 @@
   width: 198px;
   padding: 12px;
   border-radius: 15px;
+  background-color: var(--main-white);
 }
 
 .nameBar {

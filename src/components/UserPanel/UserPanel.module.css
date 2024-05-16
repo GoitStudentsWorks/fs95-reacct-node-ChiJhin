@@ -2,3 +2,9 @@
   display: flex;
   justify-content: space-between;
 }
+
+.panelWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

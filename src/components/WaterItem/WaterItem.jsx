@@ -6,14 +6,6 @@ import svg from '../../assets/sprite.svg';
 export default function WaterItem({ countMl: ml, currentTime: time }) {
   return (
     <>
-      {/* <div>
-        <LuGlassWater />
-        <p>{ml} ml</p>
-        <p>{time}</p>
-        <FiEdit2 />
-        <AiOutlineDelete />
-      </div> */}
-
       <li className={css.card}>
         <svg className={css.glassIcon} width="38" height="38">
           <use xlinkHref={`${svg}#icon-glass`}></use>
@@ -24,10 +16,10 @@ export default function WaterItem({ countMl: ml, currentTime: time }) {
         </div>
 
         <div className={css.cardBtnsBlock}>
-          <button>
+          <button className={css.btn}>
             <FiEdit2 />
           </button>
-          <button>
+          <button className={css.btn}>
             <AiOutlineDelete />
           </button>
         </div>
