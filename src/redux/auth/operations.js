@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { showNotification } from '../../utils/notification';
 
-axios.defaults.baseURL = '/users';
+
+axios.defaults.baseURL = 'https://aquatrack-it-warriors-backend.onrender.com/api';
 
 // add JWT
 function setAuthHeader(token) {
@@ -11,6 +13,7 @@ function setAuthHeader(token) {
 // remove JWT
 function clearAuthHeader() {
   axios.defaults.headers.common.Authorization = '';
+  //delete axios.defaults.headers.common.Authorization;?
 }
 
 export const register = createAsyncThunk(
