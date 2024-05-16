@@ -1,5 +1,4 @@
 import { boy, girlOne, girlTwo } from '../../assets/images';
-
 import css from './AdvantagesSection.module.css';
 export default function AdvantagesSection() {
   return (

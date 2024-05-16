@@ -1,0 +1,52 @@
+.title {
+    font-size: 20px;
+    line-height: 24px;
+    color: #323f47;
+    margin-bottom: 16px;
+  }
+  
+  .question {
+    font-size: 18px;
+    line-height: 18px;
+    color: #323f47;
+    margin-bottom: 24px;
+  }
+  
+  .deleteButton {
+    width: 304px;
+    height: 46px;
+    border-radius: 30px;
+    background-color: var(--accent);
+    padding: 14px 24px;
+    font-weight: bold;
+    line-height: 18px;
+    letter-spacing: -1%;
+    text-align: center;
+    color: #323f47;
+    margin-left: 6px;
+    margin-bottom: 16px;
+  }
+  
+  .cancelButton {
+    font-weight: bold;
+    line-height: 18px;
+    letter-spacing: -1%;
+    text-align: center;
+    margin-left: 126px;
+    color: rgba(50, 63, 71, 0.3);
+    background-color: var(--main-white);
+    box-shadow: none;
+    transition: background-color 0.3s ease;
+    
+  }
+  /* Media queries for tablet and desktop */                                
+  @media (min-width: 768px) {
+  .deleteButton {
+    width: 170px; 
+  }
+
+  .cancelButton {
+   display: inline-block; 
+    margin-left: 12px; 
+  }
+}

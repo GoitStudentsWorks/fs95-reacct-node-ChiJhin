@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = '/water';
+axios.defaults.baseURL = `https://aquatrack-it-warriors-backend.onrender.com/api/water`;
 
 export const addWater = createAsyncThunk(
   'contacts/addWater',
@@ -29,6 +29,18 @@ export const editWater = createAsyncThunk(
 
 export const deleteWater = createAsyncThunk(
   'contacts/deleteWater',
+  async (day, thunkAPI) => {
+    try {
+      const response = await axios.delete('/update', day);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const logOut = createAsyncThunk(
+  'contacts/logOut',
   async (day, thunkAPI) => {
     try {
       const response = await axios.delete('/update', day);
