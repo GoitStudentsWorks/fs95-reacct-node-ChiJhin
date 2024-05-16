@@ -1,10 +1,12 @@
-import * as Yup from 'yup';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { useState } from 'react';
+import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { FiEyeOff, FiEye } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import css from './SignInForm.module.css';
-// import { useDispatch } from 'react-redux';
+import Logo from '../Logo/Logo';
 import { useId } from 'react';
 
 const signInValidationSchema = Yup.object().shape({
@@ -17,12 +19,8 @@ const signInValidationSchema = Yup.object().shape({
 });
 
 export default function SignInForm() {
-  //   const dispatch = useDispatch();
-  const [passwordVisibility, setPasswordVisibility] = useState(true);
-
-  const handlePasswordVisibility = () => {
-    setPasswordVisibility(!passwordVisibility);
-  };
+  const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
 
   const emailFieldId = useId();
   const passwordFieldId = useId();
@@ -30,49 +28,73 @@ export default function SignInForm() {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(signInValidationSchema),
   });
 
   const onSubmit = (data) => {
-    dispatch(logIn(data));
+    dispatch(login(data));
     reset();
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor={emailFieldId}>Email</label>
-          <input
-            className={errors.email ? css.errorInput : css.input}
-            placeholder="Enter your email"
-            type="text"
-            id={emailFieldId}
-            {...register('email')}
-          />
-          {errors.email && <p className={css.error}>{errors.email?.message}</p>}
-        </div>
-        <div>
-          <label htmlFor={passwordFieldId}>Password</label>
-          <input
-            className={errors.password ? css.errorInput : css.input}
-            placeholder="Enter your password"
-            type={passwordVisibility ? 'password' : 'text'}
-            id={passwordFieldId}
-            {...register('password')}
-          />
-          <span onClick={handlePasswordVisibility}>
-            {passwordVisibility ? <FaEyeSlash /> : <FaEye />}
-          </span>
-          {errors.password && (
-            <p className={css.error}>{errors.password?.message}</p>
-          )}
-        </div>
-        <button type="submit">Sign In</button>
-      </form>
-    </>
+    <div className={css.container}>
+      <div className={css.section}>
+        <Logo />
+        <h1 className={css.title}>Sign In</h1>
+        <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
+          <div className={css.field}>
+            <label htmlFor={emailFieldId} className={css.email}>
+              Email
+            </label>
+            <input
+              className={errors.email ? css.errorInput : css.firstInput}
+              type="text"
+              placeholder="Enter your email"
+              id={emailFieldId}
+              {...register('email')}
+            />
+            {errors.email && (
+              <p className={css.error}>{errors.email.message}</p>
+            )}
+          </div>
+          <div className={css.field}>
+            <label htmlFor={passwordFieldId} className={css.password}>
+              Password
+            </label>
+            <div className={css.toggle}>
+              <input
+                className={errors.password ? css.errorIn : css.secondInput}
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Enter your password"
+                id={passwordFieldId}
+                {...register('password')}
+              />
+              <div
+                onClick={() => setShowPassword(!showPassword)}
+                className={css.iconOne}
+              >
+                {showPassword ? <FiEye size={20} /> : <FiEyeOff size={20} />}
+              </div>
+            </div>
+            {errors.password && (
+              <p className={css.error}>{errors.password.message}</p>
+            )}
+          </div>
+
+          <button type="submit" className={css.button}>
+            Sign In
+          </button>
+          <p className={css.text}>
+            Don`t have an account?
+            <Link to="/signup" className={css.link}>
+              Sign Up
+            </Link>
+          </p>
+        </form>
+      </div>
+    </div>
   );
 }
