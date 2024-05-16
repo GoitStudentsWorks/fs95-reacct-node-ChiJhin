@@ -1,7 +1,38 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectRefreshToken } from './selectors';
+import { updateToken, updateTokenError } from './slice';
 
 axios.defaults.baseURL = '/users';
+
+axios.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  async function (error) {
+    if (error.response.status == 401) {
+      const refreshToken = useSelector(selectRefreshToken);
+      try {
+        const res = await axios.patch('/users/refresh', {
+          refreshToken: refreshToken,
+        });
+        setAuthHeader(res.data.authToken);
+
+        const dispatch = useDispatch();
+
+        dispatch(updateToken(res.data));
+
+        return axios(error.config);
+      } catch (error) {
+        const dispatch = useDispatch();
+        dispatch(updateTokenError({}));
+        return Promise.reject(error);
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 // add JWT
 function setAuthHeader(token) {
@@ -19,7 +50,7 @@ export const register = createAsyncThunk(
     try {
       const res = await axios.post('/users/register', credentials);
       // add token to the HTTP header
-      setAuthHeader(res.data.token);
+      setAuthHeader(res.data.authToken);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -33,7 +64,7 @@ export const login = createAsyncThunk(
     try {
       const res = await axios.post('/users/login', credentials);
       // add token to the HTTP header
-      setAuthHeader(res.data.token);
+      setAuthHeader(res.data.authToken);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -43,7 +74,7 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
-    await axios.post('/users/logout');
+    await axios.get('/users/logout');
     // remove  token from the HTTP header
     clearAuthHeader();
   } catch (error) {
@@ -71,29 +102,15 @@ export const refresh = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
   }
 });
 
-export const updateToken = createAsyncThunk(
-  'auth/updateToken',
-  async (_, thunkAPI) => {
-    try {
-      // add refreshToken to the HTTP header
-      const state = thunkAPI.getState();
-      const refreshToken = state.auth.refreshToken;
-      setAuthHeader(refreshToken);
-      const res = await axios.get('/users/newpair');
-      // add token to the HTTP header
-      setAuthHeader(res.data.token);
-      return res.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
 export const editUser = createAsyncThunk(
   'auth/editUser',
-  async (user, thunkAPI) => {
+  async (formData, thunkAPI) => {
     try {
-      const res = await axios.patch('/users/update', user);
+      const res = await axios.patch('/users/update', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

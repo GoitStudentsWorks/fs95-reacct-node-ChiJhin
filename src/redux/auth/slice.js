@@ -1,12 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  register,
-  login,
-  logout,
-  refresh,
-  updateToken,
-  editUser,
-} from './operations';
+import { register, login, logout, refresh, editUser } from './operations';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -25,11 +18,11 @@ const authSlice = createSlice({
     user: {
       name: null,
       email: null,
-      photo: null,
+      avatarURL: null,
       gender: null,
       weight: null,
-      sportDuration: null,
-      waterPerDay: null,
+      dailyActivityTime: null,
+      dailyWaterNorm: null,
     },
     token: null,
     refreshToken: null,
@@ -38,11 +31,31 @@ const authSlice = createSlice({
     loading: false,
     error: null,
   },
-  extraReducers: builder => {
+  reducers: {
+    updateToken(state, action) {
+      state.token = action.payload.authToken;
+      state.refreshToken = action.payload.refreshToken;
+    },
+    updateTokenError(state, action) {
+      state.user = {
+        name: null,
+        email: null,
+        avatarURL: null,
+        gender: null,
+        weight: null,
+        dailyActivityTime: null,
+        dailyWaterNorm: null,
+      };
+      state.token = null;
+      state.refreshToken = null;
+      state.isLoggedIn = false;
+    },
+  },
+  extraReducers: (builder) => {
     builder
       .addCase(register.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.user.email = action.payload.email;
+        state.token = action.payload.authToken;
         state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
         state.error = null;
@@ -51,8 +64,8 @@ const authSlice = createSlice({
       .addCase(register.pending, handlePending)
       .addCase(register.rejected, handleRejected)
       .addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.user.email = action.payload.email;
+        state.token = action.payload.authToken;
         state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
         state.error = null;
@@ -60,15 +73,15 @@ const authSlice = createSlice({
       })
       .addCase(login.pending, handlePending)
       .addCase(login.rejected, handleRejected)
-      .addCase(logout.fulfilled, state => {
+      .addCase(logout.fulfilled, (state) => {
         state.user = {
           name: null,
           email: null,
-          photo: null,
+          avatarURL: null,
           gender: null,
           weight: null,
-          sportDuration: null,
-          waterPerDay: null,
+          dailyActivityTime: null,
+          dailyWaterNorm: null,
         };
         state.token = null;
         state.refreshToken = null;
@@ -78,51 +91,36 @@ const authSlice = createSlice({
       })
       .addCase(logout.pending, handlePending)
       .addCase(logout.rejected, handleRejected)
-      .addCase(refresh.pending, state => {
+      .addCase(refresh.pending, (state) => {
         state.isRefreshing = true;
         state.loading = true;
       })
       .addCase(refresh.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user.name = action.payload.name;
+        state.user.email = action.payload.email;
+        state.user.gender = action.payload.gender;
+        state.user.weight = action.payload.weight;
+        state.user.avatarURL = action.payload.avatarURL;
+        state.user.dailyActivityTime = action.payload.dailyActivityTime;
+        state.user.dailyWaterNorm = action.payload.dailyWaterNorm;
         state.isLoggedIn = true;
         state.isRefreshing = false;
         state.error = null;
         state.loading = false;
       })
-      .addCase(refresh.rejected, state => {
+      .addCase(refresh.rejected, (state) => {
         state.isRefreshing = false;
         state.loading = false;
         state.error = null;
-      })
-      .addCase(updateToken.fulfilled, (state, action) => {
-        state.token = action.payload.token;
-        state.isRefreshing = false;
-        state.error = null;
-        state.loading = false;
-      })
-      .addCase(updateToken.pending, state => {
-        state.isRefreshing = true;
-        state.loading = true;
-      })
-      .addCase(updateToken.rejected, state => {
-        state.user = {
-          name: null,
-          email: null,
-          photo: null,
-          gender: null,
-          weight: null,
-          sportDuration: null,
-          waterPerDay: null,
-        };
-        state.token = null;
-        state.refreshToken = null;
-        state.isRefreshing = false;
-        state.isLoggedIn = false;
-        state.error = null;
-        state.loading = false;
       })
       .addCase(editUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user.name = action.payload.name;
+        state.user.email = action.payload.email;
+        state.user.gender = action.payload.gender;
+        state.user.weight = action.payload.weight;
+        state.user.avatarURL = action.payload.avatarURL;
+        state.user.dailyActivityTime = action.payload.dailyActivityTime;
+        state.user.dailyWaterNorm = action.payload.dailyWaterNorm;
         state.error = null;
         state.loading = false;
       })
@@ -140,3 +138,5 @@ const authPersistConfig = {
 
 const persistedReducer = persistReducer(authPersistConfig, authSlice.reducer);
 export const authReducer = persistedReducer;
+
+export const { updateToken, updateTokenError } = authSlice.actions;

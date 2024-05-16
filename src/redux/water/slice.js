@@ -22,21 +22,18 @@ const waterSlice = createSlice({
     dayWater: [],
     monthWater: [],
     day: null,
-    month: {
-      start: null,
-      end: null,
-    },
+    month: null,
     loading: false,
     error: null,
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       //add
       .addCase(addWater.pending, handlePending)
       .addCase(addWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.dayWater = action.payload;
+        state.dayWater.push(action.payload);
       })
       .addCase(addWater.rejected, handleRejected)
       //edit
@@ -44,7 +41,9 @@ const waterSlice = createSlice({
       .addCase(editWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.dayWater = action.payload;
+        state.dayWater = state.dayWater.map((el) =>
+          el._id === action.payload._id ? action.payload : el
+        );
       })
       .addCase(editWater.rejected, handleRejected)
       //delete
@@ -52,7 +51,13 @@ const waterSlice = createSlice({
       .addCase(deleteWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.dayWater = [];
+
+        const index = state.dayWater.findIndex(
+          (el) => el._id === action.payload._id
+        );
+        if (index !== -1) {
+          state.dayWater.splice(index, 1);
+        }
       })
       .addCase(deleteWater.rejected, handleRejected)
       //day
