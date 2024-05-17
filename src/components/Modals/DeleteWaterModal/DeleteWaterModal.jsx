@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Modal from '../Modal/Modal';
 import { useDispatch } from 'react-redux';
 import { deleteWater } from '../../../redux/water/operations';
@@ -15,16 +15,21 @@ export default function DeleteWaterModal({ isOpen, closeModal, entryId }) {
 
     try {
       // Make API request to delete water entry
-      await axios.delete(`https://aquatrack-it-warriors-backend.onrender.com/api/water/${entryId}`);
+      await axios.delete(
+        `https://aquatrack-it-warriors-backend.onrender.com/api/water/${entryId}`
+      );
 
       // Show success notification
       showNotification('Water entry deleted successfully!', 'success');
-      dispatch(deleteWaterSuccess(entryId));
+      dispatch(deleteWater(entryId));
       // Close modal after successful deletion
       closeModal();
     } catch (error) {
       // Show error notification
-      showNotification('Failed to delete water entry. Please try again.', 'error');
+      showNotification(
+        'Failed to delete water entry. Please try again.',
+        'error'
+      );
       console.error('Delete operation failed:', error);
     } finally {
       setIsDeleting(false);
@@ -43,7 +48,11 @@ export default function DeleteWaterModal({ isOpen, closeModal, entryId }) {
         >
           {isDeleting ? 'Deleting...' : 'Delete'}
         </button>
-        <button className={css.cancelButton} onClick={closeModal} disabled={isDeleting}>
+        <button
+          className={css.cancelButton}
+          onClick={closeModal}
+          disabled={isDeleting}
+        >
           Cancel
         </button>
       </div>
