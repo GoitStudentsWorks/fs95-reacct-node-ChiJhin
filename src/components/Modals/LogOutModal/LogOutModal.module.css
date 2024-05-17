@@ -1,6 +1,7 @@
 .modalBox{
     display: flex;
     flex-direction: column;
+    
     /* gap:28px ; */
 }
 .title{
@@ -48,11 +49,11 @@ color: rgba(50, 63, 71, 0.3);
     background: #f0eff4;
 }
 @media (min-width:768px) {
-    .btnBox{flex-direction: row;}
+    .btnBox{flex-direction: row;} f
     .btn{
         border-radius: 15px;
 padding: 40px;
-width: 516px;
-height: 244px;
+width: 173px;
+height: 60px;
     }
 }
