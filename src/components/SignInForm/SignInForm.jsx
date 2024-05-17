@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import css from './SignInForm.module.css';
 import Logo from '../Logo/Logo';
 import { useId } from 'react';
+import { login } from '../../redux/auth/operations';
 
 const signInValidationSchema = Yup.object().shape({
   email: Yup.string()

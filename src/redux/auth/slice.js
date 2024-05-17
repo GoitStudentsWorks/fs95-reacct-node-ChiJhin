@@ -33,7 +33,7 @@ const authSlice = createSlice({
   },
   reducers: {
     updateToken(state, action) {
-      state.token = action.payload.authToken;
+      state.token = action.payload.token;
       state.refreshToken = action.payload.refreshToken;
     },
     updateTokenError(state, action) {
@@ -54,8 +54,14 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(register.fulfilled, (state, action) => {
-        state.user.email = action.payload.email;
-        state.token = action.payload.authToken;
+        state.user.name = action.payload.user.name;
+        state.user.email = action.payload.user.email;
+        state.user.gender = action.payload.user.gender;
+        state.user.weight = action.payload.user.weight;
+        state.user.avatarURL = '';
+        state.user.dailyActivityTime = action.payload.user.dailyActivityTime;
+        state.user.dailyWaterNorm = action.payload.user.dailyWaterNorm;
+        state.token = action.payload.token;
         state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
         state.error = null;
@@ -64,8 +70,14 @@ const authSlice = createSlice({
       .addCase(register.pending, handlePending)
       .addCase(register.rejected, handleRejected)
       .addCase(login.fulfilled, (state, action) => {
-        state.user.email = action.payload.email;
-        state.token = action.payload.authToken;
+        state.user.name = action.payload.user.name;
+        state.user.email = action.payload.user.email;
+        state.user.gender = action.payload.user.gender;
+        state.user.weight = action.payload.user.weight;
+        state.user.avatarURL = action.payload.user.avatarURL;
+        state.user.dailyActivityTime = action.payload.user.dailyActivityTime;
+        state.user.dailyWaterNorm = action.payload.user.dailyWaterNorm;
+        state.token = action.payload.token;
         state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
         state.error = null;
@@ -109,9 +121,21 @@ const authSlice = createSlice({
         state.loading = false;
       })
       .addCase(refresh.rejected, (state) => {
-        state.isRefreshing = false;
-        state.loading = false;
+        state.user = {
+          name: null,
+          email: null,
+          avatarURL: null,
+          gender: null,
+          weight: null,
+          dailyActivityTime: null,
+          dailyWaterNorm: null,
+        };
+        state.token = null;
+        state.refreshToken = null;
+        state.isLoggedIn = false;
         state.error = null;
+        state.loading = false;
+        state.isRefreshing = false;
       })
       .addCase(editUser.fulfilled, (state, action) => {
         state.user.name = action.payload.name;

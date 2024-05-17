@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectRefreshToken } from './selectors';
 import { updateToken, updateTokenError } from './slice';
 
-axios.defaults.baseURL =
-  'https://aquatrack-it-warriors-backend.onrender.com/api';
+axios.defaults.baseURL = 'http://localhost:3000/api/';
 
 axios.interceptors.response.use(
   function (response) {
@@ -18,7 +17,7 @@ axios.interceptors.response.use(
         const res = await axios.patch('/users/refresh', {
           refreshToken: refreshToken,
         });
-        setAuthHeader(res.data.authToken);
+        setAuthHeader(res.data.token);
 
         const dispatch = useDispatch();
 
@@ -52,7 +51,7 @@ export const register = createAsyncThunk(
     try {
       const res = await axios.post('/users/register', credentials);
       // add token to the HTTP header
-      setAuthHeader(res.data.authToken);
+      setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -66,7 +65,8 @@ export const login = createAsyncThunk(
     try {
       const res = await axios.post('/users/login', credentials);
       // add token to the HTTP header
-      setAuthHeader(res.data.authToken);
+      setAuthHeader(res.data.token);
+
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

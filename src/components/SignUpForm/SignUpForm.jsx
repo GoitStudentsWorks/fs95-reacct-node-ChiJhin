@@ -8,6 +8,7 @@ import { FiEyeOff, FiEye } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import css from './SignUpForm.module.css';
 import Logo from '../Logo/Logo';
+import { register as userRegister } from '../../redux/auth/operations';
 
 const signUpValidationSchema = Yup.object({
   email: Yup.string()
@@ -36,7 +37,10 @@ export default function SignUpForm() {
   });
 
   const onSubmit = (data) => {
-    dispatch(registerUser(data));
+    const name = data.email.split('@')[0];
+    const email = data.email;
+    const password = data.password;
+    dispatch(userRegister({ name, email, password }));
     reset();
   };
 
