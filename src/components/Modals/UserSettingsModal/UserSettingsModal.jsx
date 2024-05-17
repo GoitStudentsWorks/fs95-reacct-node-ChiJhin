@@ -2,7 +2,7 @@ import { useState } from 'react';
 import css from './UserSettingsModal.module.css';
 import UserSettingsForm from '../UserSettingsForm/UserSettingsForm';
 
-export default function UserSettingsModal() {
+export default function UserSettingsModal({closeModal}) {
   
   return (
     <>
@@ -10,7 +10,7 @@ export default function UserSettingsModal() {
         
       <div className={css.settingBox}>
         
-          <UserSettingsForm/>
+          <UserSettingsForm closeModal={closeModal}/>
       </div>
     </>
   );

@@ -45,8 +45,8 @@ export default function BtnAddWater (){
           <div>
             {/* тут втавляєм потрібний компонент */}
             {/* <WaterModal/> */}
-            <UserSettingsModal/>
-            {/* <LogOutModal/> */}
+            <UserSettingsModal closeModal={closeModalUpdate}/>
+            {/* <LogOutModal closeModal={closeModalUpdate} /> */}
             {/* <WaterForm item={update} closeModal={closeModalUpdate} /> */}
           </div>
         </Modals>

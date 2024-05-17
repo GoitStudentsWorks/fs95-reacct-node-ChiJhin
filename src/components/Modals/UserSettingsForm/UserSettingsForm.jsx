@@ -8,20 +8,20 @@ import { editWater, selectDay } from '../../../redux/water/operations';
 import { editUser } from '../../../redux/auth/operations';
 import TimeField from 'react-simple-timefield';
 
-export default function UserSettingsForm() {
+export default function UserSettingsForm({ closeModal }) {
   const [selectedValueRadio, setSelectedValueRadio] = useState('');
   const [result, setResult] = useState(null);
   const [volume, setSelectedVolume] = useState('');
   const [M, setM] = useState(null);
   const [T, setT] = useState('7:00');
-  const [avatar, setAvatar] = useState(false)
+  const [avatar, setAvatar] = useState(false);
 
-//   const dispatch = useDispatch();
-//   const selector = useSelector(state => state.water)
-//   console.log(selector);
-// useEffect(()=>{
-//   dispatch(selectDay())
-// },[dispatch])
+  //   const dispatch = useDispatch();
+  //   const selector = useSelector(state => state.water)
+  //   console.log(selector);
+  // useEffect(()=>{
+  //   dispatch(selectDay())
+  // },[dispatch])
 
   const handleRadioChange = (event) => {
     setSelectedValueRadio(event.target.value);
@@ -35,16 +35,16 @@ export default function UserSettingsForm() {
 
   const convertToMinutes = (time) => {
     const [hours, minutes] = time.split(':');
-    const totalMinutes = (parseInt(hours)  + parseInt(minutes)/60) ;
+    const totalMinutes = parseInt(hours) + parseInt(minutes) / 60;
     return totalMinutes;
   };
-  
-  useEffect(() => {    
+
+  useEffect(() => {
     if (selectedValueRadio !== '') {
-        const time =convertToMinutes(T)
+      const time = convertToMinutes(T);
       if (selectedValueRadio === 'woman') {
         // console.log( T,  time);
-        const V = M * 0.03 +  time * 0.4;
+        const V = M * 0.03 + time * 0.4;
         setResult(V.toFixed(2));
         // console.log('result', V);
       } else {
@@ -65,47 +65,44 @@ export default function UserSettingsForm() {
 
   setValue('lastEmail', 'sad@gmail.com');
 
-  const onSubmit = (data, actions) => {
-    const {avatar,gender,lastEmail,lastKilo,lastName,lastTime,lastValume} = data;
+  const onSubmit = (data) => {
+    const { gender, lastEmail, lastKilo, lastName, lastTime, lastValume } =
+      data;
     const file = avatar;
-    console.log(data, file);
-
+    // console.log(data, file);
+    // closeModal()
     const formData = new FormData();
-    // for(const key of formData.keys()){
-    //   console.log(key);
-    // }
-  //   const fg = formData.append('lastKilo', 'John');
-  //   formData.append('password', 'John123');
-  //  console.log(formData,fg);
+    formData.append('avatar', file);
+    formData.append('gender', gender);
+    formData.append('name', lastName);
+    formData.append('email', lastEmail);
+    formData.append('kilo', lastKilo);
+    formData.append('time', lastTime);
+    formData.append('valume', lastValume);
 
-  //  dispatch(editWater({ id: id, data: formData }))
-  //      .unwrap()
-  //      .then(() => {
-  //        notify();
-  //      })
-  //      .catch(() => {
-  //        notifyError();
-  //      });
-    //  closeModal();
+    const obj = Object.fromEntries(formData.entries());
+    console.log(obj);
 
-  //   if (file) {
-  //     const blob = new Blob([file]);
-  //     console.log(blob);
-  //     const objectURL = URL.createObjectURL(blob);
-  //     console.log(objectURL);
-  //       // setAvatar(objectURL);
-  //   }
+    //  dispatch(editWater({ id: id, data: formData }))
+    //      .unwrap()
+    //      .then(() => {
+    //        notify();
+    //      })
+    //      .catch(() => {
+    //        notifyError();
+    //      });
+    //    closeModal();
   };
 
   return (
     <>
       {/* =============================== */}
       <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
-        <AvatarInput 
-        control={control} 
-        register={register} 
-        setAvatar={setAvatar}
-        avatar={avatar}
+        <AvatarInput
+          control={control}
+          register={register}
+          setAvatar={setAvatar}
+          avatar={avatar}
         />
         <div>
           <h3 className={css.titleHender}>Your gender identity</h3>
@@ -162,28 +159,24 @@ export default function UserSettingsForm() {
             <div className={css.formKilo}>
               <label>Your weight in kilograms:</label>
               <input
-                {...register('lastKilo', {value: 70}) }
+                {...register('lastKilo', { value: 70 })}
                 onChange={(event) => handleChange(setM, event)}
               />
             </div>
 
             <div className={css.formKilo}>
               <label>The time of active participation in sports:</label>
-              
-<TimeField
-    value='07:00'   //тут підставити дефолтне значення
-    onChange={(event, value) => {
-      handleChange(setT,event)
-      }} 
-    input={
-      <input
-       {...register('lastTime', { required: true })}
-     />
-    }   
-    colon=":"     
-/>
-    {errors.lastTime && <p>Last name is required.</p>} 
-    </div>
+
+              <TimeField
+                value="07:00" //тут підставити дефолтне значення
+                onChange={(event, value) => {
+                  handleChange(setT, event);
+                }}
+                input={<input {...register('lastTime', { required: true })} />}
+                colon=":"
+              />
+              {errors.lastTime && <p>Last name is required.</p>}
+            </div>
 
             <p className={css.amountWater}>
               The required amount of water in liters per day:
