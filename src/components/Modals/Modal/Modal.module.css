@@ -18,7 +18,8 @@
 
 .modalSetting {
   composes: Modal;
-  height: 1302px;
+  /* height: 1302px; */
+  height: 100%;
 }
 
 /*.overlay {
@@ -79,7 +80,8 @@
     margin: 40px auto;
     padding: 40px;
     width: 648px;
-    height: 1336px;
+    /* height: 1336px; */
+    height: 100%;
   }
   
 }
