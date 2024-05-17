@@ -3,11 +3,12 @@ import css from './AvatarInput.module.css';
 import sprite from '../../../../assets/sprite.svg';
 import { useState } from 'react';
 
-export default function AvatarInput({ control, register }) {
-  const [avatar, setAvatar] = useState(true);
+export default function AvatarInput({ control, register,avatar,setAvatar }) {
+  // const [avatar, setAvatar] = useState(true);
+  // const [avatar, setAvatar] = useState(false)
 
   const avatarUser = (
-    <img className={css.photo} src={avatar} width="100%" alt="Avatar" />
+        <img className={css.photo} src={avatar} width="100%" height= "100%" alt="Avatar" />
   );
   const avatarDefault = (
     <svg
@@ -26,10 +27,10 @@ export default function AvatarInput({ control, register }) {
 
     if (file) {
       const blob = new Blob([file]);
-    //   console.log(blob);
+      // console.log(blob);
       const objectURL = URL.createObjectURL(blob);
-    //   console.log(objectURL);
-      //   setAvatar(objectURL);
+      // console.log(objectURL);
+        setAvatar(objectURL);
     }
   };
 
