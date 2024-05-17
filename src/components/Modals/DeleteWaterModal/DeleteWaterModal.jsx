@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteWater } from '../../../redux/water/operations';
 import { showNotification } from '../../../utils/notification';
-import css from './DeleteWaterModal.module.css'
-
+import css from './DeleteWaterModal.module.css';
 
 const title = 'Delete entry';
 
@@ -56,11 +55,3 @@ export default function DeleteWaterModal({ isOpen, closeModal, entryId }) {
   </>
   );
 } 
-
-
-
-
-
-
-
-   
