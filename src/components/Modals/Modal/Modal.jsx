@@ -11,8 +11,7 @@ const customStyles = {
 
 export default function Modals({ styleVariantBtn,styleVariant, isOpen, closeModal, children }) {
   return (
-    <>
-      <Modal
+    <Modal
         isOpen={isOpen}
         onRequestClose={closeModal}
         style={customStyles}
@@ -24,6 +23,5 @@ export default function Modals({ styleVariantBtn,styleVariant, isOpen, closeModa
           <AiOutlineClose/>
         </button>
       </Modal>
-    </>
   );
 }

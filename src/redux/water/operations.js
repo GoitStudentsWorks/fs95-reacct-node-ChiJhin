@@ -28,10 +28,10 @@ export const editWater = createAsyncThunk(
 );
 
 export const deleteWater = createAsyncThunk(
-  'contacts/deleteWater',
-  async (day, thunkAPI) => {
+  'water/deleteWater',
+  async (water, thunkAPI) => {
     try {
-      const response = await axios.delete('/update', day);
+      const response = await axios.delete(`/${water._id}`);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

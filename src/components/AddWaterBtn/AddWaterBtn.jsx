@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import Modals from "../Modals/Modal/Modal";
 // import WaterModal from '../Modals/WaterModal/WaterModal';
-import LogOutModal from '../Modals/LogOutModal/LogOutModal';
+//import LogOutModal from '../Modals/LogOutModal/LogOutModal';
+import DeleteWaterModal from '../Modals/DeleteWaterModal/DeleteWaterModal';
 export default function BtnAddWater (){
 //     const filter = useSelector(selectFilter);
 //   const dispatch = useDispatch();
@@ -43,7 +44,8 @@ export default function BtnAddWater (){
           <div>
             {/* тут втавляєм потрібний компонент */}
             {/* <WaterModal/> */}
-            <LogOutModal/>
+            {/*<LogOutModal/>*/}
+            <DeleteWaterModal/>
             {/* <WaterForm item={update} closeModal={closeModalUpdate} /> */}
           </div>
         </Modals>
