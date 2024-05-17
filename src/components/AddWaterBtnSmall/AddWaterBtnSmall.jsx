@@ -1,12 +1,13 @@
 import { FaPlus } from 'react-icons/fa';
+import css from './AddWaterBtnSmall.module.css';
 
 export default function AddWaterBtnSmall() {
   return (
     <>
-      <button>
-        <span>
+      <button className={css.wrap}>
+        <span className={css.iconWrap}>
           <FaPlus />
-        </span>{' '}
+        </span>
         Add water
       </button>
     </>

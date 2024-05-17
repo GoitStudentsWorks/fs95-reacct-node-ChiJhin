@@ -1,13 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { DayToString, TimeToString } from '../../utils/dates';
 
-axios.defaults.baseURL = '/water';
+axios.defaults.baseURL = `https://aquatrack-it-warriors-backend.onrender.com/api/`;
 
 export const addWater = createAsyncThunk(
-  'contacts/addWater',
-  async ({ day, amount }, thunkAPI) => {
+  'water/addWater',
+  async (value, thunkAPI) => {
     try {
-      const response = await axios.post('/add', { day, amount });
+      const now = new Date();
+      const date = DayToString(now);
+
+      const time = TimeToString(now);
+      const response = await axios.post('/', { value, date, time });
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -16,10 +21,10 @@ export const addWater = createAsyncThunk(
 );
 
 export const editWater = createAsyncThunk(
-  'contacts/editWater',
-  async ({ day, dayWater }, thunkAPI) => {
+  'water/editWater',
+  async (water, thunkAPI) => {
     try {
-      const response = await axios.patch('/update', { day, dayWater });
+      const response = await axios.put(`/${water._id}`, water);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -39,24 +44,26 @@ export const deleteWater = createAsyncThunk(
   }
 );
 
-export const selectDay = createAsyncThunk(
-  'contacts/selectDay',
+//day = "dd.mm.yyyy"
+export const chooseDay = createAsyncThunk(
+  'water/chooseDay',
   async (day, thunkAPI) => {
     try {
-      const response = await axios.get('/day', day);
-      return response.data;
+      const response = await axios.get('/', day);
+      return { day: day, dayWater: response.data };
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
 
-export const selectMonth = createAsyncThunk(
-  'contacts/selectMonth',
+//month = "mm.yyyy"
+export const chooseMonth = createAsyncThunk(
+  'water/chooseMonth',
   async (month, thunkAPI) => {
     try {
-      const response = await axios.get('/month', month);
-      return response.data;
+      const response = await axios.get('/', month);
+      return { month: month, monthWater: response.data };
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }

@@ -3,17 +3,28 @@
   gap: 12px;
   align-items: center;
 }
+.container {
+  display: flex;
+  justify-content: space-between;
+  min-width: 170px;
+}
 .btn {
+  border: none;
   background-color: transparent;
 }
+
+.btn:hover {
+  scale: 1.1;
+}
+
 .span {
   font-size: 14px;
   font-weight: 700;
   line-height: 18px;
-  color: var(--dark-blue);
+  color: var(--main);
 }
 .arrow {
-  stroke: var(--dark-blue);
+  stroke: var(--main);
   stroke-width: 1;
 }
 .pieIcon {

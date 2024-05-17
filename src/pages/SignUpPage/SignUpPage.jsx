@@ -1,11 +1,16 @@
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
+import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection';
+import css from '../SignUpPage/SignUpPage.module.css';
 
 export default function SignUpPage() {
   return (
-    <main>
-      <div>
-        <h1>SignUp</h1>
+    <main className={css.container}>
+      <div className={css.page}>
         <SignUpForm />
+
+        <div className={css.wrap}>
+          <AdvantagesSection />
+        </div>
       </div>
     </main>
   );

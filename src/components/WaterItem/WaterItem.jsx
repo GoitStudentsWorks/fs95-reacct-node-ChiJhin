@@ -3,17 +3,14 @@ import { FiEdit2 } from 'react-icons/fi';
 import css from './WaterItem.module.css';
 import svg from '../../assets/sprite.svg';
 
-export default function WaterItem({ countMl: ml, currentTime: time }) {
+export default function WaterItem({
+  countMl: ml,
+  currentTime: time,
+  delHendler: delModalHendler,
+  editHendler: editModalHendler,
+}) {
   return (
     <>
-      {/* <div>
-        <LuGlassWater />
-        <p>{ml} ml</p>
-        <p>{time}</p>
-        <FiEdit2 />
-        <AiOutlineDelete />
-      </div> */}
-
       <li className={css.card}>
         <svg className={css.glassIcon} width="38" height="38">
           <use xlinkHref={`${svg}#icon-glass`}></use>
@@ -24,10 +21,10 @@ export default function WaterItem({ countMl: ml, currentTime: time }) {
         </div>
 
         <div className={css.cardBtnsBlock}>
-          <button>
+          <button className={css.btn} onClick={editModalHendler}>
             <FiEdit2 />
           </button>
-          <button>
+          <button className={css.btn} onClick={delModalHendler}>
             <AiOutlineDelete />
           </button>
         </div>

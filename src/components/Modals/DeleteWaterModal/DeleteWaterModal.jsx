@@ -6,6 +6,8 @@ import css from './DeleteWaterModal.module.css';
 
 const title = 'Delete entry';
 
+
+
 export default function DeleteWaterModal({ isOpen, closeModal, entryId }) {
   const dispatch = useDispatch();
   const [isDeleting, setIsDeleting] = useState(false);
@@ -19,11 +21,13 @@ export default function DeleteWaterModal({ isOpen, closeModal, entryId }) {
 
       // Show success notification
       showNotification('Water entry deleted successfully!', 'success');
+   
       // Close modal after successful deletion
       closeModal();
     } catch (error) {
       // Show error notification
       showNotification('Failed to delete water entry. Please try again.', 'error');
+     
       console.error('Delete operation failed:', error);
     } finally {
       setIsDeleting(false);
@@ -55,3 +59,4 @@ export default function DeleteWaterModal({ isOpen, closeModal, entryId }) {
   </>
   );
 } 
+  
