@@ -6,21 +6,22 @@ import AvatarInput from './AvatarInput/AvatarInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { editWater, selectDay } from '../../../redux/water/operations';
 import { editUser } from '../../../redux/auth/operations';
+import TimeField from 'react-simple-timefield';
 
 export default function UserSettingsForm() {
   const [selectedValueRadio, setSelectedValueRadio] = useState('');
   const [result, setResult] = useState(null);
   const [volume, setSelectedVolume] = useState('');
   const [M, setM] = useState(null);
-  const [T, setT] = useState(null);
+  const [T, setT] = useState('7:00');
   const [avatar, setAvatar] = useState(false)
 
-  const dispatch = useDispatch();
-  const selector = useSelector(state => state.water)
-  console.log(selector);
-useEffect(()=>{
-  dispatch(selectDay())
-},[dispatch])
+//   const dispatch = useDispatch();
+//   const selector = useSelector(state => state.water)
+//   console.log(selector);
+// useEffect(()=>{
+//   dispatch(selectDay())
+// },[dispatch])
 
   const handleRadioChange = (event) => {
     setSelectedValueRadio(event.target.value);
@@ -32,16 +33,24 @@ useEffect(()=>{
     // console.log(event.target.value);
   };
 
+  const convertToMinutes = (time) => {
+    const [hours, minutes] = time.split(':');
+    const totalMinutes = (parseInt(hours)  + parseInt(minutes)/60) ;
+    return totalMinutes;
+  };
+  
   useEffect(() => {    
     if (selectedValueRadio !== '') {
+        const time =convertToMinutes(T)
       if (selectedValueRadio === 'woman') {
-        const V = M * 0.03 + T * 0.4;
+        // console.log( T,  time);
+        const V = M * 0.03 +  time * 0.4;
         setResult(V.toFixed(2));
-        console.log('result', V);
+        // console.log('result', V);
       } else {
-        const V = (M * 0.04 + T * 0.6).toFixed(2);
+        const V = (M * 0.04 + time * 0.6).toFixed(2);
         setResult(V);
-        console.log('result', V);
+        // console.log('result', V);
       }
     }
   }, [selectedValueRadio, M, T]);
@@ -103,7 +112,7 @@ useEffect(()=>{
         </div>
         <RadioBtn
           onChangeRadio={handleRadioChange}
-          selectedValue={selectedValueRadio}
+          // selectedValue={selectedValueRadio}
           register={register}
         />
         <div className={css.sectionBox}>
@@ -153,19 +162,28 @@ useEffect(()=>{
             <div className={css.formKilo}>
               <label>Your weight in kilograms:</label>
               <input
-                {...register('lastKilo')}
+                {...register('lastKilo', {value: 70}) }
                 onChange={(event) => handleChange(setM, event)}
               />
             </div>
 
             <div className={css.formKilo}>
               <label>The time of active participation in sports:</label>
-              <input
-                {...register('lastTime', { required: true })}
-                onChange={(event) => handleChange(setT, event)}
-              />
-              {errors.lastTime && <p>Last name is required.</p>}
-            </div>
+              
+<TimeField
+    value='07:00'   //тут підставити дефолтне значення
+    onChange={(event, value) => {
+      handleChange(setT,event)
+      }} 
+    input={
+      <input
+       {...register('lastTime', { required: true })}
+     />
+    }   
+    colon=":"     
+/>
+    {errors.lastTime && <p>Last name is required.</p>} 
+    </div>
 
             <p className={css.amountWater}>
               The required amount of water in liters per day:

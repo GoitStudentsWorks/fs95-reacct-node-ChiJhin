@@ -1,7 +1,9 @@
+import { useSelector } from "react-redux";
 import css from "./RadioInput.module.css";
+import { selectDay } from "../../../../redux/water/operations";
 
-export default function RadioBtn({ register, onChangeRadio,selectedValue}) {
-      
+export default function RadioBtn({ register, onChangeRadio}) {
+      const statusRadioBtn = useSelector(selectDay)
   return (
     <> 
       
@@ -11,8 +13,9 @@ export default function RadioBtn({ register, onChangeRadio,selectedValue}) {
           type="radio" 
           value="woman" 
           id="field-woman" 
-          checked={selectedValue === 'woman'}
+          // checked={selectedValue === 'woman'}
           onChange={onChangeRadio}
+          defaultChecked={statusRadioBtn==='woman'}
           /> 
         <label htmlFor="field-woman" className={css.radioLabel}>
         Woman
@@ -24,9 +27,9 @@ export default function RadioBtn({ register, onChangeRadio,selectedValue}) {
           type="radio" 
           value="man" 
           id="field-man" 
-          checked={selectedValue === 'man'}
+          // checked={selectedValue === 'man'}
           onChange={onChangeRadio}
-          // defaultChecked 
+          defaultChecked={statusRadioBtn==='man'} 
           /> 
         <label htmlFor="field-man" className={css.radioLabel}>
           Man
@@ -36,22 +39,4 @@ export default function RadioBtn({ register, onChangeRadio,selectedValue}) {
     </>
   );
   }
-  // const dispatch = useDispatch();
-
-  // const onSubmitFormik = ({ name, number }, actions) => {
-  //   actions.resetForm();
-  //   const contactData = {
-  //     name: name,
-  //     number: number.replace(/(\d{3})(\d{3})(\d{2})/, '$1-$2-$3'),
-  //   };
-  //   dispatch(updateContact({ id: id, data: contactData }))
-  //     .unwrap()
-  //     .then(() => {
-  //       notify();
-  //     })
-  //     .catch(() => {
-  //       notifyError();
-  //     });
-  //   closeModal();
-  // };
-
+  

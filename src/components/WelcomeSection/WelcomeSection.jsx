@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import Logo from '../../components/Logo/Logo';
 import css from './WelcomeSection.module.css';
-import BtnAddWater from '../AddWaterBtn/AddWaterBtn';
 
 export default function WelcomeSection() {
   return (
@@ -18,7 +17,6 @@ export default function WelcomeSection() {
             <NavLink to="/signin" className={css.linkSignIn}>
               Sign In
             </NavLink>
-            <BtnAddWater/>
           </div>
         </div>
       </div>
