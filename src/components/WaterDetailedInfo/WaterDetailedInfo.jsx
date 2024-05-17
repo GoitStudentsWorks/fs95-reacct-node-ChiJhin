@@ -5,10 +5,12 @@ import css from './WaterDetailedInfo.module.css';
 
 export default function WaterDetailedInfo() {
   return (
-    <div className={css.waterDetailedInfo}>
+    <div className={css.container}>
       <UserPanel userName={'Dima'} />
-      <DailyInfo />
-      <MonthInfo />
+      <div>
+        <DailyInfo />
+        <MonthInfo />
+      </div>
     </div>
   );
 }

@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectRefreshToken } from './selectors';
 import { updateToken, updateTokenError } from './slice';
 
-axios.defaults.baseURL = '/users';
+axios.defaults.baseURL =
+  'https://aquatrack-it-warriors-backend.onrender.com/api';
 
 axios.interceptors.response.use(
   function (response) {
@@ -42,6 +43,7 @@ function setAuthHeader(token) {
 // remove JWT
 function clearAuthHeader() {
   axios.defaults.headers.common.Authorization = '';
+  //delete axios.defaults.headers.common.Authorization;?
 }
 
 export const register = createAsyncThunk(

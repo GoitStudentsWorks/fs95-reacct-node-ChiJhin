@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = '/water';
+axios.defaults.baseURL = `https://aquatrack-it-warriors-backend.onrender.com/api/water`;
 
 export const addWater = createAsyncThunk(
   'water/addWater',

@@ -1,4 +1,12 @@
-@media screen and (min-width: 320px) {
+.progressBarCenter {
+  margin: 0 auto;
+}
+
+.progressBarRight {
+  margin-left: auto;
+}
+
+@media screen and (min-width: 375px) {
   .bottle_page_wrapper {
     display: flex;
     position: relative;
@@ -10,7 +18,7 @@
   }
 
   .bottle_page_img {
-    margin-left: 41px;
+    margin-left: auto;
     margin-right: auto;
     margin-top: 50px;
     width: 262px;
@@ -18,7 +26,6 @@
   }
 
   .bottle_page_logo {
-    font-family: var(--main-font-family);
     position: absolute;
     left: 16px;
     top: 24px;
@@ -29,8 +36,9 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    row-gap: 2px;
     position: absolute;
+    top: 157px;
+    left: 32px;
     background-color: var(--white);
     border-radius: 15px;
     width: 103px;
@@ -48,23 +56,17 @@
     min-height: 477px;
     min-width: 374px;
     margin-top: 69px;
-    margin-left: 165px;
   }
 
   .bottle_page_norm_wrapper {
-    top: 157px;
-    left: 32px;
     padding: 14px;
-    width: 129px;
-    height: 78px;
+    width: calc(100% - 60px);
+    height: 400px;
     row-gap: 4px;
-    justify-content: space-around;
   }
-
-  /*END EDIT BUTTON*/
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1440px) {
   .bottle_page_wrapper {
     width: 48vw;
     min-height: 736px;
@@ -73,7 +75,8 @@
     min-height: 604px;
     min-width: 472px;
     margin-top: 92px;
-    margin-left: auto;
-    margin-right: auto;
+  }
+  .bottle_page_norm_wrapper {
+    height: 500px;
   }
 }
