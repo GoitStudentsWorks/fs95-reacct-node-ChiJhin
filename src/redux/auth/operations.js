@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectRefreshToken } from './selectors';
 import { updateToken, updateTokenError } from './slice';
 
-axios.defaults.baseURL = 'http://localhost:3000/api/';
+axios.defaults.baseURL =
+  'https://aquatrack-it-warriors-backend.onrender.com/api/';
 
 axios.interceptors.response.use(
   function (response) {
