@@ -1,16 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { DayToString, TimeToString } from '../../utils/dates';
 
-axios.defaults.baseURL = `http://localhost:3000/api/`;
+axios.defaults.baseURL = `https://aquatrack-it-warriors-backend.onrender.com/api/`;
 
 export const addWater = createAsyncThunk(
   'water/addWater',
   async (value, thunkAPI) => {
     try {
       const now = new Date();
-      const date =
-        now.getFullYear() + '.' + now.getMonth() + '.' + now.getDate();
-      const time = now.getHours() + ':' + now.getMinutes();
+      const date = DayToString(now);
+
+      const time = TimeToString(now);
       const response = await axios.post('/', { value, date, time });
       return response.data;
     } catch (e) {
@@ -44,8 +45,8 @@ export const deleteWater = createAsyncThunk(
 );
 
 //day = "dd.mm.yyyy"
-export const selectDay = createAsyncThunk(
-  'water/selectDay',
+export const chooseDay = createAsyncThunk(
+  'water/chooseDay',
   async (day, thunkAPI) => {
     try {
       const response = await axios.get('/', day);
@@ -57,8 +58,8 @@ export const selectDay = createAsyncThunk(
 );
 
 //month = "mm.yyyy"
-export const selectMonth = createAsyncThunk(
-  'water/selectMonth',
+export const chooseMonth = createAsyncThunk(
+  'water/chooseMonth',
   async (month, thunkAPI) => {
     try {
       const response = await axios.get('/', month);

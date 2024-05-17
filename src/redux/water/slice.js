@@ -3,9 +3,12 @@ import {
   addWater,
   editWater,
   deleteWater,
-  selectDay,
-  selectMonth,
+  chooseDay,
+  chooseMonth,
 } from './operations';
+import { DayToString, MonthToString } from '../../utils/dates';
+
+const now = new Date();
 
 function handlePending(state) {
   state.loading = true;
@@ -21,8 +24,8 @@ const waterSlice = createSlice({
   initialState: {
     dayWater: [],
     monthWater: [],
-    day: null,
-    month: null,
+    day: DayToString(now),
+    month: MonthToString(now),
     loading: false,
     error: null,
   },
@@ -61,25 +64,25 @@ const waterSlice = createSlice({
       })
       .addCase(deleteWater.rejected, handleRejected)
       //day
-      .addCase(selectDay.pending, handlePending)
-      .addCase(selectDay.fulfilled, (state, action) => {
+      .addCase(chooseDay.pending, handlePending)
+      .addCase(chooseDay.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
         state.dayWater = action.payload.dayWater;
         state.day = action.payload.day;
       })
-      .addCase(selectDay.rejected, handleRejected)
+      .addCase(chooseDay.rejected, handleRejected)
       //month
-      .addCase(selectMonth.pending, handlePending)
-      .addCase(selectMonth.fulfilled, (state, action) => {
+      .addCase(chooseMonth.pending, handlePending)
+      .addCase(chooseMonth.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
         state.dayWater = [];
-        state.day = null;
+        // state.day = null;
         state.month = action.payload.month;
         state.monthWater = action.payload.monthWater;
       })
-      .addCase(selectMonth.rejected, handleRejected);
+      .addCase(chooseMonth.rejected, handleRejected);
   },
 });
 
