@@ -56,8 +56,9 @@ const waterSlice = createSlice({
         state.error = null;
 
         const index = state.dayWater.findIndex(
-          (el) => el._id === action.payload._id
+          (el) => el._id === action.payload.deletedData._id
         );
+
         if (index !== -1) {
           state.dayWater.splice(index, 1);
         }
@@ -77,7 +78,7 @@ const waterSlice = createSlice({
       .addCase(chooseMonth.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.dayWater = [];
+        // state.dayWater = [];
         // state.day = null;
         state.month = action.payload.month;
         state.monthWater = action.payload.monthWater;

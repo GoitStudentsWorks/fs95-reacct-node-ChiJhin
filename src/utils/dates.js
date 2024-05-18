@@ -8,7 +8,7 @@ export function DayToString(date) {
 
 export function MonthToString(date) {
   const year = date.getFullYear();
-  let month = date.getMonth();
+  let month = date.getMonth() + 1;
   if (month < 10) {
     month = '0' + month;
   }
@@ -32,37 +32,37 @@ export function DateToStr(date) {
   const month = date.split('.')[1];
   let strDate = date.split('.')[0] + ', ';
   switch (month) {
-    case '00':
+    case '01':
       strDate = strDate + 'January';
       break;
-    case '01':
+    case '02':
       strDate = strDate + 'February';
       break;
-    case '02':
+    case '03':
       strDate = strDate + 'March';
       break;
-    case '03':
+    case '04':
       strDate = strDate + 'April';
       break;
-    case '04':
+    case '05':
       strDate = strDate + 'May';
       break;
-    case '05':
+    case '06':
       strDate = strDate + 'June';
       break;
-    case '06':
+    case '07':
       strDate = strDate + 'July';
       break;
-    case '07':
+    case '08':
       strDate = strDate + 'August';
       break;
-    case '08':
+    case '09':
       strDate = strDate + 'September';
       break;
-    case '09':
+    case '10':
       strDate = strDate + 'October';
       break;
-    case '10':
+    case '11':
       strDate = strDate + 'November';
       break;
 
@@ -77,37 +77,37 @@ export function MonthToStr(date) {
   const month = date.split('.')[0];
   let strDate = '';
   switch (month) {
-    case '00':
+    case '01':
       strDate = strDate + 'January';
       break;
-    case '01':
+    case '02':
       strDate = strDate + 'February';
       break;
-    case '02':
+    case '03':
       strDate = strDate + 'March';
       break;
-    case '03':
+    case '04':
       strDate = strDate + 'April';
       break;
-    case '04':
+    case '05':
       strDate = strDate + 'May';
       break;
-    case '05':
+    case '06':
       strDate = strDate + 'June';
       break;
-    case '06':
+    case '07':
       strDate = strDate + 'July';
       break;
-    case '07':
+    case '08':
       strDate = strDate + 'August';
       break;
-    case '08':
+    case '09':
       strDate = strDate + 'September';
       break;
-    case '09':
+    case '10':
       strDate = strDate + 'October';
       break;
-    case '10':
+    case '11':
       strDate = strDate + 'November';
       break;
 
@@ -162,4 +162,27 @@ export function MonthToStrWithYear(date) {
       break;
   }
   return strDate + ', ' + year;
+}
+
+export function dayToQuary(day) {
+  const quary =
+    '?day=' +
+    day.split('.')[0] +
+    '&month=' +
+    day.split('.')[1] +
+    '&year=' +
+    day.split('.')[2];
+  return quary;
+}
+
+export function monthToQuary(day) {
+  const quary = '?month=' + day.split('.')[0] + '&year=' + day.split('.')[1];
+  return quary;
+}
+
+export function dateFromStrMonth(strMonth) {
+  const year = strMonth.split('.')[1];
+  const month = strMonth.split('.')[0];
+  const date = new Date(parseInt(year), parseInt(month) - 1);
+  return date;
 }
