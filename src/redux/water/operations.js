@@ -7,8 +7,8 @@ import {
   monthToQuary,
 } from '../../utils/dates';
 
-//axios.defaults.baseURL = `https://aquatrack-it-warriors-backend.onrender.com/api/`;
-axios.defaults.baseURL = `//localhost:3000/api/`;
+axios.defaults.baseURL = `https://aquatrack-it-warriors-backend.onrender.com/api/`;
+//axios.defaults.baseURL = `//localhost:3000/api/`;
 
 export const addWater = createAsyncThunk(
   'water/addWater',
