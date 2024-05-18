@@ -7,7 +7,7 @@ export default function DailyInfo() {
   return (
     <>
       <div>
-        <div className={css.waterListBlockHead}>
+        <div className={css.wrapper}>
           <ChooseDate />
           <AddWaterBtnSmall />
         </div>
