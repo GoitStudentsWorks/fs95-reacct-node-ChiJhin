@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../redux/auth/operations'; 
 import { showNotification } from '../../../utils/notification';
@@ -57,8 +56,7 @@ export default function LogOutModal({ isOpen, closeModal }) {
           </button>
         </div>
       </div>
-    </
- 
+    </>
   );
 }
 
