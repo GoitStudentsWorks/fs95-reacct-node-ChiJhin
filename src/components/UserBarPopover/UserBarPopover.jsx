@@ -3,12 +3,15 @@ import { FiLogOut } from 'react-icons/fi';
 import css from './UserBarPopover.module.css';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/auth/operations';
+import { logoutWater } from '../../redux/water/slice';
 
 export default function UserBarPopover() {
   const dispatch = useDispatch();
 
   const logOut = () => {
     dispatch(logout());
+
+    dispatch(logoutWater());
   };
 
   return (

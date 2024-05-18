@@ -22,7 +22,11 @@ export default function CalendarItem({ day, profit = 0 }) {
   }
 
   function handleClick() {
-    dispatch(chooseDay(day + '.' + month));
+    if (day < 9) {
+      dispatch(chooseDay('0' + day + '.' + month));
+    } else {
+      dispatch(chooseDay(day + '.' + month));
+    }
   }
 
   return (
