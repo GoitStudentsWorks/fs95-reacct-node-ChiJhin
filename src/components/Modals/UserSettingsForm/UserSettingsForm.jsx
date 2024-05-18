@@ -4,25 +4,29 @@ import css from './UserSettingsForm.module.css';
 import RadioBtn from './RadioInput/RadioInput';
 import AvatarInput from './AvatarInput/AvatarInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { editWater, selectDay } from '../../../redux/water/operations';
+// import { editWater, selectDay } from '../../../redux/water/operations';
 import { editUser } from '../../../redux/auth/operations';
 import TimeField from 'react-simple-timefield';
 
-export default function UserSettingsForm({ closeModal }) {
+export default function UserSettingsForm({ closeModal,getSetting }) {
   const [selectedValueRadio, setSelectedValueRadio] = useState('');
   const [result, setResult] = useState(null);
   const [volume, setSelectedVolume] = useState('');
   const [M, setM] = useState(null);
   const [T, setT] = useState('7:00');
   const [avatar, setAvatar] = useState(false);
+  const {avatarURL ,
+  dailyActivityTime,
+  dailyWaterNorm,
+  email,
+  gender,
+  name,
+  weight
+  }=getSetting
+  // console.log('getSetting',getSetting);
 
-  //   const dispatch = useDispatch();
-  //   const selector = useSelector(state => state.water)
-  //   console.log(selector);
-  // useEffect(()=>{
-  //   dispatch(selectDay())
-  // },[dispatch])
-
+    const dispatch = useDispatch();
+    
   const handleRadioChange = (event) => {
     setSelectedValueRadio(event.target.value);
     // console.log(`Selected value: ${event.target.value}`);
@@ -57,41 +61,49 @@ export default function UserSettingsForm({ closeModal }) {
 
   const {
     control,
-    setValue,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  setValue('lastEmail', 'sad@gmail.com');
-
   const onSubmit = (data) => {
     const { gender, lastEmail, lastKilo, lastName, lastTime, lastValume } =
       data;
     const file = avatar;
-    // console.log(data, file);
-    // closeModal()
-    const formData = new FormData();
-    formData.append('avatar', file);
-    formData.append('gender', gender);
-    formData.append('name', lastName);
-    formData.append('email', lastEmail);
-    formData.append('kilo', lastKilo);
-    formData.append('time', lastTime);
-    formData.append('valume', lastValume);
+    console.log(data, file);
+    closeModal()
+    const formData ={
+      avatarURL:file,
+      gender:gender,
+      name:lastName,
+      email:lastEmail,
+      weight:lastKilo,
+      dailyActivityTime:lastTime,
+      dailyWaterNorm:lastValume
+    }
+    console.log('formData,',formData);
+    // ------------------------
+    // const formData = new FormData();
+    // formData.append('avatarURL', file);
+    // formData.append('gender', gender);
+    // formData.append('name', lastName);
+    // formData.append('email', lastEmail);
+    // formData.append('weight', lastKilo);
+    // formData.append('dailyActivityTime', lastTime);
+    // formData.append('dailyWaterNorm', lastValume);
 
-    const obj = Object.fromEntries(formData.entries());
-    console.log(obj);
+    // const obj = Object.fromEntries(formData.entries());
+    // console.log('formData',obj);
 
-    //  dispatch(editWater({ id: id, data: formData }))
-    //      .unwrap()
-    //      .then(() => {
-    //        notify();
-    //      })
-    //      .catch(() => {
-    //        notifyError();
-    //      });
-    //    closeModal();
+     dispatch(editUser({   formData }))
+         .unwrap()
+         .then(() => {
+          //  notify();
+         })
+         .catch(() => {
+          //  notifyError();
+         });
+       closeModal();
   };
 
   return (
@@ -102,27 +114,27 @@ export default function UserSettingsForm({ closeModal }) {
           control={control}
           register={register}
           setAvatar={setAvatar}
-          avatar={avatar}
+          avatar={avatarURL}
         />
         <div>
           <h3 className={css.titleHender}>Your gender identity</h3>
         </div>
         <RadioBtn
           onChangeRadio={handleRadioChange}
-          // selectedValue={selectedValueRadio}
+          selectedValue={gender}
           register={register}
         />
         <div className={css.sectionBox}>
           <section>
             <div className={css.box}>
               <label className={css.labelName}>Your name</label>
-              <input {...register('lastName', { value: 'name' })} />
+              <input {...register('lastName', { value: name })} />
             </div>
 
             <div className={css.box}>
               <label className={css.labelName}>Email</label>
               {/* <ErrorMessage name="number" component="span" className={css.span} /> */}
-              <input {...register('lastEmail', { required: true })} />
+              <input {...register('lastEmail', { required: true },{value:email})} />
               {errors.lastEmail && <p>Last name is required.</p>}
             </div>
 
@@ -159,7 +171,7 @@ export default function UserSettingsForm({ closeModal }) {
             <div className={css.formKilo}>
               <label>Your weight in kilograms:</label>
               <input
-                {...register('lastKilo', { value: 70 })}
+                {...register('lastKilo', { value: weight })}
                 onChange={(event) => handleChange(setM, event)}
               />
             </div>
@@ -168,7 +180,7 @@ export default function UserSettingsForm({ closeModal }) {
               <label>The time of active participation in sports:</label>
 
               <TimeField
-                value="07:00" //тут підставити дефолтне значення
+                value={dailyActivityTime} //тут підставити дефолтне значення
                 onChange={(event, value) => {
                   handleChange(setT, event);
                 }}
@@ -186,7 +198,7 @@ export default function UserSettingsForm({ closeModal }) {
             <div className={css.youWater}>
               <label>Write down how much water you will drink:</label>
               <input
-                {...register('lastValume')}
+                {...register('lastValume',{value:dailyWaterNorm})}
                 onChange={(event) => handleChange(setSelectedVolume, event)}
               />
             </div>
