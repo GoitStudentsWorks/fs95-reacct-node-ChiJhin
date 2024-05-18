@@ -12,13 +12,10 @@ axios.defaults.baseURL = `https://aquatrack-it-warriors-backend.onrender.com/api
 
 export const addWater = createAsyncThunk(
   'water/addWater',
-  async (value, thunkAPI) => {
+  async ({ value, date, time }, thunkAPI) => {
     try {
-      const now = new Date();
-      const date = DayToString(now);
-
-      const time = TimeToString(now);
       const response = await axios.post('/water', { value, date, time });
+
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -56,6 +53,7 @@ export const chooseDay = createAsyncThunk(
   async (day, thunkAPI) => {
     try {
       const response = await axios.get('/water/day' + dayToQuary(day));
+
       return { day: day, dayWater: response.data };
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

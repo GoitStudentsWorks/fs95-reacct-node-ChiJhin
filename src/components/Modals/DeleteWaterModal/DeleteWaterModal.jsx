@@ -24,8 +24,10 @@ export default function DeleteWaterModal({ isOpen, closeModal, entryId }) {
       // Show success notification
       showNotification('Water entry deleted successfully!', 'success');
       dispatch(deleteWater(entryId));
-
-      dispatch(chooseMonth(month));
+      setTimeout(() => {
+        // wait to update database
+        dispatch(chooseMonth(month));
+      }, 200);
 
       // Close modal after successful deletion
       closeModal();
