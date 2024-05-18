@@ -25,9 +25,13 @@ export const addWater = createAsyncThunk(
 
 export const editWater = createAsyncThunk(
   'water/editWater',
-  async (water, thunkAPI) => {
+  async ({ id, value, date, time }, thunkAPI) => {
     try {
-      const response = await axios.put(`/water/${water._id}`, water);
+      const response = await axios.put(`/water/${id}`, {
+        value,
+        date,
+        time,
+      });
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
