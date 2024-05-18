@@ -17,7 +17,7 @@ export default function UserBar({ state: openBar, setState: setOpenBar }) {
           src={
             user.avatarURL
               ? fixBackendPath(user.avatarURL)
-              : '/default-avatar.jpg'
+              : './default-avatar.jpg'
           }
           alt="User"
           className={css.img}
