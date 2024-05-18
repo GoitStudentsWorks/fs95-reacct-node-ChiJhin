@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectRefreshToken } from './selectors';
 import { updateToken, updateTokenError } from './slice';
 
-axios.defaults.baseURL =
-  'https://aquatrack-it-warriors-backend.onrender.com/api/';
-//axios.defaults.baseURL = `//localhost:3000/api/`;
+const BACKEND_HOST = 'https://aquatrack-it-warriors-backend.onrender.com';
+//const BACKEND_HOST = 'http://localhost:3000';
+axios.defaults.baseURL = BACKEND_HOST + "/api/";
 
 axios.interceptors.response.use(
   function (response) {
@@ -46,6 +46,11 @@ function clearAuthHeader() {
   axios.defaults.headers.common.Authorization = '';
   //delete axios.defaults.headers.common.Authorization;?
 }
+
+export const fixBackendPath = (path) => {
+  if (!path || path.startsWith('http')) return path;
+  else return BACKEND_HOST + path;
+};
 
 export const register = createAsyncThunk(
   'auth/register',

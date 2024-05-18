@@ -4,6 +4,7 @@ import css from './UserBar.module.css';
 
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/selectors';
+import { fixBackendPath } from '../../redux/auth/operations';
 
 export default function UserBar({ state: openBar, setState: setOpenBar }) {
   const handleClick = () => setOpenBar(!openBar);
@@ -13,7 +14,11 @@ export default function UserBar({ state: openBar, setState: setOpenBar }) {
       <button onClick={handleClick} className={css.container}>
         {user.name}{' '}
         <img
-          src={user.avatarURL ? user.avatarURL : './default-avatar.jpg'}
+          src={
+            user.avatarURL
+              ? fixBackendPath(user.avatarURL)
+              : './default-avatar.jpg'
+          }
           alt="User"
           className={css.img}
         />
