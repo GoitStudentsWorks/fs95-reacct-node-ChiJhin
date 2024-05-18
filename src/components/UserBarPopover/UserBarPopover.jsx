@@ -4,6 +4,8 @@ import css from './UserBarPopover.module.css';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/auth/operations';
 import { logoutWater } from '../../redux/water/slice';
+import { useState } from 'react';
+import AddSettingBtn from '../AddSettingBtn/AddSettingBtn';
 
 export default function UserBarPopover() {
   const dispatch = useDispatch();
@@ -17,9 +19,10 @@ export default function UserBarPopover() {
   return (
     <>
       <div className={css.container}>
-        <button className={css.btn}>
-          <CiSettings /> Settings
-        </button>
+        <span className={css.btn}>
+          <AddSettingBtn />
+        </span>
+
         <button className={css.btn} onClick={logOut}>
           <FiLogOut /> Log out
         </button>
