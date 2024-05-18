@@ -12,5 +12,5 @@ export default defineConfig({
       assets: '/src/assets',
     },
   },
-  base: '/AquaTrack-IT-WARRIORS-frontend/',
+  base: '/AquaTrack-IT-WARRIORS-frontend',
 });
