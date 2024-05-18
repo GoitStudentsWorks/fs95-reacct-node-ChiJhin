@@ -5,7 +5,7 @@ import RadioBtn from './RadioInput/RadioInput';
 import AvatarInput from './AvatarInput/AvatarInput';
 import { useDispatch, useSelector } from 'react-redux';
 // import { editWater, selectDay } from '../../../redux/water/operations';
-import { editUser } from '../../../redux/auth/operations';
+import { editUser, fixBackendPath } from '../../../redux/auth/operations';
 import TimeField from 'react-simple-timefield';
 
 export default function UserSettingsForm({ closeModal, getSetting }) {
@@ -106,7 +106,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
           control={control}
           register={register}
           setAvatar={setAvatar}
-          avatar={avatarURL}
+          avatar={fixBackendPath(avatarURL)}
         />
         <div>
           <h3 className={css.titleHender}>Your gender identity</h3>
