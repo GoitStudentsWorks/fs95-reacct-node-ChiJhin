@@ -29,6 +29,13 @@ const waterSlice = createSlice({
     loading: false,
     error: null,
   },
+  reducers: {
+    logoutWater(state, action) {
+      const date = new Date();
+      state.day = DayToString(date);
+      state.month = MonthToString(date);
+    },
+  },
   extraReducers: (builder) => {
     builder
       //add
@@ -88,3 +95,4 @@ const waterSlice = createSlice({
 });
 
 export const waterReducer = waterSlice.reducer;
+export const { logoutWater } = waterSlice.actions;
