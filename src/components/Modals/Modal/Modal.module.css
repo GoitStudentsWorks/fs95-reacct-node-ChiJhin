@@ -1,3 +1,4 @@
+
 .Modal {
   position: absolute;
 margin: 60px auto;
@@ -14,17 +15,15 @@ background: #fff;
 inset: inherit;
 overflow: auto;
 outline: none;
-}
-.btnWater {
-width: 22px;
-height: 22px;
 
-border: none;
-background: inherit;
-position: absolute;
-top: 14px;
-right: 14px;
 }
+
+.modalSetting {
+  composes: Modal;
+  /* height: 1302px; */
+  height: 100%;
+}
+
 .btnDelete{
 position: absolute;
 top:14px;
@@ -38,32 +37,45 @@ background: inherit;
 composes: Modal;
 height: 267px;
 /* height: 1302px; */
+
+
+
 }
-.modalDelete {
-composes: Modal;
-margin: auto;
-padding: 40px 14px;
-height: 267px;
 }
 
-/* @media (min-width: 375px) {
-.Modal { */
-  /* composes: Modal; */
-  /* margin: auto; */
 
-  /* padding: 40px; */
-  /* width: 518px; */
-  /* height: 587px; */
-/* } */
-/* } */
-/* @media (min-width: 375px) and (max-width: 767.9px) {
+@media (min-width: 375px) {
+ 
+  
+  .modalDelete {
+    composes: Modal;
+    margin: auto;
+    padding: 40px 14px;
+    width: 344px;
+    height: 267px;
+  }
+  .modalLogOut {
+    composes: Modal;
+    margin: auto;
+    padding: 40px 14px;
+    width: 344px;
+    height: 267px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 767.9px) {
+ 
   .modalSetting {
     composes: Modal;
     margin: 40px auto;
     padding: 40px;
     width: 648px;
+    /* height: 1336px; */
+    height: 100%;
   }
-} */
+  
+}
+
 @media (min-width: 768px) {
 
   .modalSetting {
@@ -79,23 +91,36 @@ height: 267px;
     width: 516px;
     height: 244px;
     
-  }
-  .btnWater{
-    width: 28px;
-    height: 28px;
-    top:25px;
-    right:25px;
-  }
-  .btnDelete{
-    width: 28px;
-    height: 28px;
+ 
+  
+ 
+
   }
   .modalDelete {
-    /* composes: Modal; */
-    padding: 40px;
+    composes: Modal;
+    margin: auto;
+    padding: 40px 14px;
     width: 516px;
     height: 244px;
   }
+  .modalLogOut {
+    composes: Modal;
+    margin: auto;
+    padding: 40px 14px;
+    width: 516px;
+    height: 244px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  
+ 
+  .modalDelete {
+    composes: Modal;
+    padding: 40px;
+    width: 516px;
+    height: 244px;
+  
 
 }
 @media (min-width: 1440px)  {
@@ -106,5 +131,5 @@ height: 267px;
   width: 920px;
   /* height: 996px; */
 }
-
+ 
 }

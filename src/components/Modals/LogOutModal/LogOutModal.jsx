@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../redux/auth/operations'; 
 import { showNotification } from '../../../utils/notification';
@@ -20,10 +21,13 @@ export default function LogOutModal({ isOpen, closeModal }) {
       }, 1000);
       closeModal();
     } catch (error) {
+
+   
       showNotification('Failed to log out. Please try again.', 'error');
       console.error('Logout operation failed:', error);
     } finally {
       setIsLoggingOut(false);
+   
     }
   };
 
@@ -53,6 +57,9 @@ export default function LogOutModal({ isOpen, closeModal }) {
           </button>
         </div>
       </div>
-    </>
+    </
+ 
   );
 }
+
+

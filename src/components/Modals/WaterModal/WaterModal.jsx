@@ -1,27 +1,131 @@
+import { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { IconPlus } from '../../Icons/IconPlus';
+import { IconMinus } from '../../Icons/IconMinus';
+import { FormTitle } from '../FormTitle/FormTitle';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import css from './WaterModal.module.css';
-import WaterForm from '../WaterForm/WaterForm';
+
+const schema = yup.object().shape({
+  value: yup.number().positive('Value must be positive'),
+});
 
 export default function WaterModal() {
-  const handleDecrement = () => {};
-  const handleIncrement = () => {};
+  const [currentTime, setCurrentTime] = useState(getCurrentTime());
+
+  const {
+    register,
+    watch,
+    handleSubmit,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      time: getCurrentTime(),
+      value: 50,
+    },
+  });
+
+  function getCurrentTime() {
+    const date = new Date();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+    const formattedTime =
+      hours.toString().padStart(2, '0') +
+      ':' +
+      minutes.toString().padStart(2, '0');
+
+    return formattedTime;
+  }
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(getCurrentTime());
+    }, 60000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const submitForm = (data) => {
+    console.log(data);
+  };
+  const decrement = () => {
+    const currentValue = getValues('value');
+    const value = currentValue - 50;
+    if (value >= 0) {
+      setValue('value', value);
+    }
+  };
+
+  const increment = () => {
+    const currentValue = getValues('value');
+    const value = currentValue + 50;
+    if (value <= 500) {
+      setValue('value', value);
+    }
+  };
 
   return (
-    <>
-      <h1 className={css.titleAdd}>Add water</h1>
-      <h2 className={css.titleAmount}>Amount of water:</h2>
+    <form className={css.waterForm} onSubmit={handleSubmit(submitForm)}>
+      <div className={css.formWrapper}>
+        <FormTitle>Add water</FormTitle>
+        <p className={css.waterTitle}>Choose a value</p>
+        <span className={css.waterAmount}>Amount of water:</span>
+        <div className={css.wrapperAmount}>
+          <button
+            className={css.btnAmount}
+            onClick={decrement}
+            type="button"
+            disabled={getValues('value') === 0}
+          >
+            <IconMinus className={css.icon} />
+          </button>
 
-      <div className={css.amauntBox}>
-        <button className={css.btnMinus} onClick={handleDecrement}>
-          -
-        </button>
-        <div className={css.amauntWraper}>
-          <p className={css.wraperText}>50 ml</p>
+          <span className={css.valueAmount}>{`${watch('value')} ml`}</span>
+
+          <button className={css.btnAmount} onClick={increment} type="button">
+            <IconPlus className={css.icon} />
+          </button>
         </div>
-        <button className={css.btnMinus} onClick={handleIncrement}>
-          +
+        <div className={css.wrapperField}>
+          <div>
+            <label className={css.labelTime} htmlFor="time">
+              Recording time:
+            </label>
+            <input
+              {...register('time')}
+              className={css.inputAmount}
+              type="time"
+              name="time"
+              id="time"
+              value={currentTime}
+              readOnly
+            />
+          </div>
+
+          <label className={css.labelValue} htmlFor="value">
+            Enter the value of the water used:
+          </label>
+          <input
+            {...register('value')}
+            className={css.inputAmount}
+            type="number"
+            name="value"
+            id="value"
+            onChange={(e) => setValue('value', Number(e.target.value))}
+          />
+          {errors.value && (
+            <span className={css.error}>{errors.value.message}</span>
+          )}
+        </div>
+        <button className={css.btnSubmit} type="submit">
+          Save
         </button>
       </div>
-      <WaterForm />
-    </>
+    </form>
   );
 }

@@ -30,13 +30,15 @@ export default function CalendarPagination({ selectedDate, setSelectedDate }) {
 
   return (
     <div className={css.wrapper}>
-      <button onClick={goToPrevoiusMonth} className={css.btn}>
-        <BsChevronLeft size="12" className={css.arrow} />
-      </button>
-      <span className={css.span}>{formattedDate}</span>
-      <button onClick={goToNextMonth} className={css.btn}>
-        <BsChevronRight size="12" className={css.arrow} />
-      </button>
+      <div className={css.container}>
+        <button onClick={goToPrevoiusMonth} className={css.btn}>
+          <BsChevronLeft size="12" className={css.arrow} />
+        </button>
+        <span className={css.span}>{formattedDate}</span>
+        <button onClick={goToNextMonth} className={css.btn}>
+          <BsChevronRight size="12" className={css.arrow} />
+        </button>
+      </div>
       <button>
         <svg width="20" height="20" className={css.pieIcon}>
           <use xlinkHref={`${svg}#icon-pie-chart`}></use>
