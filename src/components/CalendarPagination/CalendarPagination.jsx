@@ -1,8 +1,13 @@
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import svg from '../../assets/sprite.svg';
 import css from './CalendarPagination.module.css';
+import { useDispatch } from 'react-redux';
+import { MonthToString } from '../../utils/dates';
+import { chooseMonth } from '../../redux/water/operations';
 
 export default function CalendarPagination({ selectedDate, setSelectedDate }) {
+  const dispatch = useDispatch();
+
   const goToPrevoiusMonth = () => {
     const prevoiusMonth = new Date(
       selectedDate.getFullYear(),
@@ -10,6 +15,7 @@ export default function CalendarPagination({ selectedDate, setSelectedDate }) {
       1
     );
     setSelectedDate(prevoiusMonth);
+    dispatch(chooseMonth(MonthToString(prevoiusMonth)));
   };
 
   const goToNextMonth = () => {
@@ -19,6 +25,7 @@ export default function CalendarPagination({ selectedDate, setSelectedDate }) {
       1
     );
     setSelectedDate(nextMonth);
+    dispatch(chooseMonth(MonthToString(nextMonth)));
   };
 
   const formattedDate = selectedDate

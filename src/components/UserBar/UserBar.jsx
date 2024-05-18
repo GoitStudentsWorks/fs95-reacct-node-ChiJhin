@@ -13,7 +13,7 @@ export default function UserBar({ state: openBar, setState: setOpenBar }) {
       <button onClick={handleClick} className={css.container}>
         {user.name}{' '}
         <img
-          src={user.avatarURL ? user.avatarURL : '/default-avatar.jpg'}
+          src={user.avatarURL ? user.avatarURL : './default-avatar.jpg'}
           alt="User"
           className={css.img}
         />
