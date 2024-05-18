@@ -1,5 +1,4 @@
 import WaterItem from '../WaterItem/WaterItem';
-import data from './dataTest';
 import css from './WaterList.module.css';
 import DeleteWaterModal from '../Modals/DeleteWaterModal/DeleteWaterModal';
 import { useState } from 'react';
@@ -36,11 +35,7 @@ export default function WaterList() {
         ))}
       </ul>
       {openDelModal && (
-        <DeleteWaterModal
-          isOpen={openDelModal}
-          closeModal={delModalHendler}
-          entryId={idTodel}
-        />
+        <DeleteWaterModal closeModal={delModalHendler} entryId={idTodel} />
       )}
     </>
   );
