@@ -1,27 +1,32 @@
 import { useState } from 'react';
 import Modal from '../Modal/Modal';
-import { useDispatch } from 'react-redux';
-import { deleteWater } from '../../../redux/water/operations';
+import { useDispatch, useSelector } from 'react-redux';
+import { chooseMonth, deleteWater } from '../../../redux/water/operations';
 import { showNotification } from '../../../utils/notification';
 import axios from 'axios';
 import css from './DeleteWaterModal.module.css';
+import { selectMonth } from '../../../redux/water/selectors';
 
 export default function DeleteWaterModal({ isOpen, closeModal, entryId }) {
   const dispatch = useDispatch();
   const [isDeleting, setIsDeleting] = useState(false);
+  const month = useSelector(selectMonth);
 
   const handleDelete = async () => {
     setIsDeleting(true);
 
     try {
       // Make API request to delete water entry
-      await axios.delete(
-        `https://aquatrack-it-warriors-backend.onrender.com/api/water/${entryId}`
-      );
+      // await axios.delete(
+      //   `https://aquatrack-it-warriors-backend.onrender.com/api/water/${entryId}`
+      // );
 
       // Show success notification
       showNotification('Water entry deleted successfully!', 'success');
       dispatch(deleteWater(entryId));
+
+      dispatch(chooseMonth(month));
+
       // Close modal after successful deletion
       closeModal();
     } catch (error) {
