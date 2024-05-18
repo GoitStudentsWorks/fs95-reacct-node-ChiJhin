@@ -65,7 +65,12 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      lastEmail:email,
+     
+    },
+  });
 
   const onSubmit = (data) => {
     const { gender, lastEmail, lastKilo, lastName, lastTime, lastValume } =
@@ -73,28 +78,28 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     const file = avatar;
     console.log(data, file);
     closeModal();
-    const formData = {
-      avatarURL: file,
-      gender: gender,
-      name: lastName,
-      email: lastEmail,
-      weight: lastKilo,
-      dailyActivityTime: lastTime,
-      dailyWaterNorm: lastValume,
-    };
-    console.log('formData,', formData);
+    // const formData = {
+    //   avatarURL: file,
+    //   gender: gender,
+    //   name: lastName,
+    //   email: lastEmail,
+    //   weight: lastKilo,
+    //   dailyActivityTime: lastTime,
+    //   dailyWaterNorm: lastValume,
+    // };
+    // console.log('formData,', formData);
     // ------------------------
-    // const formData = new FormData();
-    // formData.append('avatarURL', file);
-    // formData.append('gender', gender);
-    // formData.append('name', lastName);
-    // formData.append('email', lastEmail);
-    // formData.append('weight', lastKilo);
-    // formData.append('dailyActivityTime', lastTime);
-    // formData.append('dailyWaterNorm', lastValume);
+    const formData = new FormData();
+    formData.append('avatarURL', file);
+    formData.append('gender', gender);
+    formData.append('name', lastName);
+    formData.append('email', lastEmail);
+    formData.append('weight', lastKilo);
+    formData.append('dailyActivityTime', lastTime);
+    formData.append('dailyWaterNorm', lastValume);
 
-    // const obj = Object.fromEntries(formData.entries());
-    // console.log('formData',obj);
+    const obj = Object.fromEntries(formData.entries());
+    console.log('formData',obj);
 
     dispatch(editUser({ data: formData }))
       .unwrap()
@@ -136,7 +141,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
               <label className={css.labelName}>Email</label>
               {/* <ErrorMessage name="number" component="span" className={css.span} /> */}
               <input
-                {...register('lastEmail', { required: true }, { value: email })}
+                {...register('lastEmail', { value: email },{ required: true } )}
               />
               {errors.lastEmail && <p>Last name is required.</p>}
             </div>

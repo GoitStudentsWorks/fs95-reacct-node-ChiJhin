@@ -12,12 +12,13 @@ const [get_setting, setGet_setting]=useState([])
 
     // const dispatch = useDispatch();
     const selector = useSelector(selectUser)
-    console.log(get_setting);
-
+    
     useEffect(()=>{
       // setGet_setting([])
-            // setLoading(true);
-            setGet_setting(selector)
+      // setLoading(true);
+      setGet_setting(selector)
+      
+      console.log(get_setting);
     },[])
 // useEffect(() => {
 //   async function fetchData() {
