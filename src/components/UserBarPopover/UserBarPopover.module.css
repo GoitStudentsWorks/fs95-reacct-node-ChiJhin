@@ -3,7 +3,6 @@
   flex-direction: column;
   gap: 8px;
   background-color: var(--main-white);
-  border-radius: 15px;
 }
 
 .btn {

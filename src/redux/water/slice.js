@@ -29,6 +29,13 @@ const waterSlice = createSlice({
     loading: false,
     error: null,
   },
+  reducers: {
+    logoutWater(state, action) {
+      const date = new Date();
+      state.day = DayToString(date);
+      state.month = MonthToString(date);
+    },
+  },
   extraReducers: (builder) => {
     builder
       //add
@@ -56,8 +63,9 @@ const waterSlice = createSlice({
         state.error = null;
 
         const index = state.dayWater.findIndex(
-          (el) => el._id === action.payload._id
+          (el) => el._id === action.payload.deletedData._id
         );
+
         if (index !== -1) {
           state.dayWater.splice(index, 1);
         }
@@ -77,7 +85,7 @@ const waterSlice = createSlice({
       .addCase(chooseMonth.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.dayWater = [];
+        // state.dayWater = [];
         // state.day = null;
         state.month = action.payload.month;
         state.monthWater = action.payload.monthWater;
@@ -87,3 +95,4 @@ const waterSlice = createSlice({
 });
 
 export const waterReducer = waterSlice.reducer;
+export const { logoutWater } = waterSlice.actions;
