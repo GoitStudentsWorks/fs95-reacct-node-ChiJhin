@@ -1,52 +1,80 @@
+.modalBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .title {
-    font-size: 20px;
-    line-height: 24px;
-    color: #323f47;
-    margin-bottom: 16px;
-  }
-  
-  .question {
-    font-size: 18px;
-    line-height: 18px;
-    color: #323f47;
-    margin-bottom: 24px;
-  }
-  
-  .deleteButton {
-    width: 304px;
-    height: 46px;
-    border-radius: 30px;
-    background-color: var(--accent);
-    padding: 14px 24px;
-    font-weight: bold;
-    line-height: 18px;
-    letter-spacing: -1%;
-    text-align: center;
-    color: #323f47;
-    margin-left: 6px;
-    margin-bottom: 16px;
-  }
-  
-  .cancelButton {
-    font-weight: bold;
-    line-height: 18px;
-    letter-spacing: -1%;
-    text-align: center;
-    margin-left: 126px;
-    color: rgba(50, 63, 71, 0.3);
-    background-color: var(--main-white);
-    box-shadow: none;
-    transition: background-color 0.3s ease;
-    
-  }
-  /* Media queries for tablet and desktop */                                
-  @media (min-width: 768px) {
-  .deleteButton {
-    width: 170px; 
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
+}
+
+.modalBox p {
+  margin-bottom: 28px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
+}
+
+.btnBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  align-items: center;
+}
+
+.btn {
+  border: none;
+  border-radius: 30px;
+  padding: 14px 12px;
+  width: 304px;
+  height: 46px;
+  background: #9be1a0;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
+  cursor: pointer;
+}
+
+.btnCancel {
+  border: none;
+  border-radius: 30px;
+  padding: 14px 12px;
+  width: 304px;
+  height: 46px;
+  background: #f0eff4;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: rgba(50, 63, 71, 0.3);
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .btnBox {
+    flex-direction: row;
+    gap: 16px;
   }
 
-  .cancelButton {
-   display: inline-block; 
-    margin-left: 12px; 
+  .btn, .btnCancel {
+    border-radius: 15px;
+    padding: 14px;
+    width: 173px;
+    height: 46px;
   }
 }
+

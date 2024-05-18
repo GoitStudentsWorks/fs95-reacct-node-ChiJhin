@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Modals from "../Modals/Modal/Modal";
 // import WaterModal from '../Modals/WaterModal/WaterModal';
-// import LogOutModal from '../Modals/LogOutModal/LogOutModal';
+//import LogOutModal from '../Modals/LogOutModal/LogOutModal';
 import UserSettingsModal from '../Modals/UserSettingsModal/UserSettingsModal';
 export default function BtnAddWater (){
 //     const filter = useSelector(selectFilter);
