@@ -8,25 +8,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import { editUser } from '../../../redux/auth/operations';
 import TimeField from 'react-simple-timefield';
 
-export default function UserSettingsForm({ closeModal,getSetting }) {
+export default function UserSettingsForm({ closeModal, getSetting }) {
   const [selectedValueRadio, setSelectedValueRadio] = useState('');
   const [result, setResult] = useState(null);
   const [volume, setSelectedVolume] = useState('');
   const [M, setM] = useState(null);
   const [T, setT] = useState('7:00');
   const [avatar, setAvatar] = useState(false);
-  const {avatarURL ,
-  dailyActivityTime,
-  dailyWaterNorm,
-  email,
-  gender,
-  name,
-  weight
-  }=getSetting
+  const {
+    avatarURL,
+    dailyActivityTime,
+    dailyWaterNorm,
+    email,
+    gender,
+    name,
+    weight,
+  } = getSetting;
   // console.log('getSetting',getSetting);
 
-    const dispatch = useDispatch();
-    
+  const dispatch = useDispatch();
+
   const handleRadioChange = (event) => {
     setSelectedValueRadio(event.target.value);
     // console.log(`Selected value: ${event.target.value}`);
@@ -71,17 +72,17 @@ export default function UserSettingsForm({ closeModal,getSetting }) {
       data;
     const file = avatar;
     console.log(data, file);
-    closeModal()
-    const formData ={
-      avatarURL:file,
-      gender:gender,
-      name:lastName,
-      email:lastEmail,
-      weight:lastKilo,
-      dailyActivityTime:lastTime,
-      dailyWaterNorm:lastValume
-    }
-    console.log('formData,',formData);
+    closeModal();
+    const formData = {
+      avatarURL: file,
+      gender: gender,
+      name: lastName,
+      email: lastEmail,
+      weight: lastKilo,
+      dailyActivityTime: lastTime,
+      dailyWaterNorm: lastValume,
+    };
+    console.log('formData,', formData);
     // ------------------------
     // const formData = new FormData();
     // formData.append('avatarURL', file);
@@ -95,15 +96,15 @@ export default function UserSettingsForm({ closeModal,getSetting }) {
     // const obj = Object.fromEntries(formData.entries());
     // console.log('formData',obj);
 
-     dispatch(editUser({   formData }))
-         .unwrap()
-         .then(() => {
-          //  notify();
-         })
-         .catch(() => {
-          //  notifyError();
-         });
-       closeModal();
+    dispatch(editUser({ data: formData }))
+      .unwrap()
+      .then(() => {
+        //  notify();
+      })
+      .catch(() => {
+        //  notifyError();
+      });
+    closeModal();
   };
 
   return (
@@ -134,7 +135,9 @@ export default function UserSettingsForm({ closeModal,getSetting }) {
             <div className={css.box}>
               <label className={css.labelName}>Email</label>
               {/* <ErrorMessage name="number" component="span" className={css.span} /> */}
-              <input {...register('lastEmail', { required: true },{value:email})} />
+              <input
+                {...register('lastEmail', { required: true }, { value: email })}
+              />
               {errors.lastEmail && <p>Last name is required.</p>}
             </div>
 
@@ -198,7 +201,7 @@ export default function UserSettingsForm({ closeModal,getSetting }) {
             <div className={css.youWater}>
               <label>Write down how much water you will drink:</label>
               <input
-                {...register('lastValume',{value:dailyWaterNorm})}
+                {...register('lastValume', { value: dailyWaterNorm })}
                 onChange={(event) => handleChange(setSelectedVolume, event)}
               />
             </div>
