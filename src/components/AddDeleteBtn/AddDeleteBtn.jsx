@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Modals from '../Modals/Modal/Modal';
-import { FiEdit2 } from 'react-icons/fi';
-import WaterModal from '../Modals/WaterModal/WaterModal';
+import DeleteWaterModal from '../Modals/DeleteWaterModal/DeleteWaterModal';
+import { AiOutlineDelete } from 'react-icons/ai';
 
-export default function AddWaterBtn({ id }) {
+export default function AddDeleteBtn({ id }) {
   const [update, setUpdate] = useState(null);
   const [modIsOpen, setModIsOpen] = useState(false);
   const styleNameClass = {
@@ -26,17 +26,17 @@ export default function AddWaterBtn({ id }) {
   return (
     <div>
       <button type="button" onClick={() => handleBtn(id)}>
-        <FiEdit2 />
+        <AiOutlineDelete />
       </button>
       {update !== null && (
         <Modals
-          styleVariantBtn={styleNameClass.btnWater}
-          styleVariant={styleNameClass.modalWater}
+          styleVariantBtn={styleNameClass.btnDelete}
+          styleVariant={styleNameClass.modalDelete}
           isOpen={modIsOpen}
           closeModal={closeModalUpdate}
         >
           <div>
-            <WaterModal closeModal={closeModalUpdate} entryId={update} />
+            <DeleteWaterModal closeModal={closeModalUpdate} entryId={update} />
           </div>
         </Modals>
       )}

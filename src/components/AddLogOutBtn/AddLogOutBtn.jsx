@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Modals from '../Modals/Modal/Modal';
-import { FiEdit2 } from 'react-icons/fi';
-import WaterModal from '../Modals/WaterModal/WaterModal';
+import { FiLogOut } from 'react-icons/fi';
+import LogOutModal from '../Modals/LogOutModal/LogOutModal';
 
-export default function AddWaterBtn({ id }) {
+export default function AddLogOutBtn() {
   const [update, setUpdate] = useState(null);
   const [modIsOpen, setModIsOpen] = useState(false);
   const styleNameClass = {
@@ -15,8 +15,8 @@ export default function AddWaterBtn({ id }) {
     btnWater: 'btnWater',
   };
 
-  const handleBtn = (id) => {
-    setUpdate(id);
+  const handleBtn = () => {
+    setUpdate(1);
     setModIsOpen(true);
   };
 
@@ -25,18 +25,18 @@ export default function AddWaterBtn({ id }) {
   };
   return (
     <div>
-      <button type="button" onClick={() => handleBtn(id)}>
-        <FiEdit2 />
+      <button type="button" onClick={() => handleBtn()}>
+        <FiLogOut /> Log out
       </button>
       {update !== null && (
         <Modals
-          styleVariantBtn={styleNameClass.btnWater}
-          styleVariant={styleNameClass.modalWater}
+          styleVariantBtn={styleNameClass.btnDelete}
+          styleVariant={styleNameClass.modalDelete}
           isOpen={modIsOpen}
           closeModal={closeModalUpdate}
         >
           <div>
-            <WaterModal closeModal={closeModalUpdate} entryId={update} />
+            <LogOutModal closeModal={closeModalUpdate} entryId={update} />
           </div>
         </Modals>
       )}
