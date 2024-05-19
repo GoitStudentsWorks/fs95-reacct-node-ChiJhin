@@ -10,7 +10,7 @@ import { addWater } from '../../../redux/water/operations';
 import { editWater } from '../../../redux/water/operations';
 import css from './WaterModal.module.css';
 const schema = yup.object().shape({
-  value: yup.number().positive('Value must be positive'),
+  value: yup.number().positive('Value must be positive').required('Value is required'),
 });
 export default function WaterModal() {
   const dispatch = useDispatch();
@@ -50,6 +50,10 @@ export default function WaterModal() {
   // const submitForm = (data) => {
   //   console.log(data);
   // };
+  useEffect(() => {
+    setValue('time', currentTime);
+  }, [currentTime, setValue]);
+
   const submitForm = (data) => {
     if (!waterValueDay) {
       dispatch(addWater(data));
@@ -71,6 +75,10 @@ export default function WaterModal() {
       setValue('value', value);
     }
   };
+
+  const watchedValue = watch('value', waterValueDay ?? 50);
+  const displayValue = typeof watchedValue === 'number' ? watchedValue : 0;
+
   return (
     <form className={css.waterForm} onSubmit={handleSubmit(submitForm)}>
       <div className={css.formWrapper}>
@@ -90,7 +98,7 @@ export default function WaterModal() {
           >
             <IconMinus className={css.icon} />
           </button>
-          <span className={css.valueAmount}>{`${watch('value')} ml`}</span>
+          <span className={css.valueAmount}>{`${displayValue} ml`}</span>
           <button className={css.btnAmount} onClick={increment} type="button">
             <IconPlus className={css.icon} />
           </button>
