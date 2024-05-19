@@ -1,18 +1,20 @@
-import { AiOutlineDelete } from 'react-icons/ai';
-import { FiEdit2 } from 'react-icons/fi';
+// import { AiOutlineDelete } from 'react-icons/ai';
+// import { FiEdit2 } from 'react-icons/fi';
 import css from './WaterItem.module.css';
 import svg from '../../assets/sprite.svg';
+import AddDeleteBtn from '../AddDeleteBtn/AddDeleteBtn';
+import AddWaterBtn from '../AddWaterBtn/AddWaterBtn';
 
 export default function WaterItem({
   myKey: id,
   countMl: ml,
   currentTime: time,
-  delHendler: delModalHendler,
-  editHendler: editModalHendler,
+  // delHendler: delModalHendler,
+  // editHendler: editModalHendler,
 }) {
-  function hendleClic() {
-    delModalHendler(id);
-  }
+  // function hendleClic() {
+  //   delModalHendler(id);
+  // }
   return (
     <>
       <li className={css.card}>
@@ -25,12 +27,22 @@ export default function WaterItem({
         </div>
 
         <div className={css.cardBtnsBlock}>
-          <button className={css.btn} onClick={editModalHendler}>
+          <span className={css.btn}>
+          <AddWaterBtn
+          id={id}
+          />
+          </span>
+          <span className={css.btn}>
+          <AddDeleteBtn 
+          id={id}
+          />
+          </span>
+          {/* <button className={css.btn} onClick={editModalHendler}>
             <FiEdit2 />
           </button>
           <button className={css.btn} onClick={hendleClic}>
             <AiOutlineDelete />
-          </button>
+          </button> */}
         </div>
       </li>
     </>

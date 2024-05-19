@@ -1,20 +1,21 @@
-import { CiSettings } from 'react-icons/ci';
-import { FiLogOut } from 'react-icons/fi';
+// import { CiSettings } from 'react-icons/ci';
+// import { FiLogOut } from 'react-icons/fi';
 import css from './UserBarPopover.module.css';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../redux/auth/operations';
-import { logoutWater } from '../../redux/water/slice';
-import { useState } from 'react';
+// import { useDispatch } from 'react-redux';
+// import { logout } from '../../redux/auth/operations';
+// import { logoutWater } from '../../redux/water/slice';
+// import { useState } from 'react';
 import AddSettingBtn from '../AddSettingBtn/AddSettingBtn';
+import AddLogOutBtn from '../AddLogOutBtn/AddLogOutBtn';
 
 export default function UserBarPopover() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const logOut = () => {
-    dispatch(logout());
+  // const logOut = () => {
+  //   dispatch(logout());
 
-    dispatch(logoutWater());
-  };
+  //   dispatch(logoutWater());
+  // };
 
   return (
     <>
@@ -22,10 +23,12 @@ export default function UserBarPopover() {
         <span className={css.btn}>
           <AddSettingBtn />
         </span>
-
-        <button className={css.btn} onClick={logOut}>
+<span className={css.btn}>
+<AddLogOutBtn />
+</span>
+        {/* <button className={css.btn} onClick={logOut}>
           <FiLogOut /> Log out
-        </button>
+        </button> */}
       </div>
     </>
   );

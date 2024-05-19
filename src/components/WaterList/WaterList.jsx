@@ -6,15 +6,15 @@ import { useSelector } from 'react-redux';
 import { selectDayWater } from '../../redux/water/selectors';
 
 export default function WaterList() {
-  const [openDelModal, setOpenDelModal] = useState(false);
-  const [idTodel, setidTodel] = useState('');
-  const [openEditModal, setOpenEditModal] = useState(false);
+  // const [openDelModal, setOpenDelModal] = useState(false);
+  // const [idTodel, setidTodel] = useState('');
+  // const [openEditModal, setOpenEditModal] = useState(false);
   // const delModalHendler = () => setOpenDelModal(!openDelModal);
-  function delModalHendler(id) {
-    setOpenDelModal(!openDelModal);
-    setidTodel(id);
-  }
-  const editModalHendler = () => setOpenEditModal(!openEditModal);
+  // function delModalHendler(id) {
+  //   setOpenDelModal(!openDelModal);
+  //   setidTodel(id);
+  // }
+  // const editModalHendler = () => setOpenEditModal(!openEditModal);
 
   const dayWater = useSelector(selectDayWater);
 
@@ -27,16 +27,16 @@ export default function WaterList() {
             myKey={item._id}
             countMl={item.value}
             currentTime={item.time}
-            modal={openDelModal}
-            setModal={setOpenDelModal}
-            delHendler={delModalHendler}
-            editHendler={editModalHendler}
+            // modal={openDelModal}
+            // setModal={setOpenDelModal}
+            // delHendler={delModalHendler}
+            // editHendler={editModalHendler}
           />
         ))}
       </ul>
-      {openDelModal && (
+      {/* {openDelModal && (
         <DeleteWaterModal closeModal={delModalHendler} entryId={idTodel} />
-      )}
+      )} */}
     </>
   );
 }
