@@ -7,7 +7,7 @@ export default function WaterDetailedInfo() {
   return (
     <div className={css.container}>
       <UserPanel />
-      <div>
+      <div className={css.wrap}>
         <DailyInfo />
         <MonthInfo />
       </div>
