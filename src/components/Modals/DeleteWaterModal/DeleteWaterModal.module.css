@@ -30,6 +30,7 @@
   gap: 8px;
   width: 100%;
   align-items: center;
+  justify-content: center;
 }
 
 .btn {
@@ -70,11 +71,11 @@
     gap: 16px;
   }
 
-  .btn, .btnCancel {
+  .btn,
+  .btnCancel {
     border-radius: 15px;
     padding: 14px;
     width: 173px;
     height: 46px;
   }
 }
-

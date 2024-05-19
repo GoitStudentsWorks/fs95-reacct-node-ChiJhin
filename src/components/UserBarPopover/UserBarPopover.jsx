@@ -20,15 +20,9 @@ export default function UserBarPopover() {
   return (
     <>
       <div className={css.container}>
-        <span className={css.btn}>
-          <AddSettingBtn />
-        </span>
-<span className={css.btn}>
-<AddLogOutBtn />
-</span>
-        {/* <button className={css.btn} onClick={logOut}>
-          <FiLogOut /> Log out
-        </button> */}
+        <AddSettingBtn />
+
+        <AddLogOutBtn />
       </div>
     </>
   );

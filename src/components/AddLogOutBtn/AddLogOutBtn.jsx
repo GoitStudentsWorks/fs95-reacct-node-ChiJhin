@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Modals from '../Modals/Modal/Modal';
 import { FiLogOut } from 'react-icons/fi';
 import LogOutModal from '../Modals/LogOutModal/LogOutModal';
+import css from './AddLogOutBtn.module.css';
 
 export default function AddLogOutBtn() {
   const [update, setUpdate] = useState(null);
@@ -25,7 +26,7 @@ export default function AddLogOutBtn() {
   };
   return (
     <div>
-      <button type="button" onClick={() => handleBtn()}>
+      <button type="button" onClick={() => handleBtn()} className={css.btn}>
         <FiLogOut /> Log out
       </button>
       {update !== null && (

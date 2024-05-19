@@ -1,16 +1,12 @@
 .container {
+  position: absolute;
+  top: 110%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  align-items: center;
   background-color: var(--main-white);
-}
-
-.btn {
-  border: none;
-  background-color: inherit;
-  color: var(--main);
-}
-
-.btn:hover {
-  color: var(--main-inherit);
+  border-radius: 15px;
+  padding: 10px;
 }

@@ -3,6 +3,7 @@ import css from './CalendarItem.module.css';
 import { selectMonth, selectMonthWater } from '../../redux/water/selectors';
 import { selectUser } from '../../redux/auth/selectors';
 import { chooseDay } from '../../redux/water/operations';
+import clsx from 'clsx';
 
 export default function CalendarItem({ day, profit = 0 }) {
   const monthWater = useSelector(selectMonthWater);
@@ -20,6 +21,9 @@ export default function CalendarItem({ day, profit = 0 }) {
       profit = 100;
     }
   }
+  const lowProfit = (profit) => {
+    return clsx(css.dayBtn, profit < 100 && css.profitLow);
+  };
 
   function handleClick() {
     if (day < 9) {
@@ -31,7 +35,7 @@ export default function CalendarItem({ day, profit = 0 }) {
 
   return (
     <>
-      <button className={css.dayBtn} onClick={handleClick}>
+      <button className={lowProfit(profit)} onClick={handleClick}>
         {day}
       </button>
       <span className={css.profit}>{profit.toFixed(0)} %</span>

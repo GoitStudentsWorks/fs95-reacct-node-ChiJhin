@@ -13,8 +13,8 @@ import bottleMobX2 from '../../assets/mobile/bottle_2x.png';
 export default function WaterMainInfo() {
   return (
     <>
-      <div className={css.bottle_page_wrapper}>
-        <picture className={css.bottle_page_img}>
+      <div className={css.bottlePageWrapper}>
+        <picture className={css.bottlePageImg}>
           {/*dekstop*/}
           <source
             media="(min-width: 1440px)"
@@ -42,7 +42,7 @@ export default function WaterMainInfo() {
         </picture>
         <div>
           <Logo />
-          <div className={css.bottle_page_norm_wrapper}>
+          <div className={css.bottlePageNormWrap}>
             <WaterDailyNorma />
             <div className={css.progressBarCenter}>
               <WaterProgressBar />

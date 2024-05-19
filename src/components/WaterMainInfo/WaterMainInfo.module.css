@@ -7,7 +7,7 @@
 }
 
 @media screen and (min-width: 375px) {
-  .bottle_page_wrapper {
+  .bottlePageWrapper {
     display: flex;
     position: relative;
     justify-content: center;
@@ -17,7 +17,7 @@
     height: 415px;
   }
 
-  .bottle_page_img {
+  .bottlePageImg {
     margin-left: auto;
     margin-right: auto;
     margin-top: 50px;
@@ -25,14 +25,7 @@
     height: 335px;
   }
 
-  .bottle_page_logo {
-    position: absolute;
-    left: 16px;
-    top: 24px;
-    margin: 0;
-  }
-
-  .bottle_page_norm_wrapper {
+  .bottlePageNormWrap {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -48,17 +41,17 @@
 }
 
 @media screen and (min-width: 768px) {
-  .bottle_page_wrapper {
+  .bottlePageWrapper {
     width: 100%;
     min-height: 578px;
   }
-  .bottle_page_img {
+  .bottlePageImg {
     min-height: 477px;
     min-width: 374px;
     margin-top: 69px;
   }
 
-  .bottle_page_norm_wrapper {
+  .bottlePageNormWrap {
     padding: 14px;
     width: calc(100% - 60px);
     height: 400px;
@@ -67,16 +60,16 @@
 }
 
 @media screen and (min-width: 1440px) {
-  .bottle_page_wrapper {
+  .bottlePageWrapper {
     width: 48vw;
     min-height: 736px;
   }
-  .bottle_page_img {
+  .bottlePageImg {
     min-height: 604px;
     min-width: 472px;
     margin-top: 92px;
   }
-  .bottle_page_norm_wrapper {
+  .bottlePageNormWrap {
     height: 500px;
   }
 }

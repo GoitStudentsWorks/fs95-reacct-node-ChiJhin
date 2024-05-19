@@ -4,6 +4,7 @@ import Modals from '../Modals/Modal/Modal';
 // import WaterModal from '../Modals/WaterModal/WaterModal';
 // import LogOutModal from '../Modals/LogOutModal/LogOutModal';
 import UserSettingsModal from '../Modals/UserSettingsModal/UserSettingsModal';
+import css from './AddSettingBtn.module.css';
 
 export default function AddSettingBtn() {
   //     const filter = useSelector(selectFilter);
@@ -32,7 +33,11 @@ export default function AddSettingBtn() {
   };
   return (
     <div>
-      <button type="button" onClick={() => handleAddWater(1)}>
+      <button
+        type="button"
+        onClick={() => handleAddWater(1)}
+        className={css.btn}
+      >
         {' '}
         <CiSettings />
         Setting

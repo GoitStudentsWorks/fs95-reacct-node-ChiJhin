@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Modals from '../Modals/Modal/Modal';
 import { FiEdit2 } from 'react-icons/fi';
 import WaterModal from '../Modals/WaterModal/WaterModal';
+import css from './AddWaterBtn.module.css';
 
 export default function AddWaterBtn({ id }) {
   const [update, setUpdate] = useState(null);
@@ -25,7 +26,7 @@ export default function AddWaterBtn({ id }) {
   };
   return (
     <div>
-      <button type="button" onClick={() => handleBtn(id)}>
+      <button type="button" onClick={() => handleBtn(id)} className={css.btn}>
         <FiEdit2 />
       </button>
       {update !== null && (

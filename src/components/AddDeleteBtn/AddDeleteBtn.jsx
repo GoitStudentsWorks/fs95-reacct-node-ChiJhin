@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Modals from '../Modals/Modal/Modal';
 import DeleteWaterModal from '../Modals/DeleteWaterModal/DeleteWaterModal';
 import { AiOutlineDelete } from 'react-icons/ai';
+import css from './AddDeleteBtn.module.css';
 
 export default function AddDeleteBtn({ id }) {
   const [update, setUpdate] = useState(null);
@@ -25,7 +26,7 @@ export default function AddDeleteBtn({ id }) {
   };
   return (
     <div>
-      <button type="button" onClick={() => handleBtn(id)}>
+      <button type="button" onClick={() => handleBtn(id)} className={css.btn}>
         <AiOutlineDelete />
       </button>
       {update !== null && (
