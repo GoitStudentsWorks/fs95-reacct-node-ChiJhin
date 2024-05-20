@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectAvatar } from '../../../../redux/auth/selectors';
 
-
 export default function AvatarInput({
   control,
   register,
@@ -13,7 +12,6 @@ export default function AvatarInput({
   setAvatar,
   setMyAvatar,
 }) {
-
   // const [avatar, setAvatar] = useState(true);
   // const [avatar, setAvatar] = useState(false)
   const [inputImg, setInputImage] = useState(false);
@@ -21,15 +19,13 @@ export default function AvatarInput({
   const avatarUser = (
     <img
       className={css.photo}
-
       src={inputImg ? inputImg : userAvatar}
-
       width="100%"
       height="100%"
       alt="Avatar"
     />
   );
-  const avatarDefault = (
+  /* const avatarDefault = (
     <svg
       fill="var(--main)"
       // width="62"
@@ -38,12 +34,21 @@ export default function AvatarInput({
     >
       <use href={`${sprite}#icon-trash`}></use>
     </svg>
+  );*/
+
+  const avatarDefault = (
+    <img
+      className={css.photo}
+      src="./default-avatar.jpg"
+      width="100%"
+      height="100%"
+      alt="Avatar"
+    />
   );
 
   const onChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-
       setMyAvatar(file);
       setInputImage(URL.createObjectURL(file));
 
@@ -54,13 +59,14 @@ export default function AvatarInput({
       setAvatar(objectURL);
     } else {
       setInputImage(false);
-
     }
   };
 
   return (
     <div className={css.avatarInput}>
-      <div className={css.avatarBox}>{avatar ? avatarUser : avatarDefault}</div>
+      <div className={css.avatarBox}>
+        {userAvatar || inputImg ? avatarUser : avatarDefault}
+      </div>
       <Controller
         name="file"
         control={control}
