@@ -12,8 +12,6 @@ export default function AvatarInput({
   // setAvatar,
   setMyAvatar,
 }) {
-  
-=======
   // const [avatar, setAvatar] = useState(true);
   // const [avatar, setAvatar] = useState(false)
   const [inputImg, setInputImage] = useState(false);
@@ -23,9 +21,6 @@ export default function AvatarInput({
     <img
       className={css.photo}
       src={inputImg ? inputImg : userAvatar}
-     
-=======
-
       width="100%"
       height="100%"
       alt="Avatar"
@@ -39,9 +34,9 @@ export default function AvatarInput({
       width="100%"
       height="100%"
       alt="Avatar"
-    />)
-=======
- 
+    />
+  );
+
   const onChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -61,12 +56,10 @@ export default function AvatarInput({
   return (
     <div className={css.avatarInput}>
       <div className={css.avatarBox}>
-
         {/* {avatar ? avatarUser : avatarDefault} */}
         {userAvatar || inputImg ? avatarUser : avatarDefault}
-        </div>
-=======
-      
+      </div>
+
       <Controller
         name="file"
         control={control}
@@ -83,11 +76,7 @@ export default function AvatarInput({
       />
       <label htmlFor="file-input">
         <div className={css.upLoad}>
-          <svg
-            fill="var(--main)"
-           
-            className={css.svgAvatarBtn}
-          >
+          <svg fill="var(--main)" className={css.svgAvatarBtn}>
             <use href={`${sprite}#icon-upload`}></use>
           </svg>
           <p>Upload a photo</p>
