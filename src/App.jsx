@@ -13,6 +13,7 @@ import SignInPage from './pages/SignInPage/SignInPage.jsx';
 import SignUpPage from './pages/SignUpPage/SignUpPage.jsx';
 import TrackerPage from './pages/TrackerPage/TrackerPage.jsx';
 import { store } from './redux/store.js';
+import { Toaster } from 'react-hot-toast';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export default function App() {
     <b>Refreshing user...</b>
   ) : (
     <div>
+      <Toaster />
       <Routes>
         <Route
           path="/"
