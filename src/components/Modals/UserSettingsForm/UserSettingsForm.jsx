@@ -5,7 +5,7 @@ import RadioBtn from './RadioInput/RadioInput';
 import AvatarInput from './AvatarInput/AvatarInput';
 import { useDispatch, useSelector } from 'react-redux';
 // import { editWater, selectDay } from '../../../redux/water/operations';
-import { editUser, fixBackendPath } from '../../../redux/auth/operations';
+import { editUser } from '../../../redux/auth/operations';
 import TimeField from 'react-simple-timefield';
 
 export default function UserSettingsForm({ closeModal, getSetting }) {
@@ -15,6 +15,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
   const [M, setM] = useState(null);
   const [T, setT] = useState('7:00');
   const [avatar, setAvatar] = useState(false);
+  const [myAvatar, setMyAvatar] = useState(false);
   const {
     avatarURL,
     dailyActivityTime,
@@ -75,17 +76,22 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     const { gender, lastEmail, lastKilo, lastName, lastTime, lastValume } =
       data;
     const file = avatar;
-    console.log(data, file);
+    // console.log(data, file);
     closeModal();
 
     const formData = new FormData();
-    formData.append('avatar', file);
+
+    formData.append('avatar', myAvatar);
+
     formData.append('gender', gender);
     formData.append('name', lastName);
     formData.append('email', lastEmail);
     formData.append('weight', lastKilo);
     formData.append('dailyActivityTime', lastTime);
     formData.append('dailyWaterNorm', lastValume);
+
+    const obj = Object.fromEntries(formData.entries());
+    // console.log('formData', obj);
 
     dispatch(editUser(formData))
       .unwrap()
@@ -106,7 +112,8 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
           control={control}
           register={register}
           setAvatar={setAvatar}
-          avatar={fixBackendPath(avatarURL)}
+          avatar={avatarURL}
+          setMyAvatar={setMyAvatar}
         />
         <div>
           <h3 className={css.titleHender}>Your gender identity</h3>
