@@ -1,9 +1,7 @@
-import { useSelector } from "react-redux";
 import css from "./RadioInput.module.css";
-// import { selectDay } from "../../../../redux/water/operations";
 
 export default function RadioBtn({ register, onChangeRadio, selectedValue}) {
-      // const statusRadioBtn = useSelector(selectDay)
+ 
   return (
     <> 
       
@@ -15,7 +13,6 @@ export default function RadioBtn({ register, onChangeRadio, selectedValue}) {
           id="field-woman" 
           defaultChecked={selectedValue === 'woman'}
           onChange={onChangeRadio}
-          // defaultChecked={statusRadioBtn==='woman'}
           /> 
         <label htmlFor="field-woman" className={css.radioLabel}>
         Woman
@@ -29,7 +26,6 @@ export default function RadioBtn({ register, onChangeRadio, selectedValue}) {
           id="field-man" 
           defaultChecked={selectedValue === 'man'}
           onChange={onChangeRadio}
-          // defaultChecked={statusRadioBtn==='man'} 
           /> 
         <label htmlFor="field-man" className={css.radioLabel}>
           Man
