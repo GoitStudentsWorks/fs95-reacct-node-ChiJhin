@@ -10,7 +10,7 @@ import { selectUser } from '../../redux/auth/selectors';
 export default function WaterProgressBar() {
   const dayWater = useSelector(selectDayWater);
   const dayNorma = useSelector(selectUser).dailyWaterNorm;
-
+  console.log(dayWater);
   //const waterAmount = 50;
   const drinkedWater = dayWater.reduce((accumulator, currentObject) => {
     return accumulator + currentObject.value;
