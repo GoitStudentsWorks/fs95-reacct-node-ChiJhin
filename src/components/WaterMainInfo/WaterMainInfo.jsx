@@ -34,11 +34,7 @@ export default function WaterMainInfo() {
             type="image/png"
           />
           {/*default*/}
-          <img
-            className="bottle_page_img"
-            src={bottleDesc}
-            alt="bottle with water"
-          />
+          <img className="bottle" src={bottleMob} alt="bottle with water" />
         </picture>
         <div>
           <Logo />

@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectRefreshToken } from './selectors';
 import { updateToken, updateTokenError } from './slice';
 
-const BACKEND_HOST = 'https://aquatrack-it-warriors-backend.onrender.com';
-//const BACKEND_HOST = 'http://localhost:3000';
+export const BACKEND_HOST =
+  'https://aquatrack-it-warriors-backend.onrender.com';
+//export const BACKEND_HOST = 'http://localhost:3000';
 axios.defaults.baseURL = BACKEND_HOST + '/api/';
 
 axios.interceptors.response.use(
@@ -47,10 +48,10 @@ function clearAuthHeader() {
   //delete axios.defaults.headers.common.Authorization;?
 }
 
-export const fixBackendPath = (path) => {
-  if (!path || path.startsWith('http')) return path;
-  else return BACKEND_HOST + path;
-};
+// /*export const fixBackendPath = (path) => {
+//   if (!path || path.startsWith('http')) return path;
+//   else return BACKEND_HOST + path;
+// };*/
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -120,6 +121,7 @@ export const editUser = createAsyncThunk(
           'Content-Type': 'multipart/form-data',
         },
       });
+
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

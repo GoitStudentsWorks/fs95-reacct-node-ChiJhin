@@ -29,7 +29,6 @@ export default function AddLogOutBtn() {
       <button type="button" onClick={() => handleBtn()} className={css.btn}>
         <FiLogOut /> Log out
       </button>
-      {update !== null && (
         <Modals
           styleVariantBtn={styleNameClass.btnDelete}
           styleVariant={styleNameClass.modalDelete}
@@ -40,7 +39,6 @@ export default function AddLogOutBtn() {
             <LogOutModal closeModal={closeModalUpdate} entryId={update} />
           </div>
         </Modals>
-      )}
     </div>
   );
 }

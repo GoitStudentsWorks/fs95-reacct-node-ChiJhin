@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -9,6 +8,7 @@ import { Link } from 'react-router-dom';
 import css from './SignUpForm.module.css';
 import Logo from '../Logo/Logo';
 import { register as userRegister } from '../../redux/auth/operations';
+import toast from 'react-hot-toast';
 
 const signUpValidationSchema = Yup.object({
   email: Yup.string()
@@ -16,7 +16,11 @@ const signUpValidationSchema = Yup.object({
     .email('Invalid email address'),
   password: Yup.string()
     .required('Password is required')
-    .min(7, 'Password must be at least 7 characters long'),
+    .min(7, 'Password must be at least 7 characters long')
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+      'Password must contain at least one letter and one number, only Latin letters are allowed'
+    ),
   repeatPassword: Yup.string()
     .oneOf([Yup.ref('password')], 'Passwords must match')
     .required('Please confirm your password'),
@@ -40,8 +44,17 @@ export default function SignUpForm() {
     const name = data.email.split('@')[0];
     const email = data.email;
     const password = data.password;
-    dispatch(userRegister({ name, email, password }));
-    reset();
+    dispatch(userRegister({ name, email, password }))
+      .unwrap()
+      .then(() => {
+        toast.success('Sign up successful! Welcome aboard! 🎉', {
+          duration: 2000,
+        });
+        reset();
+      })
+      .catch((error) => {
+        toast.error('Oops!Failed to sign up', { duration: 4000 });
+      });
   };
 
   return (

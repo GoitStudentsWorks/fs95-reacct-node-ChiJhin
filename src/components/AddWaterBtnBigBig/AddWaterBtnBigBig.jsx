@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import Modals from '../Modals/Modal/Modal';
-import { FiEdit2 } from 'react-icons/fi';
 import WaterModal from '../Modals/WaterModal/WaterModal';
-import css from './AddWaterBtn.module.css';
-
-export default function AddWaterBtnBig({ id, ml }) {
-  const [update, setUpdate] = useState(null);
+import css from './AddWaterBtnBigBig.module.css';
+import { FaPlus } from 'react-icons/fa';
+export default function AddWaterBtnBigBig() {
   const [modIsOpen, setModIsOpen] = useState(false);
   const styleNameClass = {
     modalDelete: 'modalDelete',
@@ -15,20 +13,22 @@ export default function AddWaterBtnBig({ id, ml }) {
     modalWater: 'Modal',
     btnWater: 'btnWater',
   };
-
-  const handleBtn = (id) => {
-    setUpdate(id);
-    console.log(ml);
+  const handleBtn = () => {
+    // handleClick();
     setModIsOpen(true);
   };
-
   const closeModalUpdate = () => {
     setModIsOpen(false);
   };
   return (
     <div>
-      <button type="button" onClick={() => handleBtn(id)} className={css.btn}>
-        <FiEdit2 />
+      <button
+        className={css.container}
+        type="button"
+        onClick={() => handleBtn()}
+      >
+        <FaPlus />
+        Add water
       </button>
       <Modals
         styleVariantBtn={styleNameClass.btnWater}
@@ -37,7 +37,7 @@ export default function AddWaterBtnBig({ id, ml }) {
         closeModal={closeModalUpdate}
       >
         <div>
-          <WaterModal closeModal={closeModalUpdate} id={id} ml={ml} />
+          <WaterModal closeModal={closeModalUpdate} />
         </div>
       </Modals>
     </div>

@@ -5,22 +5,31 @@ import { IconPlus } from '../../Icons/IconPlus';
 import { IconMinus } from '../../Icons/IconMinus';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { selectDayWater } from '../../../redux/water/selectors';
+import {
+  selectDayWater,
+  selectDay,
+  selectMonth,
+} from '../../../redux/water/selectors';
 import { addWater } from '../../../redux/water/operations';
 import { editWater } from '../../../redux/water/operations';
+import { chooseMonth } from '../../../redux/water/operations';
+
 import css from './WaterModal.module.css';
 const schema = yup.object().shape({
-  value: yup
-    .number()
-    .typeError('Enter a valid number')
-    .positive('Value must be positive')
-    .required('Enter the number'),
+  value: yup.number().positive('Value must be positive'),
 });
-export default function WaterModal({closeModal, entryId}) {
+export default function WaterModal({ id, ml }) {
   const dispatch = useDispatch();
-  const waterValueDay = useSelector(selectDayWater);
-  console.log(waterValueDay);
-  const isEdit = entryId !== null;
+  const date = useSelector(selectDay);
+  const month = useSelector(selectMonth);
+  // const waterValueDay = useSelector(selectDayWater);
+
+  // const waterAllDay = waterValueDay.reduce((acc, current) => {
+  //   return acc + current.value;
+  // }, 0);
+
+  // const id = waterValueDay.map((option) => option._id);
+
   const [currentTime, setCurrentTime] = useState(getCurrentTime());
   const {
     register,
@@ -28,13 +37,13 @@ export default function WaterModal({closeModal, entryId}) {
     handleSubmit,
     setValue,
     getValues,
-    clearErrors,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       time: getCurrentTime(),
-      value: waterValueDay ?? 50,
+      value: 50,
+      date: date,
     },
   });
   function getCurrentTime() {
@@ -53,30 +62,22 @@ export default function WaterModal({closeModal, entryId}) {
     }, 60000);
     return () => clearInterval(intervalId);
   }, []);
-  // const submitForm = (data) => {
-  //   console.log(data);
-  // };
-  useEffect(() => {
-    setValue('time', currentTime);
-  }, [currentTime, setValue]);
-
-  useEffect(() => {
-    if (isEdit) {
-      // Fetch existing data based on entryId if editing
-      // Example: setValue('value', fetchedData.value);
-      // Assuming waterValueDay corresponds to the data for the given entryId
-      setValue('value', waterValueDay ?? 50);
-    }
-  }, [isEdit, setValue, waterValueDay]);
 
   const submitForm = (data) => {
-    if (isEdit) {
-      dispatch(editWater({...data, id:entryId}));
-    } else {
+    if (!id) {
       dispatch(addWater(data));
+      console.log(id);
+      setTimeout(() => {
+        dispatch(chooseMonth(month));
+      }, 200);
+    } else {
+      dispatch(editWater({ ...data, id }));
+      setTimeout(() => {
+        dispatch(chooseMonth(month));
+      }, 200);
     }
-    closeModal();
   };
+
   const decrement = () => {
     const currentValue = getValues('value');
     const value = currentValue - 50;
@@ -91,18 +92,14 @@ export default function WaterModal({closeModal, entryId}) {
       setValue('value', value);
     }
   };
-
-  const watchedValue = watch('value', waterValueDay ?? 50);
-  const displayValue = typeof watchedValue === 'number' ? watchedValue : 0;
-
   return (
     <form className={css.waterForm} onSubmit={handleSubmit(submitForm)}>
       <div className={css.formWrapper}>
         <h2 className={css.title}>
-          {isEdit ? 'Edit the entered amount of water' : 'Add water'}
+          {!id ? 'Add water' : 'Edit the entered amount of water'}
         </h2>
         <p className={css.waterTitle}>
-          {isEdit ? 'Correct entered data:' : 'Choose a value'}
+          {!id ? 'Chouse a value' : 'Correct entered data:'}
         </p>
         <span className={css.waterAmount}>Amount of water:</span>
         <div className={css.wrapperAmount}>
@@ -114,7 +111,7 @@ export default function WaterModal({closeModal, entryId}) {
           >
             <IconMinus className={css.icon} />
           </button>
-          <span className={css.valueAmount}>{`${displayValue} ml`}</span>
+          <span className={css.valueAmount}>{`${watch('value')} ml`}</span>
           <button className={css.btnAmount} onClick={increment} type="button">
             <IconPlus className={css.icon} />
           </button>
@@ -143,13 +140,7 @@ export default function WaterModal({closeModal, entryId}) {
             type="number"
             name="value"
             id="value"
-            onChange={(e) => {
-              const newValue = Number(e.target.value);
-              setValue('value', newValue);
-              if (!isNaN(newValue)) {
-                clearErrors('value');
-              }
-            }}
+            onChange={(e) => setValue('value', Number(e.target.value))}
           />
           {errors.value && (
             <span className={css.error}>{errors.value.message}</span>

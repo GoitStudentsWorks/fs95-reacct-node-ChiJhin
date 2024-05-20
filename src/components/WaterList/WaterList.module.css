@@ -1,5 +1,6 @@
 .waterListWrap {
   display: flex;
+  flex-direction: row-reverse;
   flex-wrap: nowrap;
   gap: 8px;
   padding-bottom: 24px;
