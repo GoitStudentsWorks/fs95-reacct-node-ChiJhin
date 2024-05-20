@@ -64,6 +64,13 @@
   color: rgba(50, 63, 71, 0.3);
   cursor: pointer;
 }
+.btn:hover {
+  background-color: #87d28d;
+}
+
+.btnCancel:hover {
+  color: var(--main);
+}
 
 @media (min-width: 768px) {
   .btnBox {

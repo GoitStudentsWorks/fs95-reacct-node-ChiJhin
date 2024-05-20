@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectAvatar } from '../../../../redux/auth/selectors';
 
+
 export default function AvatarInput({
   control,
   register,
@@ -12,6 +13,7 @@ export default function AvatarInput({
   setAvatar,
   setMyAvatar,
 }) {
+
   // const [avatar, setAvatar] = useState(true);
   // const [avatar, setAvatar] = useState(false)
   const [inputImg, setInputImage] = useState(false);
@@ -19,7 +21,9 @@ export default function AvatarInput({
   const avatarUser = (
     <img
       className={css.photo}
+
       src={inputImg ? inputImg : userAvatar}
+
       width="100%"
       height="100%"
       alt="Avatar"
@@ -38,8 +42,8 @@ export default function AvatarInput({
 
   const onChange = (event) => {
     const file = event.target.files[0];
-
     if (file) {
+
       setMyAvatar(file);
       setInputImage(URL.createObjectURL(file));
 
@@ -50,6 +54,7 @@ export default function AvatarInput({
       setAvatar(objectURL);
     } else {
       setInputImage(false);
+
     }
   };
 
