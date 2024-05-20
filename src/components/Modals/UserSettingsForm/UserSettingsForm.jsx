@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import css from './UserSettingsForm.module.css';
 import RadioBtn from './RadioInput/RadioInput';
 import AvatarInput from './AvatarInput/AvatarInput';
-import { useDispatch, useSelector } from 'react-redux';
-// import { editWater, selectDay } from '../../../redux/water/operations';
+import { useDispatch } from 'react-redux';
 import { editUser } from '../../../redux/auth/operations';
 import TimeField from 'react-simple-timefield';
+// import { fixBackendPath } from '../../../redux/auth/operations';
 
 export default function UserSettingsForm({ closeModal, getSetting }) {
   const [selectedValueRadio, setSelectedValueRadio] = useState('');
@@ -14,7 +14,6 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
   const [volume, setSelectedVolume] = useState('');
   const [M, setM] = useState(null);
   const [T, setT] = useState('7:00');
-  const [avatar, setAvatar] = useState(false);
   const [myAvatar, setMyAvatar] = useState(false);
   const {
     avatarURL,
@@ -46,7 +45,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
   };
 
   useEffect(() => {
-    if (selectedValueRadio !== '') {
+    // if (selectedValueRadio !== '') {
       const time = convertToMinutes(T);
       if (selectedValueRadio === 'woman') {
         // console.log( T,  time);
@@ -58,7 +57,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
         setResult(V);
         // console.log('result', V);
       }
-    }
+    // }
   }, [selectedValueRadio, M, T]);
 
   const {
@@ -75,7 +74,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
   const onSubmit = (data) => {
     const { gender, lastEmail, lastKilo, lastName, lastTime, lastValume } =
       data;
-    const file = avatar;
+    // const file = avatar;
     // console.log(data, file);
     closeModal();
 
@@ -111,8 +110,9 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
         <AvatarInput
           control={control}
           register={register}
-          setAvatar={setAvatar}
-          avatar={avatarURL}
+          // setAvatar={setAvatar}
+          // avatar={fixBackendPath(avatarURL)}
+          // avatar={avatarURL}
           setMyAvatar={setMyAvatar}
         />
         <div>

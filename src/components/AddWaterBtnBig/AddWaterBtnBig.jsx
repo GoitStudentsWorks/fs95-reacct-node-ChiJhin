@@ -1,9 +1,16 @@
 // import { FaPlus } from 'react-icons/fa';
 import css from './AddWaterBtnBig.module.css';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { addWater, chooseMonth } from '../../redux/water/operations';
+import { selectDay, selectMonth } from '../../redux/water/selectors';
+import { TimeToString } from '../../utils/dates';
+=======
 // import { useDispatch, useSelector } from 'react-redux';
 // import { addWater, chooseMonth } from '../../redux/water/operations';
 // import { selectDay, selectMonth } from '../../redux/water/selectors';
 // import { TimeToString } from '../../utils/dates';
+
 import AddWaterBtnBigBig from '../AddWaterBtnBigBig/AddWaterBtnBigBig';
 
 export default function AddWaterBtnBig({ handleClick }) {
@@ -24,8 +31,14 @@ export default function AddWaterBtnBig({ handleClick }) {
   return (
     <>
       <span className={css.conteiner}>
-        <AddWaterBtnBigBig handleClick={handleClick} />
-      </span>
+
+          <AddWaterBtnBigBig
+          handleClick={handleClick}
+          />
+          </span>
+=======
+       
+
       {/* <button className={css.container} onClick={handleClick}>
         <FaPlus />
         Add water

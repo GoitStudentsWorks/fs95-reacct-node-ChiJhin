@@ -29,7 +29,6 @@ export default function AddDeleteBtn({ id }) {
       <button type="button" onClick={() => handleBtn(id)} className={css.btn}>
         <AiOutlineDelete />
       </button>
-      {update !== null && (
         <Modals
           styleVariantBtn={styleNameClass.btnDelete}
           styleVariant={styleNameClass.modalDelete}
@@ -40,7 +39,6 @@ export default function AddDeleteBtn({ id }) {
             <DeleteWaterModal closeModal={closeModalUpdate} entryId={update} />
           </div>
         </Modals>
-      )}
     </div>
   );
 }

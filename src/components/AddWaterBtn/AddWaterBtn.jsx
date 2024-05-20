@@ -4,7 +4,7 @@ import { FiEdit2 } from 'react-icons/fi';
 import WaterModal from '../Modals/WaterModal/WaterModal';
 import css from './AddWaterBtn.module.css';
 
-export default function AddWaterBtn({ id }) {
+export default function AddWaterBtnBig({ id }) {
   const [update, setUpdate] = useState(null);
   const [modIsOpen, setModIsOpen] = useState(false);
   const styleNameClass = {
@@ -29,7 +29,6 @@ export default function AddWaterBtn({ id }) {
       <button type="button" onClick={() => handleBtn(id)} className={css.btn}>
         <FiEdit2 />
       </button>
-      {update !== null && (
         <Modals
           styleVariantBtn={styleNameClass.btnWater}
           styleVariant={styleNameClass.modalWater}
@@ -40,7 +39,6 @@ export default function AddWaterBtn({ id }) {
             <WaterModal closeModal={closeModalUpdate} entryId={update} />
           </div>
         </Modals>
-      )}
     </div>
   );
 }

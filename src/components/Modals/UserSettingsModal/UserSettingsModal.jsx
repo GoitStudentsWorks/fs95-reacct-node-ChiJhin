@@ -1,46 +1,48 @@
 import { useEffect, useState } from 'react';
 import css from './UserSettingsModal.module.css';
 import UserSettingsForm from '../UserSettingsForm/UserSettingsForm';
-import axios from 'axios';
-import { set } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+// import axios from 'axios';
+import {  useSelector } from 'react-redux';
 import { selectUser } from '../../../redux/auth/selectors';
 
-export default function UserSettingsModal({ closeModal }) {
+export default function UserSettingsModal({ closeModal,modIsOpen }) {
   const [get_setting, setGet_setting] = useState([]);
-  // const [loading, setLoading] = useState(false);
 
-  // const dispatch = useDispatch();
   const selector = useSelector(selectUser);
+ 
+    useEffect(() => {
+    if(!modIsOpen){
+          return}
+       setGet_setting(selector);
 
-  useEffect(() => {
-    // setGet_setting([])
-    // setLoading(true);
-    setGet_setting(selector);
-
-    //  console.log(get_setting);
-  }, []);
+  }, [modIsOpen]);
+  // =========================
   // useEffect(() => {
+  //   if(!modIsOpen){
+  //         console.log('fdd');
+  //         return
+  //       }
   //   async function fetchData() {
   //     try {
   //       setGet_setting([])
-  //       setLoading(true);
+  //       // setLoading(true);
   //       const response = await axios.get(
   //         'https://aquatrack-it-warriors-backend.onrender.com/api/users/current'
   //       );
   //       setGet_setting(response.data);
-  //       // console.log(get_setting);
+  //       // setGet_setting(response.data);
+  //       console.log(get_setting);
   //     } catch (error) {
   //       console.log(error);
   //     }finally{
-  //       setLoading(false);
-  //       // setGet_setting(response.data);
+  //       setLoading(false)
+  //       // setLoading(false);
 
   //     }
   //   }
 
   //   fetchData();
-  // }, []);
+  // }, [loading]);
 
   return (
     <>
