@@ -10,12 +10,17 @@ import { addWater } from '../../../redux/water/operations';
 import { editWater } from '../../../redux/water/operations';
 import css from './WaterModal.module.css';
 const schema = yup.object().shape({
-  value: yup.number().positive('Value must be positive').required('Value is required'),
+  value: yup
+    .number()
+    .typeError('Enter a valid number')
+    .positive('Value must be positive')
+    .required('Enter the number'),
 });
-export default function WaterModal() {
+export default function WaterModal({closeModal, entryId}) {
   const dispatch = useDispatch();
   const waterValueDay = useSelector(selectDayWater);
   console.log(waterValueDay);
+  const isEdit = entryId !== null;
   const [currentTime, setCurrentTime] = useState(getCurrentTime());
   const {
     register,
@@ -23,6 +28,7 @@ export default function WaterModal() {
     handleSubmit,
     setValue,
     getValues,
+    clearErrors,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -54,12 +60,22 @@ export default function WaterModal() {
     setValue('time', currentTime);
   }, [currentTime, setValue]);
 
-  const submitForm = (data) => {
-    if (!waterValueDay) {
-      dispatch(addWater(data));
-    } else {
-      dispatch(editWater(data));
+  useEffect(() => {
+    if (isEdit) {
+      // Fetch existing data based on entryId if editing
+      // Example: setValue('value', fetchedData.value);
+      // Assuming waterValueDay corresponds to the data for the given entryId
+      setValue('value', waterValueDay ?? 50);
     }
+  }, [isEdit, setValue, waterValueDay]);
+
+  const submitForm = (data) => {
+    if (isEdit) {
+      dispatch(editWater({...data, id:entryId}));
+    } else {
+      dispatch(addWater(data));
+    }
+    closeModal();
   };
   const decrement = () => {
     const currentValue = getValues('value');
@@ -83,10 +99,10 @@ export default function WaterModal() {
     <form className={css.waterForm} onSubmit={handleSubmit(submitForm)}>
       <div className={css.formWrapper}>
         <h2 className={css.title}>
-          {!waterValueDay ? 'Add water' : 'Edit the entered amount of water'}
+          {isEdit ? 'Edit the entered amount of water' : 'Add water'}
         </h2>
         <p className={css.waterTitle}>
-          {!waterValueDay ? 'Chouse a value' : 'Correct entered data:'}
+          {isEdit ? 'Correct entered data:' : 'Choose a value'}
         </p>
         <span className={css.waterAmount}>Amount of water:</span>
         <div className={css.wrapperAmount}>
@@ -127,7 +143,13 @@ export default function WaterModal() {
             type="number"
             name="value"
             id="value"
-            onChange={(e) => setValue('value', Number(e.target.value))}
+            onChange={(e) => {
+              const newValue = Number(e.target.value);
+              setValue('value', newValue);
+              if (!isNaN(newValue)) {
+                clearErrors('value');
+              }
+            }}
           />
           {errors.value && (
             <span className={css.error}>{errors.value.message}</span>
