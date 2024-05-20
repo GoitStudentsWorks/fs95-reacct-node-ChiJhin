@@ -41,6 +41,7 @@ span {
   letter-spacing: -0.01em;
   color: #2f2f2f;
   margin-bottom: 5px;
+ 
 }
 .titleChoose {
   color: #323f47;
@@ -56,7 +57,7 @@ span {
   font-size: 15px;
   line-height: 1.25;
   letter-spacing: -0.01em;
-
+ 
   color: #323f47;
   margin-bottom: 5px;
 }
@@ -75,4 +76,14 @@ span {
   letter-spacing: -0.01em;
   text-align: center;
   color: #323f47;
+}
+
+@media screen and (min-width: 768px) {
+  .form {
+    max-width: 518px;
+}
+
+  .formName input {
+  max-width: 518px;
+}
 }
