@@ -1,31 +1,44 @@
-import { FaPlus } from 'react-icons/fa';
+import { useState } from 'react';
+import Modals from '../Modals/Modal/Modal';
+import WaterModal from '../Modals/WaterModal/WaterModal';
 import css from './AddWaterBtnSmall.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { addWater, chooseMonth } from '../../redux/water/operations';
-import { selectDay, selectMonth } from '../../redux/water/selectors';
-import { TimeToString } from '../../utils/dates';
+import { FaPlus } from 'react-icons/fa';
 
 export default function AddWaterBtnSmall() {
-  const dispatch = useDispatch();
-  const date = useSelector(selectDay);
-  const month = useSelector(selectMonth);
-  function handleClick() {
-    const now = new Date();
-
-    const time = TimeToString(now);
-    dispatch(addWater({ value: 250, date, time }));
-    setTimeout(() => {
-      dispatch(chooseMonth(month));
-    }, 200);
-  }
+  const [modIsOpen, setModIsOpen] = useState(false);
+  const styleNameClass = {
+    modalDelete: 'modalDelete',
+    btnDelete: 'btnDelete',
+    modalSetting: 'modalSetting',
+    btnSetting: 'btnSetting',
+    modalWater: 'Modal',
+    btnWater: 'btnWater',
+  };
+  const handleBtn = () => {
+    // handleClick();
+    setModIsOpen(true);
+  };
+  const closeModalUpdate = () => {
+    setModIsOpen(false);
+  };
   return (
     <>
-      <button className={css.wrap} onClick={handleClick}>
+      <button className={css.wrap} onClick={() => handleBtn()}>
         <span className={css.iconWrap}>
           <FaPlus />
         </span>
         Add water
       </button>
+      <Modals
+        styleVariantBtn={styleNameClass.btnWater}
+        styleVariant={styleNameClass.modalWater}
+        isOpen={modIsOpen}
+        closeModal={closeModalUpdate}
+      >
+        <div>
+          <WaterModal closeModal={closeModalUpdate} />
+        </div>
+      </Modals>
     </>
   );
 }

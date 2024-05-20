@@ -38,6 +38,7 @@ export default function WaterModal() {
     setValue,
     getValues,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -64,17 +65,18 @@ export default function WaterModal() {
   }, []);
 
   const submitForm = (data) => {
-    if (!waterAllDay) {
-      dispatch(addWater(data));
-      setTimeout(() => {
-        dispatch(chooseMonth(month));
-      }, 200);
-    } else {
-      dispatch(editWater({ ...data, id }));
-      setTimeout(() => {
-        dispatch(chooseMonth(month));
-      }, 200);
-    }
+    // if (!waterAllDay) {
+    dispatch(addWater(data));
+    setTimeout(() => {
+      dispatch(chooseMonth(month));
+    }, 200);
+    // }
+    // else {
+    //   dispatch(editWater({ ...data, id }));
+    //   setTimeout(() => {
+    //     dispatch(chooseMonth(month));
+    //   }, 200);
+    // }
   };
 
   const decrement = () => {
@@ -95,10 +97,12 @@ export default function WaterModal() {
     <form className={css.waterForm} onSubmit={handleSubmit(submitForm)}>
       <div className={css.formWrapper}>
         <h2 className={css.title}>
-          {!waterAllDay ? 'Add water' : 'Edit the entered amount of water'}
+          {/* {!waterAllDay ? 'Add water' : 'Edit the entered amount of water'} */}
+          Add water
         </h2>
         <p className={css.waterTitle}>
-          {!waterAllDay ? 'Chouse a value' : 'Correct entered data:'}
+          {/* {!waterAllDay ? 'Chouse a value' : 'Correct entered data:'} */}
+          Chouse a value
         </p>
         <span className={css.waterAmount}>Amount of water:</span>
         <div className={css.wrapperAmount}>
