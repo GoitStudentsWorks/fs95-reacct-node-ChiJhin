@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectRefreshToken } from './selectors';
 import { updateToken, updateTokenError } from './slice';
 
-export const BACKEND_HOST =
-  'https://aquatrack-it-warriors-backend.onrender.com';
-//export const BACKEND_HOST = 'http://localhost:3000';
+//export const BACKEND_HOST =
+('https://aquatrack-it-warriors-backend.onrender.com');
+export const BACKEND_HOST = 'http://localhost:3000';
 axios.defaults.baseURL = BACKEND_HOST + '/api/';
 
 axios.interceptors.response.use(

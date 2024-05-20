@@ -14,7 +14,7 @@ export function selectAuthLoading(state) {
 
 export const selectAvatar = (state) => {
   if (state.auth.user.avatarURL) {
-    return BACKEND_HOST + state.auth.user.avatarURL;
+    return BACKEND_HOST + '/' + state.auth.user.avatarURL;
   }
   return null;
 };
