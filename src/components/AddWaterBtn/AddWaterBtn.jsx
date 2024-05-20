@@ -8,10 +8,6 @@ export default function AddWaterBtn({ id }) {
   const [update, setUpdate] = useState(null);
   const [modIsOpen, setModIsOpen] = useState(false);
   const styleNameClass = {
-    modalDelete: 'modalDelete',
-    btnDelete: 'btnDelete',
-    modalSetting: 'modalSetting',
-    btnSetting: 'btnSetting',
     modalWater: 'Modal',
     btnWater: 'btnWater',
   };
@@ -29,7 +25,7 @@ export default function AddWaterBtn({ id }) {
       <button type="button" onClick={() => handleBtn(id)} className={css.btn}>
         <FiEdit2 />
       </button>
-      {update !== null && (
+      {modIsOpen && (
         <Modals
           styleVariantBtn={styleNameClass.btnWater}
           styleVariant={styleNameClass.modalWater}
