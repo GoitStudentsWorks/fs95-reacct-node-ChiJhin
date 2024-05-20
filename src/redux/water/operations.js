@@ -6,8 +6,9 @@ import {
   dayToQuary,
   monthToQuary,
 } from '../../utils/dates';
+import { BACKEND_HOST } from '../auth/operations';
 
-const BACKEND_HOST = 'https://aquatrack-it-warriors-backend.onrender.com';
+//const BACKEND_HOST = 'https://aquatrack-it-warriors-backend.onrender.com';
 //const BACKEND_HOST = 'http://localhost:3000';
 axios.defaults.baseURL = BACKEND_HOST + '/api/';
 

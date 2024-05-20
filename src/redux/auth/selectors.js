@@ -1,3 +1,5 @@
+import { BACKEND_HOST } from './operations';
+
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 
 export const selectUser = (state) => state.auth.user;
@@ -12,7 +14,7 @@ export function selectAuthLoading(state) {
 
 export const selectAvatar = (state) => {
   if (state.auth.user.avatarURL) {
-    return 'http://localhost:3000/' + state.auth.user.avatarURL;
+    return BACKEND_HOST + state.auth.user.avatarURL;
   }
   return null;
 };
