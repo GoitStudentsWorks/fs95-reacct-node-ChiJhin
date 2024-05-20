@@ -9,7 +9,7 @@
 }
 .waterForm {
   width: 343px;
-  height: 490px;
+  height: 390px;
   /* padding: 40px 20px;
   background-color: var(--background); */
   border-radius: 30px;
@@ -130,8 +130,8 @@
     margin-bottom: 20px;
   }
   .waterForm {
-    width: 518px;
-    height: 587px;
+    max-width: 518px;
+    height: 474px;
   }
   .waterTitle {
     font-size: 18px;
