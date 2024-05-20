@@ -5,17 +5,31 @@ import { IconPlus } from '../../Icons/IconPlus';
 import { IconMinus } from '../../Icons/IconMinus';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { selectDayWater } from '../../../redux/water/selectors';
+import {
+  selectDayWater,
+  selectDay,
+  selectMonth,
+} from '../../../redux/water/selectors';
 import { addWater } from '../../../redux/water/operations';
 import { editWater } from '../../../redux/water/operations';
+import { chooseMonth } from '../../../redux/water/operations';
+
 import css from './WaterModal.module.css';
 const schema = yup.object().shape({
   value: yup.number().positive('Value must be positive'),
 });
 export default function WaterModal() {
   const dispatch = useDispatch();
+  const date = useSelector(selectDay);
+  const month = useSelector(selectMonth);
   const waterValueDay = useSelector(selectDayWater);
-  console.log(waterValueDay);
+
+  const waterAllDay = waterValueDay.reduce((acc, current) => {
+    return acc + current.value;
+  }, 0);
+
+  const id = waterValueDay.map((option) => option._id);
+
   const [currentTime, setCurrentTime] = useState(getCurrentTime());
   const {
     register,
@@ -28,7 +42,8 @@ export default function WaterModal() {
     resolver: yupResolver(schema),
     defaultValues: {
       time: getCurrentTime(),
-      value: waterValueDay ?? 50,
+      value: 50,
+      date: date,
     },
   });
   function getCurrentTime() {
@@ -47,16 +62,21 @@ export default function WaterModal() {
     }, 60000);
     return () => clearInterval(intervalId);
   }, []);
-  // const submitForm = (data) => {
-  //   console.log(data);
-  // };
+
   const submitForm = (data) => {
-    if (!waterValueDay) {
+    if (!waterAllDay) {
       dispatch(addWater(data));
+      setTimeout(() => {
+        dispatch(chooseMonth(month));
+      }, 200);
     } else {
-      dispatch(editWater(data));
+      dispatch(editWater({ ...data, id }));
+      setTimeout(() => {
+        dispatch(chooseMonth(month));
+      }, 200);
     }
   };
+
   const decrement = () => {
     const currentValue = getValues('value');
     const value = currentValue - 50;
@@ -75,10 +95,10 @@ export default function WaterModal() {
     <form className={css.waterForm} onSubmit={handleSubmit(submitForm)}>
       <div className={css.formWrapper}>
         <h2 className={css.title}>
-          {!waterValueDay ? 'Add water' : 'Edit the entered amount of water'}
+          {!waterAllDay ? 'Add water' : 'Edit the entered amount of water'}
         </h2>
         <p className={css.waterTitle}>
-          {!waterValueDay ? 'Chouse a value' : 'Correct entered data:'}
+          {!waterAllDay ? 'Chouse a value' : 'Correct entered data:'}
         </p>
         <span className={css.waterAmount}>Amount of water:</span>
         <div className={css.wrapperAmount}>
