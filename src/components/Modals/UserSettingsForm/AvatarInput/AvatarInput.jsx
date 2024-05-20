@@ -3,12 +3,18 @@ import css from './AvatarInput.module.css';
 import sprite from '../../../../assets/sprite.svg';
 import { useState } from 'react';
 
-export default function AvatarInput({ control, register,avatar,setAvatar }) {
+export default function AvatarInput({ control, register, avatar, setAvatar }) {
   // const [avatar, setAvatar] = useState(true);
   // const [avatar, setAvatar] = useState(false)
 
   const avatarUser = (
-        <img className={css.photo} src={avatar} width="100%" height= "100%" alt="Avatar" />
+    <img
+      className={css.photo}
+      src={avatar}
+      width="100%"
+      height="100%"
+      alt="Avatar"
+    />
   );
   const avatarDefault = (
     <svg
@@ -22,15 +28,9 @@ export default function AvatarInput({ control, register,avatar,setAvatar }) {
   );
 
   const onChange = (event) => {
-
     const file = event.target.files[0];
-
     if (file) {
-      const blob = new Blob([file]);
-      // console.log(blob);
-      const objectURL = URL.createObjectURL(blob);
-      // console.log(objectURL);
-        setAvatar(objectURL);
+      setAvatar(event.target.files[0]);
     }
   };
 
@@ -51,22 +51,20 @@ export default function AvatarInput({ control, register,avatar,setAvatar }) {
             style={{ display: 'none' }}
             onChange={onChange}
           />
-
         )}
       />
       <label htmlFor="file-input">
         <div className={css.upLoad}>
-        <svg
-          fill="var(--main)"
-          // width="20"
-          // height="20"
-          className={css.svgAvatarBtn}
-        >
-          <use href={`${sprite}#icon-upload`}></use>
-        </svg>
-<p>Upload a photo</p>
+          <svg
+            fill="var(--main)"
+            // width="20"
+            // height="20"
+            className={css.svgAvatarBtn}
+          >
+            <use href={`${sprite}#icon-upload`}></use>
+          </svg>
+          <p>Upload a photo</p>
         </div>
-       
       </label>
     </div>
   );
