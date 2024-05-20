@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteWater } from '../../../redux/water/operations';
+import { deleteWater, chooseMonth } from '../../../redux/water/operations';
 import { showNotification } from '../../../utils/notification';
 import css from './DeleteWaterModal.module.css';
 import { selectMonth } from '../../../redux/water/selectors';
@@ -22,6 +22,10 @@ export default function DeleteWaterModal({ closeModal, entryId }) {
 
       // Show success notification
       showNotification('Water entry deleted successfully!', 'success');
+
+      setTimeout(() => {
+        dispatch(chooseMonth(month));
+      }, 200);
 
       // Close modal after successful deletion
       closeModal();
