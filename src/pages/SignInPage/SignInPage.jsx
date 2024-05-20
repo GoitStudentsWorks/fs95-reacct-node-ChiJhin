@@ -7,7 +7,6 @@ export default function SignInPage() {
     <main className={css.container}>
       <div className={css.page}>
         <SignInForm />
-
         <div className={css.wrap}>
           <AdvantagesSection />
         </div>
