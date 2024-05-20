@@ -10,6 +10,13 @@ export function selectAuthLoading(state) {
   return state.auth.loading;
 }
 
+export const selectAvatar = (state) => {
+  if (state.auth.user.avatarURL) {
+    return 'http://localhost:3000/' + state.auth.user.avatarURL;
+  }
+  return null;
+};
+
 export function selectAuthError(state) {
   return state.auth.error;
 }

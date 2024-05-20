@@ -15,6 +15,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
   const [M, setM] = useState(null);
   const [T, setT] = useState('7:00');
   const [avatar, setAvatar] = useState(false);
+  const [myAvatar, setMyAvatar] = useState(false);
   const {
     avatarURL,
     dailyActivityTime,
@@ -67,8 +68,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      lastEmail:email,
-     
+      lastEmail: email,
     },
   });
 
@@ -76,7 +76,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     const { gender, lastEmail, lastKilo, lastName, lastTime, lastValume } =
       data;
     const file = avatar;
-    console.log(data, file);
+    // console.log(data, file);
     closeModal();
     // const formData = {
     //   avatarURL: file,
@@ -90,7 +90,8 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     // console.log('formData,', formData);
     // ------------------------
     const formData = new FormData();
-    formData.append('avatarURL', file);
+
+    formData.append('avatar', myAvatar);
     formData.append('gender', gender);
     formData.append('name', lastName);
     formData.append('email', lastEmail);
@@ -99,9 +100,9 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     formData.append('dailyWaterNorm', lastValume);
 
     const obj = Object.fromEntries(formData.entries());
-    console.log('formData',obj);
+    // console.log('formData', obj);
 
-    dispatch(editUser({ data: formData }))
+    dispatch(editUser(formData))
       .unwrap()
       .then(() => {
         //  notify();
@@ -121,6 +122,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
           register={register}
           setAvatar={setAvatar}
           avatar={avatarURL}
+          setMyAvatar={setMyAvatar}
         />
         <div>
           <h3 className={css.titleHender}>Your gender identity</h3>
@@ -141,7 +143,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
               <label className={css.labelName}>Email</label>
               {/* <ErrorMessage name="number" component="span" className={css.span} /> */}
               <input
-                {...register('lastEmail', { value: email },{ required: true } )}
+                {...register('lastEmail', { value: email }, { required: true })}
               />
               {errors.lastEmail && <p>Last name is required.</p>}
             </div>

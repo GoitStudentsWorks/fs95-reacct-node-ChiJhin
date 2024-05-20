@@ -47,10 +47,10 @@ function clearAuthHeader() {
   //delete axios.defaults.headers.common.Authorization;?
 }
 
-export const fixBackendPath = (path) => {
+/*export const fixBackendPath = (path) => {
   if (!path || path.startsWith('http')) return path;
   else return BACKEND_HOST + path;
-};
+};*/
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -120,6 +120,7 @@ export const editUser = createAsyncThunk(
           'Content-Type': 'multipart/form-data',
         },
       });
+
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

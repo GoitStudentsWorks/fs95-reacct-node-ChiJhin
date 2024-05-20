@@ -9,7 +9,7 @@ import {
 
 const BACKEND_HOST = 'https://aquatrack-it-warriors-backend.onrender.com';
 //const BACKEND_HOST = 'http://localhost:3000';
-axios.defaults.baseURL = BACKEND_HOST + "/api/";
+axios.defaults.baseURL = BACKEND_HOST + '/api/';
 
 export const addWater = createAsyncThunk(
   'water/addWater',
