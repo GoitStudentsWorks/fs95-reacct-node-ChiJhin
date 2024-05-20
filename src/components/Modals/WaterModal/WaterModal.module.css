@@ -8,8 +8,12 @@
   margin-bottom: 10px;
 }
 .waterForm {
-  width: 343px;
-  height: 390px;
+
+ 
+  height: 490px;
+
+ 
+
   /* padding: 40px 20px;
   background-color: var(--background); */
   border-radius: 30px;
@@ -80,13 +84,14 @@
   border-radius: 15px;
   border: 1px solid rgba(47, 47, 47, 0.15);
   width: 100%;
-  max-width: 375px;
+  max-width: 343px;
   padding: 14px 16px;
   margin-bottom: 24px;
   color: var(--main-text);
   font-size: 14px;
   line-height: 1.25;
   letter-spacing: -0.14px;
+  
 }
 .labelValue {
   color: var(--main-text);
@@ -159,11 +164,11 @@
   }
   .inputAmount {
     max-width: 438px;
-    padding: 16px;
     margin-bottom: 24px;
     font-size: 16px;
     line-height: 1.5;
     letter-spacing: -0.16px;
+   
   }
   .labelValue {
     font-size: 18px;
