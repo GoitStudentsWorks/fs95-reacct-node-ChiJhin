@@ -36,7 +36,14 @@ export default function SignInForm() {
   });
 
   const onSubmit = (data) => {
-    dispatch(login(data));
+    dispatch(login(data))
+      .unwrap()
+      .then(() => {
+        console.log('bla');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     reset();
   };
 

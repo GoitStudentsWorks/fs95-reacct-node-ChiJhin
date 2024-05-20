@@ -15,9 +15,7 @@ export default function LogOutModal({ closeModal }) {
     try {
       await dispatch(logout()).unwrap();
       showNotification('You have been logged out successfully!', 'success');
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 1000);
+
       closeModal();
     } catch (error) {
       showNotification('Failed to log out. Please try again.', 'error');
