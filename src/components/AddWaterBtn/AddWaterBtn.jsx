@@ -4,7 +4,7 @@ import { FiEdit2 } from 'react-icons/fi';
 import WaterModal from '../Modals/WaterModal/WaterModal';
 import css from './AddWaterBtn.module.css';
 
-export default function AddWaterBtnBig({ id }) {
+export default function AddWaterBtnBig({ id, ml }) {
   const [update, setUpdate] = useState(null);
   const [modIsOpen, setModIsOpen] = useState(false);
   const styleNameClass = {
@@ -18,6 +18,7 @@ export default function AddWaterBtnBig({ id }) {
 
   const handleBtn = (id) => {
     setUpdate(id);
+    console.log(ml);
     setModIsOpen(true);
   };
 
@@ -29,16 +30,16 @@ export default function AddWaterBtnBig({ id }) {
       <button type="button" onClick={() => handleBtn(id)} className={css.btn}>
         <FiEdit2 />
       </button>
-        <Modals
-          styleVariantBtn={styleNameClass.btnWater}
-          styleVariant={styleNameClass.modalWater}
-          isOpen={modIsOpen}
-          closeModal={closeModalUpdate}
-        >
-          <div>
-            <WaterModal closeModal={closeModalUpdate} entryId={update} />
-          </div>
-        </Modals>
+      <Modals
+        styleVariantBtn={styleNameClass.btnWater}
+        styleVariant={styleNameClass.modalWater}
+        isOpen={modIsOpen}
+        closeModal={closeModalUpdate}
+      >
+        <div>
+          <WaterModal closeModal={closeModalUpdate} id={id} ml={ml} />
+        </div>
+      </Modals>
     </div>
   );
 }

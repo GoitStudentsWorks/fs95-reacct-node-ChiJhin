@@ -18,17 +18,17 @@ import css from './WaterModal.module.css';
 const schema = yup.object().shape({
   value: yup.number().positive('Value must be positive'),
 });
-export default function WaterModal() {
+export default function WaterModal({ id, ml }) {
   const dispatch = useDispatch();
   const date = useSelector(selectDay);
   const month = useSelector(selectMonth);
-  const waterValueDay = useSelector(selectDayWater);
+  // const waterValueDay = useSelector(selectDayWater);
 
-  const waterAllDay = waterValueDay.reduce((acc, current) => {
-    return acc + current.value;
-  }, 0);
+  // const waterAllDay = waterValueDay.reduce((acc, current) => {
+  //   return acc + current.value;
+  // }, 0);
 
-  const id = waterValueDay.map((option) => option._id);
+  // const id = waterValueDay.map((option) => option._id);
 
   const [currentTime, setCurrentTime] = useState(getCurrentTime());
   const {
@@ -38,7 +38,6 @@ export default function WaterModal() {
     setValue,
     getValues,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -65,18 +64,18 @@ export default function WaterModal() {
   }, []);
 
   const submitForm = (data) => {
-    // if (!waterAllDay) {
-    dispatch(addWater(data));
-    setTimeout(() => {
-      dispatch(chooseMonth(month));
-    }, 200);
-    // }
-    // else {
-    //   dispatch(editWater({ ...data, id }));
-    //   setTimeout(() => {
-    //     dispatch(chooseMonth(month));
-    //   }, 200);
-    // }
+    if (!id) {
+      dispatch(addWater(data));
+      console.log(id);
+      setTimeout(() => {
+        dispatch(chooseMonth(month));
+      }, 200);
+    } else {
+      dispatch(editWater({ ...data, id }));
+      setTimeout(() => {
+        dispatch(chooseMonth(month));
+      }, 200);
+    }
   };
 
   const decrement = () => {
@@ -97,12 +96,10 @@ export default function WaterModal() {
     <form className={css.waterForm} onSubmit={handleSubmit(submitForm)}>
       <div className={css.formWrapper}>
         <h2 className={css.title}>
-          {/* {!waterAllDay ? 'Add water' : 'Edit the entered amount of water'} */}
-          Add water
+          {!id ? 'Add water' : 'Edit the entered amount of water'}
         </h2>
         <p className={css.waterTitle}>
-          {/* {!waterAllDay ? 'Chouse a value' : 'Correct entered data:'} */}
-          Chouse a value
+          {!id ? 'Chouse a value' : 'Correct entered data:'}
         </p>
         <span className={css.waterAmount}>Amount of water:</span>
         <div className={css.wrapperAmount}>

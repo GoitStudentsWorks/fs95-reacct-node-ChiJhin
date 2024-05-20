@@ -28,14 +28,10 @@ export default function WaterItem({
 
         <div className={css.cardBtnsBlock}>
           <span className={css.btn}>
-          <AddWaterBtn
-          id={id}
-          />
+            <AddWaterBtn id={id} ml={ml} />
           </span>
           <span className={css.btn}>
-          <AddDeleteBtn 
-          id={id}
-          />
+            <AddDeleteBtn id={id} />
           </span>
           {/* <button className={css.btn} onClick={editModalHendler}>
             <FiEdit2 />
