@@ -7,8 +7,8 @@ import { FiEyeOff, FiEye } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import css from './SignInForm.module.css';
 import Logo from '../Logo/Logo';
-import { useId } from 'react';
 import { login } from '../../redux/auth/operations';
+import toast from 'react-hot-toast';
 
 const signInValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -16,21 +16,21 @@ const signInValidationSchema = Yup.object().shape({
     .required('Email is required'),
   password: Yup.string()
     .min(7, 'Password must be at least 7 characters long')
-    .required('Password is required'),
+    .required('Password is required')
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+      'Password must contain at least one letter and one number, only Latin letters are allowed'
+    ),
 });
 
 export default function SignInForm() {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
-  const emailFieldId = useId();
-  const passwordFieldId = useId();
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(signInValidationSchema),
   });
@@ -39,12 +39,18 @@ export default function SignInForm() {
     dispatch(login(data))
       .unwrap()
       .then(() => {
-        console.log('bla');
+        toast.success('Welcome back! Stay hydrated! 💧', {
+          duration: 2000,
+        });
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(
+          "It's time to drink water, but your email or password is incorrect🙈",
+          {
+            duration: 4000,
+          }
+        );
       });
-    reset();
   };
 
   return (
@@ -54,14 +60,11 @@ export default function SignInForm() {
         <h1 className={css.title}>Sign In</h1>
         <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
           <div className={css.field}>
-            <label htmlFor={emailFieldId} className={css.email}>
-              Email
-            </label>
+            <label className={css.email}>Email</label>
             <input
               className={errors.email ? css.errorInput : css.firstInput}
               type="text"
               placeholder="Enter your email"
-              id={emailFieldId}
               {...register('email')}
             />
             {errors.email && (
@@ -69,15 +72,12 @@ export default function SignInForm() {
             )}
           </div>
           <div className={css.field}>
-            <label htmlFor={passwordFieldId} className={css.password}>
-              Password
-            </label>
+            <label className={css.password}>Password</label>
             <div className={css.toggle}>
               <input
                 className={errors.password ? css.errorIn : css.secondInput}
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Enter your password"
-                id={passwordFieldId}
                 {...register('password')}
               />
               <div
