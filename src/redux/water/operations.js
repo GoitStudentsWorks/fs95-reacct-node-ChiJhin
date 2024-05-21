@@ -1,11 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import {
-  DayToString,
-  TimeToString,
-  dayToQuary,
-  monthToQuary,
-} from '../../utils/dates';
+import { dayToQuary, monthToQuary } from '../../utils/dates';
 import { BACKEND_HOST } from '../auth/operations';
 
 //const BACKEND_HOST = 'https://aquatrack-it-warriors-backend.onrender.com';

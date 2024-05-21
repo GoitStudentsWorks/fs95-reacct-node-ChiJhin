@@ -30,7 +30,7 @@ const waterSlice = createSlice({
     error: null,
   },
   reducers: {
-    logoutWater(state, action) {
+    logoutWater(state) {
       const date = new Date();
       state.day = DayToString(date);
       state.month = MonthToString(date);

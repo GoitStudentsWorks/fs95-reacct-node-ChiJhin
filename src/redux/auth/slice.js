@@ -36,7 +36,7 @@ const authSlice = createSlice({
       state.token = action.payload.token;
       state.refreshToken = action.payload.refreshToken;
     },
-    updateTokenError(state, action) {
+    updateTokenError(state) {
       state.user = {
         name: null,
         email: null,
