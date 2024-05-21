@@ -18,7 +18,7 @@ import css from './WaterModal.module.css';
 const schema = yup.object().shape({
   value: yup.number().positive('Value must be positive'),
 });
-export default function WaterModal({ id, ml }) {
+export default function WaterModal({ id, ml, closeModal }) {
   const dispatch = useDispatch();
   const date = useSelector(selectDay);
   const month = useSelector(selectMonth);
@@ -63,19 +63,21 @@ export default function WaterModal({ id, ml }) {
     return () => clearInterval(intervalId);
   }, []);
 
-  const submitForm = (data) => {
+  const submitForm = async (data) => {
     if (!id) {
-      dispatch(addWater(data));
+      await dispatch(addWater(data));
       
-      setTimeout(() => {
+     /* setTimeout(() => {
         dispatch(chooseMonth(month));
-      }, 200);
+      }, 200);*/
     } else {
-      dispatch(editWater({ ...data, id }));
-      setTimeout(() => {
+      await dispatch(editWater({ ...data, id }));
+      /*setTimeout(() => {
         dispatch(chooseMonth(month));
-      }, 200);
+      }, 200);*/
     }
+    await dispatch(chooseMonth(month));
+    closeModal();  // Close the modal
   };
 
   const decrement = () => {
