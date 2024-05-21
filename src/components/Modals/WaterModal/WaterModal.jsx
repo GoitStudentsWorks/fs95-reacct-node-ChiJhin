@@ -72,7 +72,7 @@ export default function WaterModal({ id, ml }) {
   const submitForm = (data) => {
     if (!id) {
       dispatch(addWater(data));
-      console.log(id);
+      
       setTimeout(() => {
         dispatch(chooseMonth(month));
       }, 200);
