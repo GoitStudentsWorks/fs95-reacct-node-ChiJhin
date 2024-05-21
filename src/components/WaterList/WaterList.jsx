@@ -9,14 +9,18 @@ export default function WaterList() {
   return (
     <>
       <ul className={css.waterListWrap}>
-        {dayWater.map((item) => (
-          <WaterItem
-            key={item._id}
-            myKey={item._id}
-            countMl={item.value}
-            currentTime={item.time}
-          />
-        ))}
+        {dayWater.length === 0 ? (
+          <li className={css.card} key={1}></li>
+        ) : (
+          dayWater.map((item) => (
+            <WaterItem
+              key={item._id}
+              myKey={item._id}
+              countMl={item.value}
+              currentTime={item.time}
+            />
+          ))
+        )}
       </ul>
     </>
   );

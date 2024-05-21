@@ -15,7 +15,6 @@ export default function LogOutModal({ closeModal }) {
     try {
       await dispatch(logout()).unwrap();
       showNotification('You have been logged out successfully!', 'success');
-
       closeModal();
     } catch (error) {
       showNotification('Failed to log out. Please try again.', 'error');
