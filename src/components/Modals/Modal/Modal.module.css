@@ -125,6 +125,7 @@
   @media (min-width: 1440px) {
     .modalSetting {
       width: 920px;
+      height: 996px;
     }
   }
 }

@@ -6,7 +6,9 @@ import AvatarInput from './AvatarInput/AvatarInput';
 import { useDispatch } from 'react-redux';
 import { editUser } from '../../../redux/auth/operations';
 import TimeField from 'react-simple-timefield';
-// import { fixBackendPath } from '../../../redux/auth/operations';
+import toast from 'react-hot-toast';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { settingsSchema } from './settingsSchema';
 
 export default function UserSettingsForm({ closeModal, getSetting }) {
   const [selectedValueRadio, setSelectedValueRadio] = useState('');
@@ -24,18 +26,15 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     name,
     weight,
   } = getSetting;
-  // console.log('getSetting',getSetting);
 
   const dispatch = useDispatch();
 
   const handleRadioChange = (event) => {
     setSelectedValueRadio(event.target.value);
-    // console.log(`Selected value: ${event.target.value}`);
   };
 
   const handleChange = (setSelected, event) => {
     setSelected(event.target.value);
-    // console.log(event.target.value);
   };
 
   const convertToMinutes = (time) => {
@@ -45,19 +44,14 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
   };
 
   useEffect(() => {
-    // if (selectedValueRadio !== '') {
-      const time = convertToMinutes(T);
-      if (selectedValueRadio === 'woman') {
-        // console.log( T,  time);
-        const V = M * 0.03 + time * 0.4;
-        setResult(V.toFixed(2));
-        // console.log('result', V);
-      } else {
-        const V = (M * 0.04 + time * 0.6).toFixed(2);
-        setResult(V);
-        // console.log('result', V);
-      }
-    // }
+    const time = convertToMinutes(T);
+    if (selectedValueRadio === 'woman') {
+      const V = M * 0.03 + time * 0.4;
+      setResult(V.toFixed(2));
+    } else {
+      const V = (M * 0.04 + time * 0.6).toFixed(2);
+      setResult(V);
+    }
   }, [selectedValueRadio, M, T]);
 
   const {
@@ -66,6 +60,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     handleSubmit,
     formState: { errors },
   } = useForm({
+    resolver: yupResolver(settingsSchema),
     defaultValues: {
       lastEmail: email,
     },
@@ -74,8 +69,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
   const onSubmit = (data) => {
     const { gender, lastEmail, lastKilo, lastName, lastTime, lastValume } =
       data;
-    // const file = avatar;
-    // console.log(data, file);
+
     closeModal();
 
     const formData = new FormData();
@@ -89,16 +83,16 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
     formData.append('dailyActivityTime', lastTime);
     formData.append('dailyWaterNorm', lastValume);
 
-    const obj = Object.fromEntries(formData.entries());
+    // const obj = Object.fromEntries(formData.entries());
     // console.log('formData', obj);
 
     dispatch(editUser(formData))
       .unwrap()
       .then(() => {
-        //  notify();
+        toast.success('Successfully created!');
       })
       .catch(() => {
-        //  notifyError();
+        toast.error('This is an error!');
       });
     closeModal();
   };
@@ -110,9 +104,6 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
         <AvatarInput
           control={control}
           register={register}
-          // setAvatar={setAvatar}
-          // avatar={fixBackendPath(avatarURL)}
-          // avatar={avatarURL}
           setMyAvatar={setMyAvatar}
         />
         <div>
@@ -128,15 +119,19 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
             <div className={css.box}>
               <label className={css.labelName}>Your name</label>
               <input {...register('lastName', { value: name })} />
+              {errors.lastName && (
+                <p className={css.error}>{errors.lastName.message}</p>
+              )}
             </div>
 
             <div className={css.box}>
               <label className={css.labelName}>Email</label>
-              {/* <ErrorMessage name="number" component="span" className={css.span} /> */}
               <input
                 {...register('lastEmail', { value: email }, { required: true })}
               />
-              {errors.lastEmail && <p>Last name is required.</p>}
+              {errors.lastEmail && (
+                <p className={css.error}>{errors.lastEmail.message} </p>
+              )}
             </div>
 
             {/* ================================= */}
@@ -160,7 +155,7 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
                   </p>
                 </div>
               </li>
-              <li>
+              <li className={css.vectorItem}>
                 <p>
                   <span className={css.vector}>!</span>Active time in hours
                 </p>
@@ -175,20 +170,22 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
                 {...register('lastKilo', { value: weight })}
                 onChange={(event) => handleChange(setM, event)}
               />
+              {errors.lastKilo && (
+                <p className={css.error}>{errors.lastKilo.message} </p>
+              )}
             </div>
 
             <div className={css.formKilo}>
               <label>The time of active participation in sports:</label>
 
               <TimeField
-                value={dailyActivityTime} //тут підставити дефолтне значення
+                value={dailyActivityTime}
                 onChange={(event, value) => {
                   handleChange(setT, event);
                 }}
                 input={<input {...register('lastTime', { required: true })} />}
                 colon=":"
               />
-              {errors.lastTime && <p>Last name is required.</p>}
             </div>
 
             <p className={css.amountWater}>
@@ -202,12 +199,17 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
                 {...register('lastValume', { value: dailyWaterNorm })}
                 onChange={(event) => handleChange(setSelectedVolume, event)}
               />
+              {errors.lastValume && (
+                <p className={css.error}>{errors.lastValume.message} </p>
+              )}
             </div>
           </section>
         </div>
-        <button className={css.btnSave} type="submit">
-          <span>Save</span>
-        </button>
+        <div className={css.spBtn}>
+          <button className={css.btnSave} type="submit">
+            <span>Save</span>
+          </button>
+        </div>
       </form>
     </>
   );
