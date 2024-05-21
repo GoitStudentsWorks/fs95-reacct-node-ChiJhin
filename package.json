@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run dev -- --open",
     "dev": "vite",
-    "build": "[my-framework] build --output public",
+    "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "format": "prettier --write ./src"
