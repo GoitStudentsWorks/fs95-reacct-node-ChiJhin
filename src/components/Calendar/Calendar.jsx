@@ -13,7 +13,7 @@ export default function Calendar({ selectedDate }) {
     (_, index) => index + 1
   );
   return (
-    <>
+    <div className={css.container}>
       <ul className={css.list}>
         {daysArray.map((day) => (
           <li key={day} className={css.item}>
@@ -21,6 +21,6 @@ export default function Calendar({ selectedDate }) {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 }

@@ -6,8 +6,8 @@ import css from './DailyInfo.module.css';
 export default function DailyInfo() {
   return (
     <>
-      <div className={css.waterListBlock}>
-        <div className={css.waterListBlockHead}>
+      <div>
+        <div className={css.wrapper}>
           <ChooseDate />
           <AddWaterBtnSmall />
         </div>

@@ -1,15 +1,19 @@
 import WaterItem from '../WaterItem/WaterItem';
-import data from './dataTest';
 import css from './WaterList.module.css';
+import { useSelector } from 'react-redux';
+import { selectDayWater } from '../../redux/water/selectors';
 
 export default function WaterList() {
+  const dayWater = useSelector(selectDayWater);
+
   return (
     <>
       <ul className={css.waterListWrap}>
-        {data.map((item) => (
+        {dayWater.map((item) => (
           <WaterItem
-            key={item.id}
-            countMl={item.amount}
+            key={item._id}
+            myKey={item._id}
+            countMl={item.value}
             currentTime={item.time}
           />
         ))}

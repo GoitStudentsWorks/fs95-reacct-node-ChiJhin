@@ -1,12 +1,13 @@
-import { FaPlus } from 'react-icons/fa';
+import css from './AddWaterBtnBig.module.css';
 
-export default function AddWaterBtnBig() {
+import AddWaterBtnBigBig from '../AddWaterBtnBigBig/AddWaterBtnBigBig';
+
+export default function AddWaterBtnBig({ handleClick }) {
   return (
     <>
-      <button>
-        <FaPlus />
-        Add water
-      </button>
+      <span className={css.conteiner}>
+        <AddWaterBtnBigBig handleClick={handleClick} />
+      </span>
     </>
   );
 }

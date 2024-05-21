@@ -1,5 +1,19 @@
-.waterDetailedInfo {
-  max-width: 45vw;
+.container {
+  width: 100%;
   background-color: var(--background);
   border-radius: 30px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.wrap {
+  padding: 0;
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    width: 45vw;
+  }
 }

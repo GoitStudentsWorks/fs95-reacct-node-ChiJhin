@@ -1,6 +1,6 @@
 import Modal from 'react-modal';
 import css from './Modal.module.css';
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose } from 'react-icons/ai';
 
 Modal.setAppElement('#root');
 const customStyles = {
@@ -9,7 +9,13 @@ const customStyles = {
   },
 };
 
-export default function Modals({ styleVariantBtn,styleVariant, isOpen, closeModal, children }) {
+export default function Modals({
+  styleVariantBtn,
+  styleVariant,
+  isOpen,
+  closeModal,
+  children,
+}) {
   return (
     <>
       <Modal
@@ -20,8 +26,12 @@ export default function Modals({ styleVariantBtn,styleVariant, isOpen, closeModa
         className={css[styleVariant]}
       >
         {children}
-        <button type="button" className={css[styleVariantBtn]} onClick={closeModal}>
-          <AiOutlineClose/>
+        <button
+          type="button"
+          className={css[styleVariantBtn]}
+          onClick={closeModal}
+        >
+          <AiOutlineClose />
         </button>
       </Modal>
     </>

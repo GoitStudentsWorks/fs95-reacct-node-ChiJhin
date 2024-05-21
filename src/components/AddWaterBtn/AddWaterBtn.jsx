@@ -1,53 +1,45 @@
 import { useState } from 'react';
-import Modals from "../Modals/Modal/Modal";
-// import WaterModal from '../Modals/WaterModal/WaterModal';
-import LogOutModal from '../Modals/LogOutModal/LogOutModal';
-export default function BtnAddWater (){
-//     const filter = useSelector(selectFilter);
-//   const dispatch = useDispatch();
-//   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedContactId, setSelectedContactId] = useState(null);
+import Modals from '../Modals/Modal/Modal';
+import { FiEdit2 } from 'react-icons/fi';
+import WaterModal from '../Modals/WaterModal/WaterModal';
+import css from './AddWaterBtn.module.css';
+
+export default function AddWaterBtnBig({ id, ml }) {
   const [update, setUpdate] = useState(null);
   const [modIsOpen, setModIsOpen] = useState(false);
   const styleNameClass = {
-    modalDelete:"modalDelete",
-    btnDelete:"btnDelete",
-    modalSetting:"modalSetting",
-    btnSetting:"btnSetting",
-    modalWater:"Modal",
-    btnWater:"btnWater"
-  }
+    modalDelete: 'modalDelete',
+    btnDelete: 'btnDelete',
+    modalSetting: 'modalSetting',
+    btnSetting: 'btnSetting',
+    modalWater: 'Modal',
+    btnWater: 'btnWater',
+  };
 
-      const handleAddWater= (id) => {
-        setUpdate(1)
-          setModIsOpen(true);
-          setSelectedContactId(id);
-        };
+  const handleBtn = (id) => {
+    setUpdate(id);
+    console.log(ml);
+    setModIsOpen(true);
+  };
 
-        const closeModalUpdate = () => {
-            setModIsOpen(false);
-          };
-    return (
+  const closeModalUpdate = () => {
+    setModIsOpen(false);
+  };
+  return (
+    <div>
+      <button type="button" onClick={() => handleBtn(id)} className={css.btn}>
+        <FiEdit2 />
+      </button>
+      <Modals
+        styleVariantBtn={styleNameClass.btnWater}
+        styleVariant={styleNameClass.modalWater}
+        isOpen={modIsOpen}
+        closeModal={closeModalUpdate}
+      >
         <div>
-            <button
-                  type="button"
-                  onClick={() => handleAddWater(1)}
-                >
-                  AddWater
-                </button>
-        {update !== null && (
-            <Modals styleVariantBtn={styleNameClass.btnSetting} 
-            styleVariant={styleNameClass.modalSetting} 
-            isOpen={modIsOpen} 
-            closeModal={closeModalUpdate}>
-          <div>
-            {/* тут втавляєм потрібний компонент */}
-            {/* <WaterModal/> */}
-            <LogOutModal/>
-            {/* <WaterForm item={update} closeModal={closeModalUpdate} /> */}
-          </div>
-        </Modals>
-       )} 
-      </div>
-    )
+          <WaterModal closeModal={closeModalUpdate} id={id} ml={ml} />
+        </div>
+      </Modals>
+    </div>
+  );
 }

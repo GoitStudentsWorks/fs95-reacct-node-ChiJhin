@@ -6,6 +6,6 @@
   align-items: center;
 }
 .month {
-  color: var(--dark-blue);
-  margin-right: 58px;
+  font-size: 28px;
+  color: var(--main);
 }

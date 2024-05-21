@@ -3,9 +3,12 @@ import {
   addWater,
   editWater,
   deleteWater,
-  selectDay,
-  selectMonth,
+  chooseDay,
+  chooseMonth,
 } from './operations';
+import { DayToString, MonthToString } from '../../utils/dates';
+
+const now = new Date();
 
 function handlePending(state) {
   state.loading = true;
@@ -21,22 +24,26 @@ const waterSlice = createSlice({
   initialState: {
     dayWater: [],
     monthWater: [],
-    day: null,
-    month: {
-      start: null,
-      end: null,
-    },
+    day: DayToString(now),
+    month: MonthToString(now),
     loading: false,
     error: null,
   },
-  extraReducers: builder => {
+  reducers: {
+    logoutWater(state, action) {
+      const date = new Date();
+      state.day = DayToString(date);
+      state.month = MonthToString(date);
+    },
+  },
+  extraReducers: (builder) => {
     builder
       //add
       .addCase(addWater.pending, handlePending)
       .addCase(addWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.dayWater = action.payload;
+        state.dayWater.push(action.payload);
       })
       .addCase(addWater.rejected, handleRejected)
       //edit
@@ -44,7 +51,9 @@ const waterSlice = createSlice({
       .addCase(editWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.dayWater = action.payload;
+        state.dayWater = state.dayWater.map((el) =>
+          el._id === action.payload._id ? action.payload : el
+        );
       })
       .addCase(editWater.rejected, handleRejected)
       //delete
@@ -52,30 +61,38 @@ const waterSlice = createSlice({
       .addCase(deleteWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.dayWater = [];
+
+        const index = state.dayWater.findIndex(
+          (el) => el._id === action.payload.deletedData._id
+        );
+
+        if (index !== -1) {
+          state.dayWater.splice(index, 1);
+        }
       })
       .addCase(deleteWater.rejected, handleRejected)
       //day
-      .addCase(selectDay.pending, handlePending)
-      .addCase(selectDay.fulfilled, (state, action) => {
+      .addCase(chooseDay.pending, handlePending)
+      .addCase(chooseDay.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
         state.dayWater = action.payload.dayWater;
         state.day = action.payload.day;
       })
-      .addCase(selectDay.rejected, handleRejected)
+      .addCase(chooseDay.rejected, handleRejected)
       //month
-      .addCase(selectMonth.pending, handlePending)
-      .addCase(selectMonth.fulfilled, (state, action) => {
+      .addCase(chooseMonth.pending, handlePending)
+      .addCase(chooseMonth.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.dayWater = [];
-        state.day = null;
+        // state.dayWater = [];
+        // state.day = null;
         state.month = action.payload.month;
         state.monthWater = action.payload.monthWater;
       })
-      .addCase(selectMonth.rejected, handleRejected);
+      .addCase(chooseMonth.rejected, handleRejected);
   },
 });
 
 export const waterReducer = waterSlice.reducer;
+export const { logoutWater } = waterSlice.actions;

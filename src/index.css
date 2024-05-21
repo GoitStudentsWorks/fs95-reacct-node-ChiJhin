@@ -2,12 +2,14 @@
 
 :root {
   --main: #323f47;
+  --main-inherit: rgba(50, 63, 71, 0.4);
   --main-text: #2f2f2f;
   --accent: #9be1a0;
   --background: #f0eff4;
   --main-white: #fff;
   --bold: 700;
-  --hover: #71ae75;
+  --hover: #87d28d;
+  --error: #db2323;
   --animation: 200ms ease-in;
 }
 

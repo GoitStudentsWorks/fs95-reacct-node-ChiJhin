@@ -1,12 +1,25 @@
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoIosArrowUp } from 'react-icons/io';
+import css from './UserBar.module.css';
 
-export default function UserBar({ userName: name }) {
+import { useSelector } from 'react-redux';
+import { selectAvatar, selectUser } from '../../redux/auth/selectors';
+//import { fixBackendPath } from '../../redux/auth/operations';
+
+export default function UserBar({ state: openBar, setState: setOpenBar }) {
+  const handleClick = () => setOpenBar(!openBar);
+  const user = useSelector(selectUser);
+  const userAvatar = useSelector(selectAvatar);
   return (
     <>
-      <button>
-        {name} <img src="" alt="User" />
-        <IoIosArrowDown />
+      <button onClick={handleClick} className={css.container}>
+        {user.name}{' '}
+        <img
+          src={userAvatar ? userAvatar : './default-avatar.jpg'}
+          alt="User"
+          className={css.img}
+        />
+        {openBar === true ? <IoIosArrowDown /> : <IoIosArrowUp />}
       </button>
     </>
   );
