@@ -1,4 +1,3 @@
-
 # **Aqua Track**
 
 Aqua Track — програма, правильно споживати воду. Завдяки ньому ви завжди зможе
@@ -24,15 +23,10 @@ Aqua Track — програма, правильно споживати воду.
 
 **Наша команда:**
 
-- Serhii Safonov,
-- Serhii Busha,
-- Mariia Samodurova,
-- Natalia Potushynska,
-- Anastasiia Rodzina,
-- Inha Sydorchuk,
-- Tetiana Kubrak,
-- Oleksandra Koshyl,
-- Anna Voitsekhovska
+- Юрій Мороз,
+- Валерія Сокол,
+- Ігор Кривенко,
+- Дмитро Мінчуков,
+- ...
 
 Наша команда сподівається шо за допомогою цього додатка, ви завжди будете у
-
