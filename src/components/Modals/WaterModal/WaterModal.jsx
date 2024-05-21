@@ -22,6 +22,12 @@ export default function WaterModal({ id, ml }) {
   const dispatch = useDispatch();
   const date = useSelector(selectDay);
   const month = useSelector(selectMonth);
+  const waterValueDay = useSelector(selectDayWater);
+
+  const currentWaterValue = id
+    ? waterValueDay.find((item) => item._id === id)?.value || 50
+    : 50;
+
   // const waterValueDay = useSelector(selectDayWater);
 
   // const waterAllDay = waterValueDay.reduce((acc, current) => {
@@ -42,7 +48,7 @@ export default function WaterModal({ id, ml }) {
     resolver: yupResolver(schema),
     defaultValues: {
       time: getCurrentTime(),
-      value: 50,
+      value: currentWaterValue,
       date: date,
     },
   });
