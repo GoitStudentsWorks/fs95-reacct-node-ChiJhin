@@ -7,7 +7,7 @@ const schema = yup.object().shape({
   dailyWaterIntake: yup.number().required('Введіть денну норму води'),
 });
 
-export default function WaterForm() {
+export default function WaterForm({ closeModal }) {
   const {
     register,
     handleSubmit,
@@ -22,6 +22,7 @@ const time =new Date()
   const onSubmit = (data) => {
     // Обробка даних форми
     console.log(data);
+    closeModal();  // Close the modal
   };
   
   return (
