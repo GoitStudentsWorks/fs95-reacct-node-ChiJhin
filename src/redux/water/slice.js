@@ -34,6 +34,8 @@ const waterSlice = createSlice({
       const date = new Date();
       state.day = DayToString(date);
       state.month = MonthToString(date);
+      state.dayWater = [];
+      state.monthWater = [];
     },
   },
   extraReducers: (builder) => {
