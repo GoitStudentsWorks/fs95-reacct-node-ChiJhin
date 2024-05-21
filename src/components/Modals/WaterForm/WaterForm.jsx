@@ -23,7 +23,7 @@ const time =new Date()
     // Обробка даних форми
     console.log(data);
   };
-  handleSubmit((data) => console.log(data));
+  
   return (
     <>
       <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
