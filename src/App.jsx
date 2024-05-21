@@ -10,18 +10,13 @@ import Error from './components/Error/Error.jsx';
 import { store } from './redux/store.js';
 import { Toaster } from 'react-hot-toast';
 
-import HomePage from './pages/HomePage/HomePage.jsx';
-import SignUpPage from './pages/SignUpPage/SignUpPage.jsx';
-import SignInPage from './pages/SignInPage/SignInPage.jsx';
-import TrackerPage from './pages/TrackerPage/TrackerPage.jsx';
-import ErrorPage from './pages/ErrorPage/ErrorPage.jsx';
 import { useAuth } from './hooks/useAuth.js';
 
-// const HomePage = lazy(() => import('./pages/HomePage/HomePage.jsx'));
-// const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage.jsx'));
-// const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage.jsx'));
-// const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage.jsx'));
-// const ErrorPage = lazy(() => import('./pages/ErrorPage/ErrorPage.jsx'));
+const HomePage = lazy(() => import('./pages/HomePage/HomePage.jsx'));
+const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage.jsx'));
+const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage.jsx'));
+const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage.jsx'));
+const ErrorPage = lazy(() => import('./pages/ErrorPage/ErrorPage.jsx'));
 
 export default function App() {
   const dispatch = useDispatch();
@@ -38,37 +33,45 @@ export default function App() {
     <b>Refreshing user...</b>
   ) : (
     <div>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <RestrictedRoute redirectTo="/tracker" component={<HomePage />} />
-          }
-        />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <RestrictedRoute redirectTo="/tracker" component={<HomePage />} />
+            }
+          />
 
-        <Route
-          path="/signup"
-          element={
-            <RestrictedRoute redirectTo="/tracker" component={<SignUpPage />} />
-          }
-        />
+          <Route
+            path="/signup"
+            element={
+              <RestrictedRoute
+                redirectTo="/tracker"
+                component={<SignUpPage />}
+              />
+            }
+          />
 
-        <Route
-          path="/signin"
-          element={
-            <RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />
-          }
-        />
+          <Route
+            path="/signin"
+            element={
+              <RestrictedRoute
+                redirectTo="/tracker"
+                component={<SignInPage />}
+              />
+            }
+          />
 
-        <Route
-          path="/tracker"
-          element={
-            <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
-          }
-        />
+          <Route
+            path="/tracker"
+            element={
+              <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
+            }
+          />
 
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </Suspense>
       <Toaster />
       {loading && <Loader />}
       {error && <Error />}
