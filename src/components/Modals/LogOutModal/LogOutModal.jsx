@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../../../redux/auth/operations';
 import { showNotification } from '../../../utils/notification';
 import css from './LogOutModal.module.css';
+import { logoutWater } from '../../../redux/water/slice';
 
 const title = 'Log out';
 
@@ -14,6 +15,7 @@ export default function LogOutModal({ closeModal }) {
     setIsLoggingOut(true);
     try {
       await dispatch(logout()).unwrap();
+      dispatch(logoutWater());
       showNotification('You have been logged out successfully!', 'success');
       closeModal();
     } catch (error) {
