@@ -9,12 +9,7 @@ export default function WaterItem({
   myKey: id,
   countMl: ml,
   currentTime: time,
-  // delHendler: delModalHendler,
-  // editHendler: editModalHendler,
 }) {
-  // function hendleClic() {
-  //   delModalHendler(id);
-  // }
   return (
     <>
       <li className={css.card}>
@@ -33,12 +28,6 @@ export default function WaterItem({
           <span className={css.btn}>
             <AddDeleteBtn id={id} />
           </span>
-          {/* <button className={css.btn} onClick={editModalHendler}>
-            <FiEdit2 />
-          </button>
-          <button className={css.btn} onClick={hendleClic}>
-            <AiOutlineDelete />
-          </button> */}
         </div>
       </li>
     </>

@@ -10,7 +10,7 @@
 
   position: absolute;
   inset: inherit;
-  overflow: auto;
+  overflow: hidden;
   outline: none;
 }
 /* ==================== */
@@ -48,7 +48,10 @@
 .modalSetting {
   composes: Modal;
   /* height: 1302px; */
+  overflow-y: auto;
   height: 100%;
+
+  outline: none;
 }
 
 @media screen and (min-width: 320px) and (max-width: 375.9px) {
@@ -76,7 +79,7 @@
     composes: Modal;
     margin: 40px auto;
     padding: 40px;
-    width: 648px;
+
     /* height: 1336px; */
     height: 100%;
   }
@@ -125,7 +128,6 @@
   @media (min-width: 1440px) {
     .modalSetting {
       width: 920px;
-      height: 996px;
     }
   }
 }

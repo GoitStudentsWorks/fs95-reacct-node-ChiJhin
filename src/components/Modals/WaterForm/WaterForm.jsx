@@ -14,23 +14,19 @@ export default function WaterForm({ closeModal }) {
     formState: { errors },
   } = useForm();
 
-  //   підключення Yup не працює треба розібратись
-  // const { register, handleSubmit, errors } = useForm({
-  //   resolver: yupResolver(schema),
-  // });
-const time =new Date()
+  const time = new Date();
   const onSubmit = (data) => {
     // Обробка даних форми
     console.log(data);
-    closeModal();  // Close the modal
+    closeModal(); // Close the modal
   };
-  
+
   return (
     <>
       <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.formName}>
           <label className={css.labelRecord}>Recording time:</label>
-          <input {...register('firstName',{value: time})} />
+          <input {...register('firstName', { value: time })} />
         </div>
         <p className={css.titleChoose}>Choose a value</p>
 
@@ -39,12 +35,9 @@ const time =new Date()
             Enter the value of the water used:{' '}
           </label>
 
-          <input {...register('lastName', { required: true,value:'50' })} />
+          <input {...register('lastName', { required: true, value: '50' })} />
           {errors.lastName && <p>Last name is required.</p>}
         </div>
-        {/* <input {...register('age', { pattern: /\d+/ })} /> */}
-        {/* {errors.age && <p>Please enter number for age.</p>} */}
-        {/* < input className={css.btnSave} type="submit" /> */}
         <button className={css.btnSave} type="submit">
           <span>Save</span>
         </button>

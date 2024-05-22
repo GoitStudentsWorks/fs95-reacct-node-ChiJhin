@@ -15,7 +15,6 @@
 @media screen and (min-width: 375px) {
   .wrapper {
     flex-direction: row;
-
     justify-content: space-between;
   }
 }

@@ -14,10 +14,7 @@
 }
 
 body {
-  /* background-color: var(--background); */
   background-color: var(--main-white);
-  /* background-image: url('./assets/background.png'); */
-
   background-size: auto 100%;
   background-position: center center;
   background-repeat: no-repeat;

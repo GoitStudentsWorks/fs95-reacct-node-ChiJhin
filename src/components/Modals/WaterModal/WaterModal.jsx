@@ -28,14 +28,6 @@ export default function WaterModal({ id, ml, closeModal }) {
     ? waterValueDay.find((item) => item._id === id)?.value || 50
     : 50;
 
-  // const waterValueDay = useSelector(selectDayWater);
-
-  // const waterAllDay = waterValueDay.reduce((acc, current) => {
-  //   return acc + current.value;
-  // }, 0);
-
-  // const id = waterValueDay.map((option) => option._id);
-
   const [currentTime, setCurrentTime] = useState(getCurrentTime());
   const {
     register,
@@ -72,18 +64,11 @@ export default function WaterModal({ id, ml, closeModal }) {
   const submitForm = async (data) => {
     if (!id) {
       await dispatch(addWater(data));
-      
-     /* setTimeout(() => {
-        dispatch(chooseMonth(month));
-      }, 200);*/
     } else {
       await dispatch(editWater({ ...data, id }));
-      /*setTimeout(() => {
-        dispatch(chooseMonth(month));
-      }, 200);*/
     }
     await dispatch(chooseMonth(month));
-    closeModal();  // Close the modal
+    closeModal(); // Close the modal
   };
 
   const decrement = () => {

@@ -99,7 +99,6 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
 
   return (
     <>
-      {/* =============================== */}
       <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
         <AvatarInput
           control={control}
@@ -134,7 +133,6 @@ export default function UserSettingsForm({ closeModal, getSetting }) {
               )}
             </div>
 
-            {/* ================================= */}
             <h2 className={css.titleNormaFormula}>My daily norma</h2>
             <ul className={css.listFormula}>
               <li>

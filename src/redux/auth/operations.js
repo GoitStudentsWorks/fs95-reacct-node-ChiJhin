@@ -6,7 +6,7 @@ import { updateToken, updateTokenError } from './slice';
 
 export const BACKEND_HOST =
   'https://aquatrack-it-warriors-backend.onrender.com';
-//export const BACKEND_HOST = 'http://localhost:3000';
+
 axios.defaults.baseURL = BACKEND_HOST + '/api/';
 
 axios.interceptors.response.use(
@@ -45,13 +45,7 @@ function setAuthHeader(token) {
 // remove JWT
 function clearAuthHeader() {
   axios.defaults.headers.common.Authorization = '';
-  //delete axios.defaults.headers.common.Authorization;?
 }
-
-// /*export const fixBackendPath = (path) => {
-//   if (!path || path.startsWith('http')) return path;
-//   else return BACKEND_HOST + path;
-// };*/
 
 export const register = createAsyncThunk(
   'auth/register',
