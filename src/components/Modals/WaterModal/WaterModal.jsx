@@ -18,7 +18,7 @@ import css from './WaterModal.module.css';
 const schema = yup.object().shape({
   value: yup.number().positive('Value must be positive'),
 });
-export default function WaterModal({ id, ml, closeModal }) {
+export default function WaterModal({ id, closeModal }) {
   const dispatch = useDispatch();
   const date = useSelector(selectDay);
   const month = useSelector(selectMonth);
@@ -120,8 +120,6 @@ export default function WaterModal({ id, ml, closeModal }) {
               type="time"
               name="time"
               id="time"
-              value={currentTime}
-              readOnly
             />
           </div>
           <label className={css.labelValue} htmlFor="value">

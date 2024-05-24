@@ -18,7 +18,6 @@ export default function AddWaterBtnBig({ id, ml }) {
 
   const handleBtn = (id) => {
     setUpdate(id);
-    console.log(ml);
     setModIsOpen(true);
   };
 
@@ -37,7 +36,7 @@ export default function AddWaterBtnBig({ id, ml }) {
         closeModal={closeModalUpdate}
       >
         <div>
-          <WaterModal closeModal={closeModalUpdate} id={id} ml={ml} />
+          <WaterModal closeModal={closeModalUpdate} id={id} />
         </div>
       </Modals>
     </div>
