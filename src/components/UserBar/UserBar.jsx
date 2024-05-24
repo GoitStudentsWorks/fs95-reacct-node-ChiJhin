@@ -11,7 +11,7 @@ export default function UserBar({ state: openBar, setState: setOpenBar }) {
   return (
     <>
       <button onClick={handleClick} className={css.container}>
-        {user.name.length > 8 ? user.name.slice(0, 5) + '...' : user.name}{' '}
+        {user.name}{' '}
         <img
           src={userAvatar ? userAvatar : './default-avatar.jpg'}
           alt="User"
