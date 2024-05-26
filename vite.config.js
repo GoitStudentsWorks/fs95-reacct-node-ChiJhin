@@ -12,5 +12,5 @@ export default defineConfig({
       assets: '/src/assets',
     },
   },
-  base: '/AquaTrack-IT-WARRIORS-frontend',
+  base: '/fs95-reacct-node-ChiJhin',
 });
