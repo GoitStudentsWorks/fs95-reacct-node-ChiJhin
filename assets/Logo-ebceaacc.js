@@ -1,1 +1,0 @@
-import{j as o,L as s}from"./index-e165a705.js";const n="_logoFont_p9zsf_1",t="_logo_p9zsf_1",l={logoFont:n,logo:t};function r(){return o.jsx(o.Fragment,{children:o.jsx(s,{to:"/",className:l.logoFont,children:"AQUATRACK"})})}export{r as L};
